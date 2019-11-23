@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>screen功能 linux后台运行程序</title>
-      <link href="/2019/11/22/screen%E5%8A%9F%E8%83%BD%20linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/"/>
-      <url>/2019/11/22/screen%E5%8A%9F%E8%83%BD%20linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</url>
+      <title>Hello World</title>
+      <link href="/2019/11/21/hello-world/"/>
+      <url>/2019/11/21/hello-world/</url>
       
-        <content type="html"><![CDATA[<p>screen功能 linux后台运行程序</p><h4 id="1创建screen进程"><a href="#1创建screen进程" class="headerlink" title="1创建screen进程"></a>1创建screen进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen  #进入screen环境</span><br></pre></td></tr></table></figure><h4 id="2进程下运行文件"><a href="#2进程下运行文件" class="headerlink" title="2进程下运行文件"></a>2进程下运行文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python a.py#运行a.py</span><br></pre></td></tr></table></figure><h4 id="3分离窗口"><a href="#3分离窗口" class="headerlink" title="3分离窗口"></a>3分离窗口</h4><p>先ctrl + a 进入命令模式，再按d分离窗口</p><h4 id="4列出当前进程"><a href="#4列出当前进程" class="headerlink" title="4列出当前进程"></a>4列出当前进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -ls #列出当前进程</span><br><span class="line"></span><br><span class="line">There are screens on:</span><br><span class="line"> 22013.pts-37.hpcgpu30   (Detached)</span><br><span class="line"> 9915.pts-33.hpcgpu30    (Detached)</span><br></pre></td></tr></table></figure><h4 id="5再次进入窗口"><a href="#5再次进入窗口" class="headerlink" title="5再次进入窗口"></a>5再次进入窗口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -r  22013</span><br></pre></td></tr></table></figure><h4 id="6杀死某个窗口"><a href="#6杀死某个窗口" class="headerlink" title="6杀死某个窗口"></a>6杀死某个窗口</h4><p>杀死22013窗口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 22013</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
       
       
       
@@ -17,13 +17,262 @@
     
     
     <entry>
-      <title>Hello World</title>
-      <link href="/2019/11/21/hello-world/"/>
-      <url>/2019/11/21/hello-world/</url>
+      <title>anaconda + python3.6安装</title>
+      <link href="/2019/11/09/anconda%E7%89%88%E6%9C%AC%E5%8F%B7%E5%AF%B9%E5%BA%94python%E7%89%88%E6%9C%AC/"/>
+      <url>/2019/11/09/anconda%E7%89%88%E6%9C%AC%E5%8F%B7%E5%AF%B9%E5%BA%94python%E7%89%88%E6%9C%AC/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<p>anaconda + python3.6安装</p><p><img src="https://img-blog.csdnimg.cn/20191109183836983.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>清华镜像连接<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a></p>]]></content>
       
       
+      <categories>
+          
+          <category> python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> anaconda </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>pip换镜像安装 清华镜像 豆瓣镜像</title>
+      <link href="/2019/10/27/pip%E6%8D%A2%E9%95%9C%E5%83%8F%E5%AE%89%E8%A3%85%20%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F%20%E8%B1%86%E7%93%A3%E9%95%9C%E5%83%8F/"/>
+      <url>/2019/10/27/pip%E6%8D%A2%E9%95%9C%E5%83%8F%E5%AE%89%E8%A3%85%20%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F%20%E8%B1%86%E7%93%A3%E9%95%9C%E5%83%8F/</url>
+      
+        <content type="html"><![CDATA[<p>pip换镜像安装 清华镜像 豆瓣镜像</p><a id="more"></a><p>豆瓣镜像源<a href="https://pypi.douban.com/simple/" target="_blank" rel="noopener">https://pypi.douban.com/simple/</a><br>清华镜像源<a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a><br>示例代码安装keras（注意：–user代表安装在个人目录下，不影响root目录）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install keras -i https://pypi.douban.com/simple/ --user</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> pip </tag>
+            
+            <tag> 清华镜像 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>glib源码编译安装与libffi源码编译安装</title>
+      <link href="/2019/10/24/glib%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E4%B8%8Elibffi%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/"/>
+      <url>/2019/10/24/glib%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85%E4%B8%8Elibffi%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85/</url>
+      
+        <content type="html"><![CDATA[<p>源码安装！啊！glib源码编译安装与libffi源码编译安装</p><a id="more"></a><h4 id="安装glib"><a href="#安装glib" class="headerlink" title="安装glib"></a>安装glib</h4><p>安装glib 下载glib <a href="http://ftp.acc.umu.se/pub/GNOME/sources/glib/" target="_blank" rel="noopener">http://ftp.acc.umu.se/pub/GNOME/sources/glib/</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf glib-2.48.1.tar.xz</span><br><span class="line">./configure --prefix=/home/meng/software/glib</span><br><span class="line">make -j12</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>之后需要配置环境遍历。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PKG_CONFIG_PATH=$HOME/menglingjun/software/glib/lib/pkgconfig</span><br></pre></td></tr></table></figure><p>你可能会会遇到这个错误，缺少libffi，直接到安装<a href="#anchor1">libffi</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">No package <span class="string">'libffi'</span> found</span><br><span class="line"></span><br><span class="line">Consider adjusting the PKG_CONFIG_PATH environment variable <span class="keyword">if</span> you</span><br><span class="line">installed software <span class="keyword">in</span> a non-standard prefix.</span><br><span class="line"></span><br><span class="line">Alternatively, you may <span class="built_in">set</span> the environment variables LIBFFI_CFLAGS</span><br><span class="line">and LIBFFI_LIBS to avoid the need to call pkg-config.</span><br><span class="line">See the pkg-config man page <span class="keyword">for</span> more details.</span><br></pre></td></tr></table></figure><p>你可能会会遇到这个错误，缺少libffi，直接到安装<a href="#anchor2">libpcre</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">configure: error: Package requirements (libpcre &gt;= 8.13) were not met:</span><br><span class="line"></span><br><span class="line">No package <span class="string">'libpcre'</span> found</span><br></pre></td></tr></table></figure><div id = anchor1></div><h4 id="安装libffi"><a href="#安装libffi" class="headerlink" title="安装libffi"></a>安装libffi</h4><p>去官网下载libffi  <a href="http://sourceware.org/libffi/" target="_blank" rel="noopener">http://sourceware.org/libffi/</a>，然后解压，configure，编译make，安装install。<br>这里需要注意如果不是root就需要装在自己的目录下，config需要加上prefix参数</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar xf libffi-3.0.0.tar.gz</span><br><span class="line"><span class="built_in">cd</span> libffi-3.0.0</span><br><span class="line">./configure --prefix=/home/meng/software/libffi</span><br><span class="line">make -j12</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>之后需要配置环境遍历。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export LIBFFI_CFLAGS=-I$HOME/menglingjun/software/libffi/lib/libffi-3.2.1/include</span><br><span class="line">export LIBFFI_LIBS=$HOME/menglingjun/software/libffi/lib/libffi.la</span><br><span class="line">export C_INCLUDE_PATH=$HOME/menglingjun/software/libffi/lib/libffi-3.2.1/include/</span><br><span class="line">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/menglingjun/software/libffi/lib/pkgconfig</span><br></pre></td></tr></table></figure><div id = anchor2></div><h4 id="安装libpcre"><a href="#安装libpcre" class="headerlink" title="安装libpcre"></a>安装libpcre</h4><p><a href="https://sourceforge.net/projects/pcre/files/pcre/" target="_blank" rel="noopener">https://sourceforge.net/projects/pcre/files/pcre/</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -jxvf pcre-8.39.tar.bz2</span><br><span class="line">./configure --prefix=/home/menglingjun/menglingjun/software/pcre/</span><br><span class="line">make -j12</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><p>配置环境变量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/menglingjun/software/pcre/lib/pkgconfig</span><br></pre></td></tr></table></figure><h4 id="参考博客"><a href="#参考博客" class="headerlink" title="参考博客"></a>参考博客</h4><p><a href="https://www.cnblogs.com/pcat/p/5520317.html" target="_blank" rel="noopener">https://www.cnblogs.com/pcat/p/5520317.html</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> LINUX </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> glib </tag>
+            
+            <tag> libffi </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>YouTube-8M feature extraction bug</title>
+      <link href="/2019/10/23/YouTube-8M%20feature%20extraction%20bug/"/>
+      <url>/2019/10/23/YouTube-8M%20feature%20extraction%20bug/</url>
+      
+        <content type="html"><![CDATA[<p>源码编译OPENCV C++版本 linux</p><a id="more"></a><p>YouTube-8M feature extraction bug记录</p><h4 id="Error-1-fatal-error-opencv2-core-hpp-No-such-file-or-directory"><a href="#Error-1-fatal-error-opencv2-core-hpp-No-such-file-or-directory" class="headerlink" title="Error 1  fatal error: opencv2/core.hpp: No such file or directory"></a>Error 1  fatal error: opencv2/core.hpp: No such file or directory</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ERROR: /data/menglingjun/mediapipe/mediapipe/framework/formats/BUILD:163:1: C++ compilation of rule <span class="string">'//mediapipe/framework/formats:image_frame_opencv'</span> failed (Exit 1) gcc failed: error executing <span class="built_in">command</span> /usr/<span class="built_in">local</span>/gcc/bin/gcc -U_FORTIFY_SOURCE -fstack-protector -Wall -Wunused-but-set-parameter -Wno-free-nonheap-object -fno-omit-frame-pointer -g0 -O2 <span class="string">'-D_FORTIFY_SOURCE=1'</span> -DNDEBUG -ffunction-sections ... (remaining 70 argument(s) skipped)</span><br><span class="line"></span><br><span class="line">Use --sandbox_debug to see verbose messages from the sandbox</span><br><span class="line">In file included from ./mediapipe/framework/formats/image_frame_opencv.h:20:0,</span><br><span class="line">                 from mediapipe/framework/formats/image_frame_opencv.cc:15:</span><br><span class="line">./mediapipe/framework/port/opencv_core_inc.h:18:36: fatal error: opencv2/core/version.hpp: No such file or directory</span><br><span class="line">compilation terminated.</span><br></pre></td></tr></table></figure><p>没有找到opencv2/core/version.hpp<br>解决方案：修改./mediapipe/framework/port/opencv_core_inc.h中的路径，我的是opencv4，在路径/opencv/include/opencv4/opencv2下，所以改为</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv4/opencv2/core/version.hpp&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CV_VERSION_EPOCH  <span class="comment">// for OpenCV 2.x</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv4/opencv2/core/core.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;opencv4/opencv2/core/core.hpp&gt;</span></span></span><br></pre></td></tr></table></figure><h4 id="Error2-fatal-error-libavcodec-avcodec-h-No-such-file-or-directory"><a href="#Error2-fatal-error-libavcodec-avcodec-h-No-such-file-or-directory" class="headerlink" title="Error2 fatal error: libavcodec/avcodec.h: No such file or directory"></a>Error2 fatal error: libavcodec/avcodec.h: No such file or directory</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ERROR: /data/menglingjun/mediapipe/mediapipe/util/BUILD:67:1: C++ compilation of rule <span class="string">'//mediapipe/util:audio_decoder'</span> failed (Exit 1) gcc failed: error executing <span class="built_in">command</span> /usr/<span class="built_in">local</span>/gcc/bin/gcc -U_FORTIFY_SOURCE -fstack-protector -Wall -Wunused-but-set-parameter -Wno-free-nonheap-object -fno-omit-frame-pointer -g0 -O2 <span class="string">'-D_FORTIFY_SOURCE=1'</span> -DNDEBUG -ffunction-sections ... (remaining 81 argument(s) skipped)</span><br><span class="line"></span><br><span class="line">Use --sandbox_debug to see verbose messages from the sandbox</span><br><span class="line">In file included from mediapipe/util/audio_decoder.cc:15:0:</span><br><span class="line">./mediapipe/util/audio_decoder.h:33:32: fatal error: libavcodec/avcodec.h: No such file or directory</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> YouTube-8M </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>bazel 总结</title>
+      <link href="/2019/10/23/bazel%E5%B0%8F%E6%80%BB%E7%BB%93/"/>
+      <url>/2019/10/23/bazel%E5%B0%8F%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<p>最近在用Utube-8M的mediapipe框架提取视频特征，用到了bazel编译，遇到一些问题做一些总结。</p><a id="more"></a><hr><h2 id="WORKSPACE"><a href="#WORKSPACE" class="headerlink" title="WORKSPACE"></a>WORKSPACE</h2><p>WORKSPACE位于你的项目根目录，标志你的工作区。用于引入外部依赖关系，通常是源代码位于主存储库之外。</p><h2 id="BUILD文件"><a href="#BUILD文件" class="headerlink" title="BUILD文件"></a>BUILD文件</h2><p>BUILD文件给出了编译目标的规则，包括target名称，源文件srcs，头文件hdrs，依赖deps</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cc_binary(</span><br><span class="line">    name = &quot;hello-world&quot;,</span><br><span class="line">    srcs = [&quot;hello-world.cc&quot;],</span><br><span class="line">    hdrs = [&quot;hello-world.hpp&quot;,</span><br><span class="line"> &quot;helo.hpp&quot;,</span><br><span class="line">       ],</span><br><span class="line"> deps = [&quot;//lib:hello-time&quot;]</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>具体规则可以参考源网站<a href="https://docs.bazel.build/versions/master/be/c-cpp.html#cc_binary" target="_blank" rel="noopener">https://docs.bazel.build/versions/master/be/c-cpp.html#cc_binary</a></p><h3 id="deps"><a href="#deps" class="headerlink" title="deps"></a>deps</h3><p>依赖可以包含内部依赖也可以包含外部依赖，<br><strong>内部依赖</strong>这里的路径是以WORKSPACE的路径开始的相对路径，例如deps = [“//lib:hello-time”]代表WORKSPACE路径下有lib文件夹，lib里面有hello-time.cc，并且有BUILD文件，这个就是内部依赖，还没有编译，在你编译主文件时他会自动链接先编译这个文件。</p><p><strong>外部依赖</strong>就是可以调用你安装好的包，比如opencv包，这时你需要先改WORKSPACE加入环境，再写一个BUILD调用。<br>1、WORKSPACE加入环境，它指定了名字，path就是环境遍历，build_file就是build的文件再third_party文件夹下opencv_linux.BUILD中。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new_local_repository(</span><br><span class="line">    name = &quot;linux_opencv&quot;,</span><br><span class="line">    build_file = &quot;@//third_party:opencv_linux.BUILD&quot;,</span><br><span class="line">    path = &quot;/home/menglingjun/menglingjun/software/opencv&quot;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>2、改opencv_linux.BUILD<br>加入源文件，头文件，include啥的，都是相对于你前面的path</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cc_library(</span><br><span class="line">    name = &quot;opencv&quot;,</span><br><span class="line">    srcs = glob(</span><br><span class="line">        [</span><br><span class="line">             &quot;lib64/libopencv_core.so&quot;,</span><br><span class="line">             &quot;lib64/libopencv_highgui.so&quot;,</span><br><span class="line">             &quot;lib64/libopencv_imgcodecs.so&quot;,</span><br><span class="line">             &quot;lib64/libopencv_imgproc.so&quot;,</span><br><span class="line">             &quot;lib64/libopencv_video.so&quot;,</span><br><span class="line">             &quot;lib64/libopencv_videoio.so&quot;,</span><br><span class="line">        ],</span><br><span class="line">    ),</span><br><span class="line">    hdrs = glob(</span><br><span class="line">         [</span><br><span class="line">              &quot;include/opencv4/opencv2/**/*.h*&quot;,</span><br><span class="line">              &quot;include/opencv4/opencv2/*.h*&quot;,</span><br><span class="line">         ]),</span><br><span class="line">    includes = [&quot;include/opencv4&quot;,], # [&quot;include&quot;],</span><br><span class="line">    linkstatic = 1,</span><br><span class="line">    visibility = [&quot;//visibility:public&quot;],</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>3、你要编译的目标如何依赖<br>把opencv加上就可以了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cc_binary(</span><br><span class="line">    name = &quot;hello-world&quot;,</span><br><span class="line">    srcs = [&quot;hello-world.cc&quot;],</span><br><span class="line">    hdrs = [&quot;hello-world.hpp&quot;,</span><br><span class="line"> &quot;helo.hpp&quot;,</span><br><span class="line">       ],</span><br><span class="line"> deps = [&quot;//third_party:opencv&quot;]</span><br><span class="line">)</span><br></pre></td></tr></table></figure><h2 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h2><h3 id="Test-1编译单独一个目标"><a href="#Test-1编译单独一个目标" class="headerlink" title="Test 1编译单独一个目标"></a>Test 1编译单独一个目标</h3><p>在你的WORKSPACE所在目录下运行bazel build，运行main文件夹下的hello-world.cc<br>stage1<br>    ├── main<br>    │   ├── BUILD<br>    │   └── hello-world.cc<br>   └── WORKSPACE</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bazel build //main:hello-world</span><br></pre></td></tr></table></figure><h3 id="Test-2编译带有依赖的目标"><a href="#Test-2编译带有依赖的目标" class="headerlink" title="Test 2编译带有依赖的目标"></a>Test 2编译带有依赖的目标</h3><p>如果hello-world.cc的文件需要调用hello-greet的包此时就需要加入deps依赖。build文件如下所示</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cc_library(</span><br><span class="line">    name = &quot;hello-greet&quot;,</span><br><span class="line">    srcs = [&quot;hello-greet.cc&quot;],</span><br><span class="line">    hdrs = [&quot;hello-greet.h&quot;],</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">cc_binary(</span><br><span class="line">    name = &quot;hello-world&quot;,</span><br><span class="line">    srcs = [&quot;hello-world.cc&quot;],</span><br><span class="line">    deps = [</span><br><span class="line">        &quot;:hello-greet&quot;,</span><br><span class="line">    ],</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>这样再编译hello-world，bazel就会首先编译hello-greet再对hello-world.cc进行编译。指令我们还是一样</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bazel build //main:hello-world</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> LINUX </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bazel </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>mediapipe bazel build 编译提示编译找不到opencv4/opencv2/core/version.hpp</title>
+      <link href="/2019/10/23/mediapipe%20bazel%20build%20%E7%BC%96%E8%AF%91%E6%8F%90%E7%A4%BA%E7%BC%96%E8%AF%91%E6%89%BE%E4%B8%8D%E5%88%B0opencv4_opencv2_core_version.hpp/"/>
+      <url>/2019/10/23/mediapipe%20bazel%20build%20%E7%BC%96%E8%AF%91%E6%8F%90%E7%A4%BA%E7%BC%96%E8%AF%91%E6%89%BE%E4%B8%8D%E5%88%B0opencv4_opencv2_core_version.hpp/</url>
+      
+        <content type="html"><![CDATA[<p>解决mediapipe bazel build 编译提示编译找不到opencv4/opencv2/core/version.hpp</p><a id="more"></a><hr><p>问题：mediapipe bazel build 编译提示编译找不到opencv4/opencv2/core/version.hpp<br>分析：主要原因在于没有配置好bazel的第三方库的环境变量<br>解决方案：<br>1、需要修改根目录下WORKSAPCE的linux_opencv仓库的path，改到你安装的opencv环境位置，例如我安装opencv4需要修改如下</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new_local_repository(</span><br><span class="line">    name = &quot;linux_opencv&quot;,</span><br><span class="line">    build_file = &quot;@//third_party:opencv_linux.BUILD&quot;,</span><br><span class="line">    path = &quot;/home/myname/software/opencv&quot;,</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>2、需要修改third_party/opencv_linux.BUILD找到opencv</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cc_library(</span><br><span class="line">    name = &quot;opencv&quot;,</span><br><span class="line">    srcs = glob(</span><br><span class="line">        [</span><br><span class="line">            &quot;lib/libopencv_core.so&quot;,</span><br><span class="line">            &quot;lib/libopencv_highgui.so&quot;,</span><br><span class="line">            &quot;lib/libopencv_imgcodecs.so&quot;,</span><br><span class="line">            &quot;lib/libopencv_imgproc.so&quot;,</span><br><span class="line">            &quot;lib/libopencv_video.so&quot;,</span><br><span class="line">            &quot;lib/libopencv_videoio.so&quot;,</span><br><span class="line">        ],</span><br><span class="line">    ),</span><br><span class="line">    hdrs = glob([&quot;include/opencv4/opencv2/*.h*&quot;，</span><br><span class="line">   &quot;include/opencv4/opencv2/**/*.h*&quot; ， ]),</span><br><span class="line">    includes = [&quot;include/opencv4/&quot;],</span><br><span class="line">    linkstatic = 1,</span><br><span class="line">    visibility = [&quot;//visibility:public&quot;],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bazel </tag>
+            
+            <tag> mediapipe </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>源码编译OPENCV C++版本 linux</title>
+      <link href="/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91OPENCV%20C++%E7%89%88%E6%9C%AC%20linux/"/>
+      <url>/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91OPENCV%20C++%E7%89%88%E6%9C%AC%20linux/</url>
+      
+        <content type="html"><![CDATA[<p>源码编译OPENCV C++版本 linux</p><a id="more"></a><h5 id="Tips-1-下载-OPENCV"><a href="#Tips-1-下载-OPENCV" class="headerlink" title="Tips 1 下载 OPENCV"></a>Tips 1 下载 OPENCV</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/opencv/opencv</span><br><span class="line">git clone https://github.com/opencv/opencv</span><br></pre></td></tr></table></figure><h5 id="Tips-2-创建build文件夹"><a href="#Tips-2-创建build文件夹" class="headerlink" title="Tips 2 创建build文件夹"></a>Tips 2 创建build文件夹</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd opencv</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br></pre></td></tr></table></figure><h5 id="Tips-3-Cmake编译"><a href="#Tips-3-Cmake编译" class="headerlink" title="Tips 3 Cmake编译"></a>Tips 3 Cmake编译</h5><p><strong>注意：一般编译过程会有两个文件比较难下载，最好提前下载下来，这里参考<em>Error2，Error4</em>先解决再走下面流程。</strong></p><p>其中CMAKE_INSTALL_PREFIX代表你的安装路径<br>-D BUILD_opencv_python3配置是否安装python版的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=../../OpenCV \</span><br><span class="line"> -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \</span><br><span class="line">-D BUILD_opencv_python3=OFF \</span><br><span class="line">-D BUILD_opencv_python2=OFF \</span><br><span class="line">OPENCV_GENERATE_PKGCONFIG=YES ..</span><br></pre></td></tr></table></figure><h5 id="Tips-4-make安装"><a href="#Tips-4-make安装" class="headerlink" title="Tips 4 make安装"></a>Tips 4 make安装</h5><p>j4代表用几个CPU加速</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make -j12</span><br><span class="line">#long time ...</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><h5 id="Tips-5-环境变量"><a href="#Tips-5-环境变量" class="headerlink" title="Tips 5 环境变量"></a>Tips 5 环境变量</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line"></span><br><span class="line">PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$HOME/menglingjun/software/opencv/lib64/pkgconfig</span><br><span class="line">export PKG_CONFIG_PATH</span><br><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/menglingjun/software/opencv/lib64/</span><br><span class="line"></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure><p>测试版本信息</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg-config --modversion opencv</span><br></pre></td></tr></table></figure><h5 id="Error1-Cmake3找不到"><a href="#Error1-Cmake3找不到" class="headerlink" title="Error1 Cmake3找不到"></a>Error1 Cmake3找不到</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-D WITH_CUBLAS=ON ..</span><br><span class="line">-- The CXX compiler identification is GNU 5.5.0</span><br><span class="line">-- The C compiler identification is GNU 5.5.0</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++ -- broken</span><br><span class="line">CMake Error at /usr/share/cmake3/Modules/CMakeTestCXXCompiler.cmake:45 (message):</span><br><span class="line">  The C++ compiler</span><br><span class="line"></span><br><span class="line">    &quot;/usr/local/gcc/bin/g++&quot;</span><br><span class="line"></span><br><span class="line">  is not able to compile a simple test program.</span><br><span class="line"></span><br><span class="line">  It fails with the following output:</span><br><span class="line"></span><br><span class="line">    Change Dir: /home/menglingjun/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp</span><br><span class="line"></span><br><span class="line">    Run Build Command:&quot;/usr/bin/gmake&quot; &quot;cmTC_39633/fast&quot;</span><br><span class="line">    /usr/bin/gmake -f CMakeFiles/cmTC_39633.dir/build.make CMakeFiles/cmTC_39633.dir/build</span><br><span class="line">    gmake[1]: Entering directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    /bin/sh: /usr/bin/cmake3: No such file or directory</span><br><span class="line">    gmake[1]: *** [CMakeFiles/cmTC_39633.dir/testCXXCompiler.cxx.o] Error 127</span><br><span class="line">    gmake[1]: Leaving directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    gmake: *** [cmTC_39633/fast] Error 2</span><br><span class="line">  CMake will not be able to correctly generate this project.</span><br></pre></td></tr></table></figure><p>关注这里/bin/sh: /usr/bin/cmake3: No such file or directory<br>我查看了一下/usr/bin/下有cmake，查一下cmake版本（cmake –version）发现cmake是3版本，我觉得这个cmake就是3，所以创建一个软链（副本）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s cmake cmake3</span><br></pre></td></tr></table></figure><p>我这里就ok了，如果你有别的问题，百度其他地方把。</p><h5 id="Error2-ippicv下载失败问题"><a href="#Error2-ippicv下载失败问题" class="headerlink" title="Error2 ippicv下载失败问题"></a>Error2 ippicv下载失败问题</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CMake Warning at cmake/OpenCVDownload.cmake:202 (message):</span><br><span class="line">  IPPICV: Download failed: 28;&quot;Timeout was reached&quot;</span><br><span class="line"></span><br><span class="line">  For details please refer to the download log file:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /home/menglingjun/menglingjun/software/opencv-master/build/CMakeDownloadLog.txt</span><br></pre></td></tr></table></figure><p>离线下载<br>链接：<a href="https://pan.baidu.com/s/1f6x2-S-XHKr8K0qv5inKIg&shfl=sharepset" target="_blank" rel="noopener">https://pan.baidu.com/s/1f6x2-S-XHKr8K0qv5inKIg&amp;shfl=sharepset</a><br>提取码：s9mz<br>复制这段内容后打开百度网盘手机App，操作更方便哦</p><p>存到一个目录下，随意<br>  /home/menglingjun/menglingjun/software</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 打开终端，输入</span><br><span class="line"> </span><br><span class="line">    vim ~/menglingjun/software/opencv-master/3rdparty/ippicv/ippicv.cmake #就是这个文件的路径</span><br><span class="line"> </span><br><span class="line"># 将47行的</span><br><span class="line"> </span><br><span class="line">     &quot;https://raw.githubusercontent.com/opencv/opencv_3rdparty/$&#123;IPPICV_COMMIT&#125;ippicv/&quot;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"># 改为步骤1中手动下载的文件的本地路径(也就是将网络下载的模式改为本地文件下载的模式):</span><br><span class="line"> </span><br><span class="line">    &quot;file:  /home/menglingjun/menglingjun/software/opencv-master&quot; #（仅供参考，根据自己的路径填写）</span><br></pre></td></tr></table></figure><h5 id="Error3-fatal-error-sys-videoio-h-No-such-file-or-directory"><a href="#Error3-fatal-error-sys-videoio-h-No-such-file-or-directory" class="headerlink" title="Error3 fatal error: sys/videoio.h: No such file or directory"></a>Error3 fatal error: sys/videoio.h: No such file or directory</h5><p>Cmake时把这个加上</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib-3.2.0/module</span><br></pre></td></tr></table></figure><h5 id="Error4-face-landmark-model-dat下载失败问题"><a href="#Error4-face-landmark-model-dat下载失败问题" class="headerlink" title="Error4 face_landmark_model.dat下载失败问题"></a>Error4 face_landmark_model.dat下载失败问题</h5><p>百度云下载地址，失效请评论提醒我更新：<br>链接：<a href="https://pan.baidu.com/s/1uhIDqIbMuIawrE6mXuSrnA&shfl=sharepset" target="_blank" rel="noopener">https://pan.baidu.com/s/1uhIDqIbMuIawrE6mXuSrnA&amp;shfl=sharepset</a><br>提取码：re72<br>复制这段内容后打开百度网盘手机App，操作更方便哦<br>找到/opencv_contrib/modules/face下面的CMakeLists.txt文件并打开，如下，修改红色标注的网站，改为本地目录（你需要提前下载好存在这个目录下），如下所示。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ocv_download(</span><br><span class="line">    FILENAME face_landmark_model.dat</span><br><span class="line">    HASH $&#123;__file_hash&#125;</span><br><span class="line">    URL</span><br><span class="line">      &quot;$&#123;OPENCV_FACE_ALIGNMENT_URL&#125;&quot;</span><br><span class="line">      &quot;$ENV&#123;OPENCV_FACE_ALIGNMENT_URL&#125;&quot;</span><br><span class="line">      &quot;file:/home/menglingjun/menglingjun/software/opencv_contrib/&quot;</span><br><span class="line">    DESTINATION_DIR &quot;$&#123;CMAKE_BINARY_DIR&#125;/$&#123;OPENCV_TEST_DATA_INSTALL_PATH&#125;/cv/face/&quot;</span><br><span class="line">    ID &quot;data&quot;</span><br><span class="line">    RELATIVE_URL</span><br><span class="line">    STATUS res</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/20191021163118179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> opencv </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>源码编译opencv 找不到cmake3</title>
+      <link href="/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/"/>
+      <url>/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/</url>
+      
+        <content type="html"><![CDATA[<p>源码编译opencv 找不到cmake3</p><a id="more"></a><hr><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-D WITH_CUBLAS=ON ..</span><br><span class="line">-- The CXX compiler identification is GNU 5.5.0</span><br><span class="line">-- The C compiler identification is GNU 5.5.0</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++ -- broken</span><br><span class="line">CMake Error at /usr/share/cmake3/Modules/CMakeTestCXXCompiler.cmake:45 (message):</span><br><span class="line">  The C++ compiler</span><br><span class="line"></span><br><span class="line">    &quot;/usr/local/gcc/bin/g++&quot;</span><br><span class="line"></span><br><span class="line">  is not able to compile a simple test program.</span><br><span class="line"></span><br><span class="line">  It fails with the following output:</span><br><span class="line"></span><br><span class="line">    Change Dir: /home/menglingjun/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp</span><br><span class="line"></span><br><span class="line">    Run Build Command:&quot;/usr/bin/gmake&quot; &quot;cmTC_39633/fast&quot;</span><br><span class="line">    /usr/bin/gmake -f CMakeFiles/cmTC_39633.dir/build.make CMakeFiles/cmTC_39633.dir/build</span><br><span class="line">    gmake[1]: Entering directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    /bin/sh: /usr/bin/cmake3: No such file or directory</span><br><span class="line">    gmake[1]: *** [CMakeFiles/cmTC_39633.dir/testCXXCompiler.cxx.o] Error 127</span><br><span class="line">    gmake[1]: Leaving directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    gmake: *** [cmTC_39633/fast] Error 2</span><br><span class="line">  CMake will not be able to correctly generate this project.</span><br></pre></td></tr></table></figure><p>关注这里/bin/sh: /usr/bin/cmake3: No such file or directory<br>我查看了一下/usr/bin/下有cmake，查一下cmake版本（cmake –version）发现cmake是3版本，我觉得这个cmake就是3，所以创建一个软链（副本）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s cmake cmake3</span><br></pre></td></tr></table></figure><p>我这里就ok了，如果你有别的问题，百度其他地方把。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> opencv </tag>
+            
+            <tag> cmake </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux软连接</title>
+      <link href="/2019/10/21/linux%E8%BD%AF%E8%BF%9E%E6%8E%A5/"/>
+      <url>/2019/10/21/linux%E8%BD%AF%E8%BF%9E%E6%8E%A5/</url>
+      
+        <content type="html"><![CDATA[<p>linux中有个操作叫做软连接，类似于windows中的快捷方式，对于文件，可以相当于同一个文件用一个内存存储；对于文件夹，内存在A处，软链到B处，我们在B处操作，所有的空间内存都存储到A处；</p><a id="more"></a><hr><p>创建软链接</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln  -s  [源文件或目录]  [目标文件或目录]</span><br></pre></td></tr></table></figure><p>例如，在当前目录创建test1，软链到var路径下的test，这样内存就占用test的内存。（一般用于节省home的内存，将home下的数据软链到其他硬盘）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln –s  /var/www/test  test1</span><br></pre></td></tr></table></figure><p>删除软连接</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm –rf test</span><br></pre></td></tr></table></figure><p>修改软连接</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln –snf  [新的源文件或目录]  [目标文件或目录]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> LINUX </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软连接 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CVPR2019 GAN论文分享</title>
+      <link href="/2019/09/28/CVPR2019%20GAN%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB/"/>
+      <url>/2019/09/28/CVPR2019%20GAN%E8%AE%BA%E6%96%87%E5%88%86%E4%BA%AB/</url>
+      
+        <content type="html"><![CDATA[<p>更新于2019-9-29<br>2019-9-29增加DCGAN总结<br>2019-9-27增加《Geometry-Consistent Generative Adversarial Networks for》<br>2019-9-26增加《Sphere Generative Adversarial Network Based on Geometric Moment Matching》<br>2019-9-25增加《Mixture Density Generative Adversarial Networks》<br>2019-9-23创建文本</p><a id="more"></a><hr><h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><p>2019CVPR共有10篇论文上榜，其中包含6篇改进GAN网络的文章，包括四篇改良GAN的模型崩塌问题，有一篇改良文字转图像模型的，有一篇提出切片W距离；除了改进GAN的论文还有有4篇文章属于领域创新型文章，有应用在模型压缩、美妆生成、交互式图像生成、视频生成等领域。<br><img src="https://img-blog.csdnimg.cn/20191009102123595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20191009101557263.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="《Mode-Seeking-Generative-Adversarial-Networks-for-Diverse-Image-Synthesis》—–MSGAN"><a href="#《Mode-Seeking-Generative-Adversarial-Networks-for-Diverse-Image-Synthesis》—–MSGAN" class="headerlink" title="《Mode Seeking Generative Adversarial Networks for Diverse Image Synthesis》—–MSGAN"></a>《Mode Seeking Generative Adversarial Networks for Diverse Image Synthesis》—–MSGAN</h3><p>这篇文章主要针对cGAN的模型崩塌问题提出了一种正则化的思想，在原目标函数基础上加入一个输出图像之间的距离与噪声输入之间距离的比值。<br>源码：<a href="https://github.com/HelenMao/MSGAN" target="_blank" rel="noopener">https://github.com/HelenMao/MSGAN</a></p><h4 id="IDEA"><a href="#IDEA" class="headerlink" title="IDEA"></a>IDEA</h4><p>先摆一张论文中的图，这是他idea的来源，讲的什么意思呢，左边为真实数据分布，应该在模型空间里会有五个模型，模型崩塌时会像第二个图一样，他映射好只有中间那两个波峰模型，而利用它的ModeSeeking会达到第三张图状态，怎么达到呢，看右侧虚线框，里面解释在Z到ImageSpaceI的映射中，可以看出如果，这个比值小的话，会使的只在中间晃荡，当比值大时就活到外边映射到更多的模型去。所以作者给出一个正则化思想就是最大化一个输出图像之间的距离与噪声输入之间距离的比值。<br><img src="https://img-blog.csdnimg.cn/20190928095303908.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="Work"><a href="#Work" class="headerlink" title="Work"></a>Work</h4><p>加入的正则项如下，他主要想最大化这个比值，以实现输入端一个差值很小的输入却能引起输出端较大的模型差异。（笔者感觉这是一个方向，大家都在想让输出模型尽可能差别大一些，或者增大距离，或者映射到一个区别都更大的空间，这样模型才能输出多样性）<br><img src="https://img-blog.csdnimg.cn/20190928094607252.png" alt="在这里插入图片描述"><br>一般人们引入一个正则项后要加入一个权重系数来平衡，所以最终的目标函数如下：<br><img src="https://img-blog.csdnimg.cn/2019092809462128.png" alt="在这里插入图片描述"></p><h4 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h4><p>作者对于图像约束GAN（pairedimage and unpaired images）、文字约束GAN分别做了大量实验来验证它的正则化项好！<br>这里举一例paired image cGAN<br>作者用pix2pix做的baseline，数据集用的facades（建筑风格）与maps（地图映射）最终结果如下，这大家都说自己好的。<br><img src="https://img-blog.csdnimg.cn/20190928100956259.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190928101215267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="《Mixture-Density-Generative-Adversarial-Networks》—–MDGAN"><a href="#《Mixture-Density-Generative-Adversarial-Networks》—–MDGAN" class="headerlink" title="《Mixture Density Generative Adversarial Networks》—–MDGAN"></a>《Mixture Density Generative Adversarial Networks》—–MDGAN</h3><p>这篇文章也是用来解决GAN的模型崩塌问题，传统的GAN中D只做了个打分操作，这里作者想到让D输出K维向量，然后在这个K维度空间去聚类不同的高斯模型。这不同的高斯模型就代表真实图像可能存在的模型（感觉做这方面改进的想法都差不多，我们能改进吗？）<br>源码：<a href="https://github.com/eghbalz/mdgan" target="_blank" rel="noopener">https://github.com/eghbalz/mdgan</a>（作者还没写……只写了个readme）</p><h4 id="IDEA-1"><a href="#IDEA-1" class="headerlink" title="IDEA"></a>IDEA</h4><p>这里还是拿论文中一张图简要说一下作者思路，作者想构造更多的模型，他就像最后映射到一个高纬度空间，我们去聚类多个高斯模型这样就能形成更多的模型。<br><img src="https://img-blog.csdnimg.cn/20190928104712554.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="Work-1"><a href="#Work-1" class="headerlink" title="Work"></a>Work</h4><p>作者主要的工作就是这个公司，定义了一个lk函数，lk函数如下，他把D输出的结果当成k维embedding来处理，将k维度向量放到C个高斯分布中去计算lk值，这个值越高就说明他服从这个高斯分布，然后这里C个模型相当于他想去映射k个不同的模型来提高图像的多样性（<strong>我不太懂得是他这C个模型参数是提前给定参数还是训练自动调？？？</strong>）<br><img src="https://img-blog.csdnimg.cn/20190928102928583.png" alt="在这里插入图片描述"><br><strong>注意：这里的权值是1/d+1，可不可以改进一下，引入个过拟合项，哈哈。</strong></p><p>然后实际损失函数如下，整体还是和GAN一样。<br><img src="https://img-blog.csdnimg.cn/20190928102406384.png" alt="在这里插入图片描述"></p><h4 id="Experiments-1"><a href="#Experiments-1" class="headerlink" title="Experiments"></a>Experiments</h4><p>作者分别对MNIST、Fashion-MNIST、CIFAR-10、CelebA数据集做了实验，取VanillaGAN以及WGAN、DRAGAN做对比实验，这里展示MNIST数据集实验结果如下：<br><img src="https://img-blog.csdnimg.cn/2019092810442663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="《Sphere-Generative-Adversarial-Network-Based-on-Geometric-Moment-Matching》"><a href="#《Sphere-Generative-Adversarial-Network-Based-on-Geometric-Moment-Matching》" class="headerlink" title="《Sphere Generative Adversarial Network Based on Geometric Moment Matching》"></a>《Sphere Generative Adversarial Network Based on Geometric Moment Matching》</h3><p>本篇文章也是旨在改良GAN网络训练时容易出现模型崩塌和不稳定的问题。原始的GAN网络损失函数计算特征embedding的一阶矩，GAN在训练的过程中会出现不稳定和模型崩塌，WGAN/WGAN-gp虽然引用了Wasserstein距离，一定程度上解决了这个问题，但是这些模型同样存在问题：对于模型的参数要求还是比较高，因此SphereGAN尝试不引入新的参数的情况下将模型整体进行变换，达到稳定模型的效果。<br>源码：<a href="https://github.com/Dotori-HJ/SphereGAN-Pytorch-implementation" target="_blank" rel="noopener">https://github.com/Dotori-HJ/SphereGAN-Pytorch-implementation</a></p><h4 id="IDEA-2"><a href="#IDEA-2" class="headerlink" title="IDEA"></a>IDEA</h4><p>目前我还没全看完这篇文章，我理解的意思时，普通的一阶矩可能会突然距离很远，导致一些不稳定的现像，而我们把embedding弄到超球面，计算超球面距离就会被局限到超球面，以实现训练比较稳定的效果，可以看下图理解。<br>另外，作者说利用一个高维的特征以及超球面的特征来保证充分评测数据，以有一个好的结果。两者兼备了！优秀。<br><img src="https://img-blog.csdnimg.cn/20190928175111266.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="Work-2"><a href="#Work-2" class="headerlink" title="Work"></a>Work</h4><p>下图展示了整个网络的示意图，前面和GAN网络一致修改了后面损失计算的部分。<br><img src="https://img-blog.csdnimg.cn/20190928175358963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><p>损失函数如下：<br><img src="https://img-blog.csdnimg.cn/20190928175322355.png" alt="在这里插入图片描述"></p><h4 id="Experiments-2"><a href="#Experiments-2" class="headerlink" title="Experiments"></a>Experiments</h4><p>作者在CIFAR上做了实验，下图为实验结果，效果还算提高了很多。<br><img src="https://img-blog.csdnimg.cn/20190928181804394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="《Geometry-Consistent-Generative-Adversarial-Networks-for-One-Sided-Unsupervised-Domain-Mapping》"><a href="#《Geometry-Consistent-Generative-Adversarial-Networks-for-One-Sided-Unsupervised-Domain-Mapping》" class="headerlink" title="《Geometry-Consistent Generative Adversarial Networks for One-Sided Unsupervised Domain Mapping》"></a>《Geometry-Consistent Generative Adversarial Networks for One-Sided Unsupervised Domain Mapping》</h3><p>本文提出一种几何一致的无监督Image2ImageGAN，相比于CycleGAN、distanceGAN有一个更好的效果，好像文中没有去解释与别人相比是否好，文中说是is compatible with other well-studied unsupervised constraints.但是实验结果他当然证明比别人好！</p><h4 id="IDEA-3"><a href="#IDEA-3" class="headerlink" title="IDEA"></a>IDEA</h4><p>起初image2image的生成对抗网络需要大量的pair图才能有一个好的效果，为此研究者提出好了cycleGAN构造Gxy和Gyx来把y作为中间隐含的变量；distanceGAN则是利用y距离来映射x之间距离，这里作者给出一种几何一致的方法，下图右侧所示，也是在不知道y的情况，用银含量去拟合。<br><img src="https://img-blog.csdnimg.cn/20190929225628893.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h4 id="Experiments-3"><a href="#Experiments-3" class="headerlink" title="Experiments"></a>Experiments</h4><p>作者采用了SVHM与MNIST数据集作为x、y，对比了DistanceGAN、CycleGAN等实验方法，结果如下：<br><img src="https://img-blog.csdnimg.cn/20190929230344470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="《Towards-Optimal-Structured-CNN-Pruning-via-Generative-Adversarial-Learning》"><a href="#《Towards-Optimal-Structured-CNN-Pruning-via-Generative-Adversarial-Learning》" class="headerlink" title="《Towards Optimal Structured CNN Pruning via Generative Adversarial Learning》"></a>《Towards Optimal Structured CNN Pruning via Generative Adversarial Learning》</h3><p>本文算是比较新颖的一篇文章，作者将GAN网络应用到模型剪枝方面，提出了GAL网络。<br>源码：<a href="https://github.com/anonymouscvpr1983/GAL" target="_blank" rel="noopener">https://github.com/anonymouscvpr1983/GAL</a></p><h4 id="IDEA-4"><a href="#IDEA-4" class="headerlink" title="IDEA"></a>IDEA</h4><p>这篇文章引用一个softmask（软掩码）与稀疏限制的思想去试图删掉原网络的一部分层去看它的效果，来训练得到一个和baseline相似效果的网络。</p><h4 id="Work-3"><a href="#Work-3" class="headerlink" title="Work"></a>Work</h4><p>网络框图如下所示，Generator完成对模型的压缩，Discrimantor完成对原始BaseLine模型和剪枝后的模型的评价，Discriminator优化使两个模型差距更大，而Generator使的模型效果和Baseline一致。<br><img src="https://img-blog.csdnimg.cn/20190928154442746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>Generator分三方面去改动：</p><p>1）BlockSelection：这个方法适合resnet等带残差的网络，将网络分成许多块，每个块在传播时乘以参数m，m的值决定该block需要的程度，如果最后发现m变为0则该层就可以删掉。<br><img src="https://img-blog.csdnimg.cn/2019092816061059.png" alt="在这里插入图片描述"><br>2）BranchSelection：卷积核选择，对于1*1、3*3等卷积核分别乘以一定比例，决定卷积核对网络的影响多少；这个在googlenet等一些用多种卷积核的网络中有好处。<br><img src="https://img-blog.csdnimg.cn/20190928170840343.png" alt="在这里插入图片描述"></p><p>3）ChanelSelection：通道选择，这种优化方法对于每个卷积网络都适用。他是对于每一层卷积网络，在每它的每一个权重的基础上乘以参数m来限制该权重对整个模型的影响。最后清除m为0的权重。<br><img src="https://img-blog.csdnimg.cn/20190928170010400.png" alt="在这里插入图片描述"></p><h2 id="Experiments-4"><a href="#Experiments-4" class="headerlink" title="Experiments"></a>Experiments</h2><p>作者做了大量实验证明GAL在保证模型准确率的情况下大大压缩了模型的参数量。<br>如下图为MNIST数据集，LeNet与VGG模型的实验结果，作者用SSL和NISP方法对比， GAL 获得了最好的分类错误率与参数压缩量。<br><img src="https://img-blog.csdnimg.cn/20191009102643184.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>除此之外，作者也对Resnet、GoogLenet、Densenet做了GAL优化，给出了优化结果。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉 </category>
+          
+          <category> GAN </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CVPR </tag>
+            
+            <tag> MSGAN </tag>
+            
+        </tags>
       
     </entry>
     
@@ -55,7 +304,34 @@
     
     
     <entry>
-      <title>WGAN代码解读及实验总结</title>
+      <title>screen功能 linux后台运行程序</title>
+      <link href="/2019/09/18/screen%E5%8A%9F%E8%83%BD%20linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/"/>
+      <url>/2019/09/18/screen%E5%8A%9F%E8%83%BD%20linux%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<p>screen功能 linux后台运行程序</p><a id="more"></a><hr><h4 id="1创建screen进程"><a href="#1创建screen进程" class="headerlink" title="1创建screen进程"></a>1创建screen进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen  #进入screen环境</span><br></pre></td></tr></table></figure><h4 id="2进程下运行文件"><a href="#2进程下运行文件" class="headerlink" title="2进程下运行文件"></a>2进程下运行文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python a.py#运行a.py</span><br></pre></td></tr></table></figure><h4 id="3分离窗口"><a href="#3分离窗口" class="headerlink" title="3分离窗口"></a>3分离窗口</h4><p>先ctrl + a 进入命令模式，再按d分离窗口</p><h4 id="4列出当前进程"><a href="#4列出当前进程" class="headerlink" title="4列出当前进程"></a>4列出当前进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">screen -ls #列出当前进程</span><br><span class="line"></span><br><span class="line">There are screens on:</span><br><span class="line"> 22013.pts-37.hpcgpu30   (Detached)</span><br><span class="line"> 9915.pts-33.hpcgpu30    (Detached)</span><br></pre></td></tr></table></figure><h4 id="5再次进入窗口"><a href="#5再次进入窗口" class="headerlink" title="5再次进入窗口"></a>5再次进入窗口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -r  22013</span><br></pre></td></tr></table></figure><h4 id="6杀死某个窗口"><a href="#6杀死某个窗口" class="headerlink" title="6杀死某个窗口"></a>6杀死某个窗口</h4><p>杀死22013窗口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kill -9 22013</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> LINUX </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> screen </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Faiss源码安装</title>
       <link href="/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/"/>
       <url>/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/</url>
       
@@ -82,6 +358,35 @@
     
     
     <entry>
+      <title>The Summary Of Face Recognition</title>
+      <link href="/2019/08/21/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%82%A3%E7%82%B9%E4%BA%8B---%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%96%B9%E6%A1%88summary/"/>
+      <url>/2019/08/21/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E9%82%A3%E7%82%B9%E4%BA%8B---%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%96%B9%E6%A1%88summary/</url>
+      
+        <content type="html"><![CDATA[<p>通俗易懂教你如何做人脸识别</p><a id="more"></a><hr><h1 id="The-Summary-Of-Face-Recognition"><a href="#The-Summary-Of-Face-Recognition" class="headerlink" title="The Summary Of Face Recognition"></a>The Summary Of Face Recognition</h1><p>[全文共计7162字，预计阅读15分钟，消耗脑容量20MB]</p><blockquote><p>人脸识别包含人脸检测、人脸对齐、人脸识别三个步骤。<br>首先利用人脸检测(FaceDetiction)识别图像中所有人脸，回归人脸的boundbox。<br>然后对于识别出的人脸，可能会有歪头的，如果直接做recognition可能准确率较低，所以&gt;我们需要做一步人脸对齐(FaceAlign)，把所有人脸转为一个标准（正方形内，两眼对齐，嘴巴两侧对齐…）。<br>最后我们需要对所有的人脸做识别，提取特征与员工特征库进行对比。</p></blockquote><p><img src="https://img-blog.csdnimg.cn/20190821185319477.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h1 id="Part-1-FaceDetiction"><a href="#Part-1-FaceDetiction" class="headerlink" title="Part 1 FaceDetiction"></a>Part 1 FaceDetiction</h1><p>人脸检测（待总结…）<br><img src="https://img-blog.csdnimg.cn/20190821160732897.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h1 id="Part-2-FaceRecognition"><a href="#Part-2-FaceRecognition" class="headerlink" title="Part 2 FaceRecognition"></a>Part 2 FaceRecognition</h1><blockquote><p>其实人脸识别可以从两个角度做，之前人们一直是当成分类任务做，现在更多的是1：1特征对比；<br>先说分类任务，我们先对数据进行人脸检测以及对齐得到一个对齐后的人脸数据集，在训练集中每个类（标签/人）下有许多图片（都是对齐好的），然后对数据做一个分类任务，常规的分类模型有googlenet、resnet、densenet、mobilenet（移动端）等等，目标函数用softmax损失函数。<br>后者1：1比对，把分类网络当成特征提取器提取特征，和人脸库对比，欧氏距离小于一定阈值就认为比对成功。这里注意的是人脸库里面是标准照片直接前向传播得到的embedding 特征层。</p></blockquote><p><img src="https://img-blog.csdnimg.cn/20190821144643515.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h2 id="Part-2-1-InsightFace框架"><a href="#Part-2-1-InsightFace框架" class="headerlink" title="Part 2.1 InsightFace框架"></a>Part 2.1 InsightFace框架</h2><p>我们先看一下insightface的框架是怎么做的。这我自己画的一个简单的图，其实很简单，人脸识别分类代码分为两部分，一部分在特征提取网络，用成熟的分类网络提取特征，得到embedding向量，可以看为FaceImage2Vector。这个维度可以自己设计，大家都选的512（抱歉，一个特别的日子，我们一起默哀一会。）然后常规做法，我们会用全连接层转到class_num维度，这时搞一个softmax去做损失即可。后来，大佬们就觉得损失不够好开始改，这个我在2.2中去介绍一下这一系列损失函数的变化。<br><img src="https://img-blog.csdnimg.cn/20190821162957233.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>然后接下来，我们看一下人脸识别代码怎么评测？</p><h2 id="Part-2-2-模型评测"><a href="#Part-2-2-模型评测" class="headerlink" title="Part 2.2 模型评测"></a>Part 2.2 模型评测</h2><p>对于普通分类问题，可能我们考察一个模型好坏，主要看测试集准确率就可以；对于人脸识别问题，我们有开集和闭集之说，闭集是指训练集与测试集人物一样，不会出现不认识的人，一般只在我们的某个领域，比如某个公司不会来外人。但实际不可能，人脸是个很大的开集，我们的训练集不可能囊括所有人，你训练一个模型，比如公司内部，万一有个别的人来了，这破机器认为他就是内部的人，因为可能模型不能很好的区分开。所以这就有了开集测试的重要性。</p><p>实际我们做人脸识别考察是在我们的库里训练一个更好的特征提取器，这个提取器拥有很好的区分能力。如果只在闭集测试，那就看准确率就行；如果在开集测试，我们就要看他在其他数据集上的区分度，怎么测？我们取样N对图像，看每一对两个图像是否属于一个类，我们搞一个阈值，两个图像的特征（由特征提取器提取）欧氏距离小于阈值就认为属于一个类，否则不属于一个类。我们看他能实现多高的准确率。</p><p>做1：1认证，我们需要准备一个pair测试文件，格式如下：</p><blockquote><p>图A地址  图B地址  0/1（代表着是否为同类）</p></blockquote><p>这里注意两张图片是不同图片，大概可能会有3000正例（同类），3000负例。做比对之后我们会有一个结果</p><blockquote><p>TP代表正确识别为正例的样本（原来是正例）   TN正确识别为负例的样本（原来是负例）<br>FP代表错误识别为正例的样本（原来是负例）   FN错误识别为负例的样本（原来是正例）<br>TN+FP代表测试负例，也就是类间测试次数<br>TP+FN代表测试正例，也就是类内测试次数<br>（这里类内测试是指同属于一个类的样本测试，看他们是否足够接近，类间测试是对于不同类的测试，看他们距离是否足够大）<br>FN为错误识别为负例的样本，也是错误接受的次数<br>FP同理代表错误拒绝的次数</p></blockquote><p>然后我们会用以下指标考查：<br>（1）准确率：实验中直接采用(TP+TN)/SUM；考察越高越好。</p><p>TPR召回率：TP/(TP+FN)；考察越高越好</p><p>FPR假正例率：FP/(TN+FP)；考察越低越好</p><p>（2）FAR误识率：FAR = 错误接受次数/类间测试次数=FN/(TN+FP)；考察越低越好。</p><p>（3）FRR拒识率：FRR = 错误拒绝次数/类内测试次数=FP/(TP+FN)；考察越低越好。</p><h2 id="Part-2-3-损失函数回顾"><a href="#Part-2-3-损失函数回顾" class="headerlink" title="Part 2.3 损失函数回顾"></a>Part 2.3 损失函数回顾</h2><blockquote><p>人脸识别和一般的分类任务不太一样，他更大的特点在于类目多，我们训练13亿人，要让他对地球人进行适应，并且类间差距可能也小，样本有时不均衡，数据不多。所以对于人脸识别要求有更好的泛化能力、容错能力。我们从基本的softmax一点一点看一看</p></blockquote><h3 id="Part-2-3-1-softmax损失"><a href="#Part-2-3-1-softmax损失" class="headerlink" title="Part 2.3.1 softmax损失"></a>Part 2.3.1 softmax损失</h3><p>softmax损失函数是最经典的损失函数，用于多分类问题；softmax损失作用于标签所对应类Y_i的得分，优化提高它的概率得分，所以对于闭集的分类能有一个好的结果；<br><img src="https://img-blog.csdnimg.cn/20190821165213487.png" alt="在这里插入图片描述"><br>然而我们了解人脸识别一般是开集的，测试集是所有可能进入你的检测系统的人，有两个问题？一则来了一个外人，你是否能把他排出去？二则稍微脸上变了点，你是否能很好地分开？softmax做损失在训练集能很好的分开，但是不能很好的增加类外间距，减小类内间距。</p><blockquote><p>这里补充一下什么是类内间距，类外间距？<br>划分多个类，无非是把它映射到某一个featuremap，然后做一个超平面，把它们分开，类内间距，就是一个类自己的划分区域最大伸展距离，其实就是它的空间。类外间距就是每个类区域之间的间距。我们想要的结果是他们之间的间隔大一点，这样会有一定的容错能力，泛化能力；类内的间隔小一些，这样聚类效果更好一些。</p></blockquote><p>随后大家就开始增大类外间距，减小类内间距的探索。</p><h3 id="Part-2-3-2-Triplet-Loss"><a href="#Part-2-3-2-Triplet-Loss" class="headerlink" title="Part 2.3.2 Triplet Loss"></a>Part 2.3.2 Triplet Loss</h3><p>Triplet loss属于Metric Learning, 相比起softmax, 它可以方便地训练大规模数据集，不受显存的限制。缺点是过于关注局部，导致难以训练且收敛时间长</p><blockquote><p>这里提一下Metric Learning的概念，它是根据不同的任务来自主学习出针对某个特定任务的度量距离函数。通过计算两张图片之间的相似度，使得输入图片被归入到相似度大的图片类别中去。通常的目标是使同类样本之间的距离尽可能缩小，不同类样本之间的距离尽可能放大。</p></blockquote><p>Triplet loss是这么干的，搞三种图片进去，图A，与图A同类的图，与图A不是同类的图，然后损失函数如下，目的就是让同类的图更近，不同类的图更远。<br>             $$L=max(d(a,p)−d(a,n)+margin,0)$$<br><img src="https://img-blog.csdnimg.cn/20190823104456649.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="Part-2-3-3-L-Softmax"><a href="#Part-2-3-3-L-Softmax" class="headerlink" title="Part 2.3.3 L-Softmax"></a>Part 2.3.3 L-Softmax</h3><p>到L-Softmax，人们就开始直接搞一个间距给损失函数，下图中第一个是softmax做十分类的二维特征图，可以看出来是分开了，但是很拥挤。如果放一张训练集之外的图可能就分错了。</p><blockquote><p>这里我对这个图做一个解释，首先数据实验是将损失函数前的embedding层定为二维（X1,X2）也就对应着图里的横纵坐标；然后在正式损失之前有个全连接层，对于这个W维度应该是（2，class）这里实验是对手写数字体做实验，所以class=10，这里我们认为W=(W_1,W_2,W_3,…,W_10)代表10个子权重，其实我们去看$W\cdot X= ||W||<em>|X| *cos\theta = ( ||W_1||</em>|X| <em>cos\theta_1,||W_2||</em>|X| *cos\theta_2,…)$最后每一项代表该类的得分，也就是哪一项值大就更属于哪一类。此时权重是一个可调量，我们认为他是平面内十个向量，然后同样一个X看他和谁的点乘更大就更好。再者由于cos在0-180度内是单调函数，所以角度越小越好，||W||越大越好。</p></blockquote><p><img src="https://img-blog.csdnimg.cn/20190821171557148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>L-Softmax就对$\theta$做了个间距，如下公式，对于不是本类的还是原来操作（注意这里写为$W\cdot X=||W||<em>||X||</em>cos\theta$），对于本类，我们把角度$\theta$变成$m\theta$，此处m代表提升的倍数，这样让他本来可能模型认为分类不错，但是我们强行把角度增大，使得效果不是很好，这会模型只能说好吧，按照这个继续去优化，去适应这个间隙。</p><p><img src="https://img-blog.csdnimg.cn/20190821172959595.png" alt="在这里插入图片描述"><br>另外为了损失函数单调，我们搞了个条件限制mt<img src="https://img-blog.csdnimg.cn/2019082117294528.png" alt="在这里插入图片描述"><br>然后我们再看上面那张彩图，对于不同m，投射出来的间隙确实不一样，之间的间隙越来越大。m越大分割的类间距越大，类内间距越小，聚类的效果越好，当然这个值也不能太大，可能会不收敛。</p><p><img src="https://img-blog.csdnimg.cn/20190821171557148.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="Part-2-3-4-SphereFace-A-softmax"><a href="#Part-2-3-4-SphereFace-A-softmax" class="headerlink" title="Part 2.3.4 SphereFace( A-softmax)"></a>Part 2.3.4 SphereFace( A-softmax)</h3><p>SphereFace是在L-Softmax的基础上将权重进行归一化，L-Softmax会同时从角度和权重长度上区分不同类别，而SphereFace只从角度上去区分不同类别（因为||W|| = 1了）<br><img src="https://img-blog.csdnimg.cn/20190821170424118.png" alt="在这里插入图片描述"><br>这里可以用他论文里这张图，这里（a）和（b）是softmax loss的结果；（c）和（d）是限制W1和W2向量的模等于1，而且b1和b2偏置等于0，称为modified softmax loss；（e）和（f）是angular softmax loss；我们能看出softmax点比较散，类间距几乎没有，我们把W1标准化，b=0发现，产生了一定间距，进而他做了margin发现间距更大了。之前的L-softmax没有对权重归一化，使得类的结果还要考虑W，这样测间距就比较复杂，A-softmax只需要衡量角度即可。<br><img src="https://img-blog.csdnimg.cn/20190823114805527.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h3 id="Part-2-3-5-CosFace-LMSL-Large-Margin-Cosine-Loss"><a href="#Part-2-3-5-CosFace-LMSL-Large-Margin-Cosine-Loss" class="headerlink" title="Part 2.3.5 CosFace( LMSL: Large Margin Cosine Loss)"></a>Part 2.3.5 CosFace( LMSL: Large Margin Cosine Loss)</h3><p>CosFace的思想和SphereFace( A-softmax)的思想接近，其中主要做了以下三点的改进：</p><ul><li>loss的形式做了稍微的改变，将超参数m由乘法运算变成了减法运算</li><li>不仅对权重进行了正则化，还对特征进行了正则化。</li><li>对归一化后的值乘上一个scale参数，超球面过小时，分类映射到超球面上不好分类，这个scale参数可以扩大超球面体积，这是后面的损失一直在用的观点。</li></ul><p><img src="https://img-blog.csdnimg.cn/2019082117365039.png" alt="在这里插入图片描述"></p><h3 id="Part-2-3-6-ArcFace"><a href="#Part-2-3-6-ArcFace" class="headerlink" title="Part 2.3.6 ArcFace"></a>Part 2.3.6 ArcFace</h3><p>ArcFace是在CosFace基础上又改了下，前面有过对于角度乘以一个margin，这里它直接在角度上加一个margin，得到了一个很好的结果，如下所示。<br><img src="https://img-blog.csdnimg.cn/20190821174050423.png" alt="在这里插入图片描述"><br>论文中对多个损失函数做了一个对比，如下图所示，普通softmax就是分开即可，类间距几乎没有，SpherFace在角度上乘以margin可以增加内间距，但是存在角度为0的地方会有交集，这是一个问题；ArcFace也是在角度上做的margin，他是直接加一个margin，就解决了0度角的交集；CosFace则是在角度的cos值基础上加了一个margin也能在cosi基础上做好间距。<br><img src="https://img-blog.csdnimg.cn/20190821174210759.png" alt="在这里插入图片描述"></p><h1 id="Part-3-InsightFace"><a href="#Part-3-InsightFace" class="headerlink" title="Part 3 InsightFace"></a>Part 3 InsightFace</h1><h2 id="Part-3-1-代码结构"><a href="#Part-3-1-代码结构" class="headerlink" title="Part 3.1 代码结构"></a>Part 3.1 代码结构</h2><p>我做了这么一张图，大概展示代码的整个结构，Insightface源码在这：<a href="https://github.com/deepinsight/insightface#pretrained-models" target="_blank" rel="noopener">https://github.com/deepinsight/insightface#pretrained-models</a><br>我们如果只关注人脸识别部分，更多的要去看src以及recognition部分代码<br><img src="https://img-blog.csdnimg.cn/20190823105859490.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><h2 id="Part-3-2-人脸识别实验"><a href="#Part-3-2-人脸识别实验" class="headerlink" title="Part 3.2 人脸识别实验"></a>Part 3.2 人脸识别实验</h2><p>这里我们以搭建一个人脸识别方案的例子展开，首先需要准备数据，数据准备完后我们需要对数据进行人脸识别+对齐，这部分可以采用MTCNN方法，在src/align中，附上我的实际操作总结：<a href="https://blog.csdn.net/CLOUD_J/article/details/98769515" target="_blank" rel="noopener">insightface数据制作全过程记录</a>然后对于对齐好的数据，我们可以进行用insightface提供的模型做初步验证，可以参考：<a href="https://blog.csdn.net/CLOUD_J/article/details/98882718" target="_blank" rel="noopener">insightface测试recognition验证集效果全过程</a>测试结束，我们可以进行训练，可以参考：<a href="https://blog.csdn.net/CLOUD_J/article/details/98941498" target="_blank" rel="noopener">insightface中recognition训练过程</a></p><h1 id="Part-4-人脸识别部署"><a href="#Part-4-人脸识别部署" class="headerlink" title="Part 4 人脸识别部署"></a>Part 4 人脸识别部署</h1><p>（待补充）</p><hr><p>幸福是靠自己正确的！用黄晓明的一句话，我不管你怎么想，我只说我要怎样！加油！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机视觉 </category>
+          
+          <category> 人脸识别 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> insightface </tag>
+            
+            <tag> 人脸识别 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python + web操作 爬虫 自动填写表单</title>
       <link href="/2019/08/21/python%20+%20web%E6%93%8D%E4%BD%9C%20%E7%88%AC%E8%99%AB%20%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%86%99%E8%A1%A8%E5%8D%95/"/>
       <url>/2019/08/21/python%20+%20web%E6%93%8D%E4%BD%9C%20%E7%88%AC%E8%99%AB%20%E8%87%AA%E5%8A%A8%E5%A1%AB%E5%86%99%E8%A1%A8%E5%8D%95/</url>
@@ -93,8 +398,18 @@
           
           <category> python </category>
           
+          <category> 网络爬虫 </category>
+          
       </categories>
       
+      
+        <tags>
+            
+            <tag> 爬虫 </tag>
+            
+            <tag> webdriver </tag>
+            
+        </tags>
       
     </entry>
     
@@ -114,6 +429,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> vim </tag>
+            
+        </tags>
       
     </entry>
     
@@ -158,6 +479,12 @@
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> os </tag>
+            
+        </tags>
       
     </entry>
     
