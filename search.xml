@@ -17,6 +17,31 @@
     
     
     <entry>
+      <title>from tensorflow.python.keras.utils import tf_utils ImportError&#39;:&#39; cannot import name &#39;tf_utils&#39;</title>
+      <link href="/2019/11/16/from%20tensorflow.python.keras.utils%20import%20tf_utils%20ImportError_%20cannot%20import%20name%20&#39;tf_utils&#39;/"/>
+      <url>/2019/11/16/from%20tensorflow.python.keras.utils%20import%20tf_utils%20ImportError_%20cannot%20import%20name%20&#39;tf_utils&#39;/</url>
+      
+        <content type="html"><![CDATA[<p>Debug:在安装keras出现问题</p><a id="more"></a><h5 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.python.keras.utils <span class="keyword">import</span> tf_utils</span><br><span class="line">ImportError: cannot <span class="keyword">import</span> name <span class="string">'tf_utils'</span></span><br></pre></td></tr></table></figure><h5 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h5><p>Seems like it was a problem with keras 2.3.0, I installed keras 2.1.5 using pip and it works fine.</p><h5 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install keras==2.1.5 -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure><h5 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h5><p><a href="https://stackoverflow.com/questions/57985406/cannot-import-name-tf-utils-when-using-importing-keras" target="_blank" rel="noopener">https://stackoverflow.com/questions/57985406/cannot-import-name-tf-utils-when-using-importing-keras</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Debug </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> keras </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>anaconda + python3.6安装</title>
       <link href="/2019/11/09/anconda%E7%89%88%E6%9C%AC%E5%8F%B7%E5%AF%B9%E5%BA%94python%E7%89%88%E6%9C%AC/"/>
       <url>/2019/11/09/anconda%E7%89%88%E6%9C%AC%E5%8F%B7%E5%AF%B9%E5%BA%94python%E7%89%88%E6%9C%AC/</url>
