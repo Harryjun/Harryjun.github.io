@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>publicfile | CloudCver</title>
+  <title>共享资料 | CloudCver</title>
   
   
 
@@ -44,7 +44,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover page half'>
+    <cover class='cover article half'>
       
         
   <h1 class='title'>CloudCver</h1>
@@ -84,7 +84,7 @@
             
             
             id="archives">
-            <i class='fas fa-archive fa-fw'></i>&nbsp;归档
+            <i class='fas fa-file-alt fa-fw'></i>&nbsp;归档
           </a>
         </li>
       
@@ -227,7 +227,7 @@
                 
                 
                 id="blogarchives">
-								<i class='fas fa-archive fa-fw'></i>&nbsp;文章归档
+								<i class='fas fa-file-alt fa-fw'></i>&nbsp;文章归档
 							</a>
             </li>
           
@@ -288,7 +288,7 @@
       <div class='l_main'>
   
 
-  <article id="page" class="post white-box article-type-page" itemscope itemprop="blogPost">
+  <article id="article" class="post white-box article-type-article" itemscope itemprop="blogPost">
     
 
 
@@ -301,7 +301,7 @@
   
     <h1 class="title">
       <a href="/publicfile/index.html">
-        publicfile
+        共享资料
       </a>
     </h1>
   
@@ -376,31 +376,9 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        
+        <h3 id="推荐系统论文"><a href="#推荐系统论文" class="headerlink" title="推荐系统论文"></a>推荐系统论文</h3><h3 id="推荐系统论文-1"><a href="#推荐系统论文-1" class="headerlink" title="推荐系统论文"></a>推荐系统论文</h3>
       </div>
       
-      
-    </section>
-  </article>
-
-
-
-  <!-- 显示推荐文章和评论 -->
-
-
-
-  <article class="post white-box comments">
-    <section class="article typo">
-      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
-      
-      
-      
-      
-        <section id="comments">
-          <div id="valine_container" class="valine_thread">
-            <i class="fas fa-spinner fa-spin fa-fw"></i>
-          </div>
-        </section>
       
     </section>
   </article>
@@ -611,7 +589,7 @@
           
           id="archives">
           
-            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+            <i class="fas fa-file-alt fa-fw" aria-hidden="true"></i>
           
           文章归档
         </a></li>
@@ -638,6 +616,18 @@
             <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
           
           私人资料
+        </a></li>
+      
+        <li><a class="flat-box" title="/publicfile/" href="/publicfile/"
+          
+            rel="nofollow"
+          
+          
+          id="publicfile">
+          
+            <i class="fas fa-paste fa-fw" aria-hidden="true"></i>
+          
+          共享资料
         </a></li>
       
         <li><a class="flat-box" title="/about/" href="/about/"
@@ -988,36 +978,6 @@
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  
-    
-      <script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1.0.6/js/volantis.min.js"></script>
-    
-  
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-    return GUEST_INFO.indexOf(item) > -1
-  });
-  var notify = 'true' == true;
-  var verify = 'true' == true;
-  var valine = new Valine();
-  valine.init({
-    el: '#valine_container',
-    notify: notify,
-    verify: verify,
-    guest_info: guest_info,
-    
-    appId: "TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz",
-    appKey: "qfw2KwYOyVL3X6U2ET9vnyIa",
-    placeholder: "怎么说？老哥~",
-    pageSize:'10',
-    avatar:'mp',
-    lang:'zh-cn',
-    highlight:'true'
-  })
-  </script>
 
 
 
