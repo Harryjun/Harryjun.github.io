@@ -67,6 +67,31 @@
     
     
     <entry>
+      <title>多光谱知识总结</title>
+      <link href="/2019/11/09/%E5%A4%9A%E5%85%89%E8%B0%B1/"/>
+      <url>/2019/11/09/%E5%A4%9A%E5%85%89%E8%B0%B1/</url>
+      
+        <content type="html"><![CDATA[<p>anaconda + python3.6安装</p><p>多光谱知识总结<br>1、什么是多光谱？<br>多光谱成像技术是基于液晶可调谐滤波（LCTF)技术，可在不同波长处（420一720nm）检测荧光探针或染料在细胞或组织中的分布，可获取各种波长范围内的所有信号，通过光谱学的原理，可将每一种色原或染料分离成单独的图像，完全去除样本的自发荧光，可明显提高组织切片成像的信噪比，还可将每种信号进行单独分离、定量，为多指标检测提供可行性，使之在病理诊断中有着很好的应用价值。<br>简单的说就是看看它在不同波段下是否比RGB显示情况下表现更清晰。<br>2、多光谱成像图像的评价指标<br>2.1 图像亮度信息法<br>对多光谱图像的每个波段来讲，人眼识别灰度图像的最大限度取决于灰度图像的亮度值大小和图像的灰度分布。可以用平均灰度值衡量第i波段灰度图像的亮度，用图像的标准差来度量灰度图像的离散程度<br> <img src="https://tuchuangblog-1257632417.cos.ap-chengdu.myqcloud.com/1.jpg" alt="在这里插入图片描述"><br>2.2 判断分类法<br>可以用深度学习的方法对图像做分类实验，测试其对分类的影响，或者看其提取的特征的欧式距离差别的大小。<br>3、 一些论文应用<br>3.1 马铃薯的最佳光谱范围<br>论文通过对多端波长进行了实验最终给出了马铃薯的最佳光谱范围为475，558，680，715，750，800，850（单位nm）。<br>3.2 四季豆叶片的特征波段<br>对400～720nm波段范围的多光谱图像波段数据进行优化，选取了灰度分布离散、图像亮度信息大且与其他波段相关性小的四季豆叶片特征波段。根据各波段图像的波段指数值和可识别度，从大量波段数据中通过比较两种方法获取了四季豆叶片的特征波段，得出545、630、645、720、650 和570nm波段对四季豆叶片的分类均比较理想。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 多光谱 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>pip换镜像安装 清华镜像 豆瓣镜像</title>
       <link href="/2019/10/27/pip%E6%8D%A2%E9%95%9C%E5%83%8F%E5%AE%89%E8%A3%85%20%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F%20%E8%B1%86%E7%93%A3%E9%95%9C%E5%83%8F/"/>
       <url>/2019/10/27/pip%E6%8D%A2%E9%95%9C%E5%83%8F%E5%AE%89%E8%A3%85%20%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F%20%E8%B1%86%E7%93%A3%E9%95%9C%E5%83%8F/</url>
@@ -516,25 +541,6 @@
     
     
     <entry>
-      <title>linux服务器下一些操作</title>
-      <link href="/2019/08/09/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C/"/>
-      <url>/2019/08/09/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C/</url>
-      
-        <content type="html"><![CDATA[<p>本文总结了最近使用linux服务器用到的一些基本操作</p><a id="more"></a><h3 id="1-链接服务器"><a href="#1-链接服务器" class="headerlink" title="1 链接服务器"></a>1 链接服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh menglingjun@hpcgpu9.ai.lycc.qihoo.net</span><br></pre></td></tr></table></figure><p>输入密码…</p><h3 id="2-创建软连接"><a href="#2-创建软连接" class="headerlink" title="2 创建软连接"></a>2 创建软连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">readlink -f ./insightface/</span><br><span class="line">产生软连接</span><br><span class="line">/data/menglingjun/insightface</span><br><span class="line">复制一下，然后到Home下</span><br><span class="line">ln -s /data/menglingjun/insightface .</span><br></pre></td></tr></table></figure><h3 id="3-查内存情况"><a href="#3-查内存情况" class="headerlink" title="3 查内存情况"></a>3 查内存情况</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure><h3 id="4-查看文件详情"><a href="#4-查看文件详情" class="headerlink" title="4 查看文件详情"></a>4 查看文件详情</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ll /</span><br><span class="line">~ home目录</span><br><span class="line">pwd显示当前工作目录绝对路径</span><br></pre></td></tr></table></figure><h3 id="5-查看GPU情况"><a href="#5-查看GPU情况" class="headerlink" title="5 查看GPU情况"></a>5 查看GPU情况</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure><h3 id="6-安装PIP包到个人用户下"><a href="#6-安装PIP包到个人用户下" class="headerlink" title="6 安装PIP包到个人用户下"></a>6 安装PIP包到个人用户下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install packget --user</span><br></pre></td></tr></table></figure><h3 id="7"><a href="#7" class="headerlink" title="7"></a>7</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --default-timeout=100 install -U packget</span><br></pre></td></tr></table></figure><h3 id="8-查看本机IP"><a href="#8-查看本机IP" class="headerlink" title="8 查看本机IP"></a>8 查看本机IP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br><span class="line">ls -lht查看当前文件夹下文件信息</span><br></pre></td></tr></table></figure><h3 id="9-windows把文件传到linux下"><a href="#9-windows把文件传到linux下" class="headerlink" title="9 windows把文件传到linux下"></a>9 windows把文件传到linux下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scp -rp menglingjun@10.173.226.203:/home/menglingjun/insightface/insightface-master/datasets/lfw2/Micky_Arison/Micky_Arison_0001.jpg d:/a</span><br><span class="line">scp /d:/1.txt menglingjun@10.160.167.27:/home/menglingjun/a</span><br><span class="line">scp -r /d:/a menglingjun@10.160.167.27:/home/menglingjun/a#拷贝整个目录</span><br><span class="line">scp /d:/im2rec.py menglingjun@10.173.226.203:/home/menglingjun/insightface/insightface-master/src/data/</span><br><span class="line">scp menglingjun@10.173.226.203 :/home/menglingjun/a/d:/1.txt  /d:/a</span><br><span class="line"></span><br><span class="line">scp /d:/generate_image_pairs.py menglingjun@10.173.226.203:/home/menglingjun/insightface/insightface-master/src/data/</span><br></pre></td></tr></table></figure><h3 id="10-删除文件夹"><a href="#10-删除文件夹" class="headerlink" title="10 删除文件夹"></a>10 删除文件夹</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf //</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> LINUX </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>insightface中recognition训练过程</title>
       <link href="/2019/08/09/insightface%E4%B8%ADrecognition%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B/"/>
       <url>/2019/08/09/insightface%E4%B8%ADrecognition%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B/</url>
@@ -556,6 +562,25 @@
             <tag> insightface </tag>
             
         </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux服务器下一些操作</title>
+      <link href="/2019/08/09/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C/"/>
+      <url>/2019/08/09/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<p>本文总结了最近使用linux服务器用到的一些基本操作</p><a id="more"></a><h3 id="1-链接服务器"><a href="#1-链接服务器" class="headerlink" title="1 链接服务器"></a>1 链接服务器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh menglingjun@hpcgpu9.ai.lycc.qihoo.net</span><br></pre></td></tr></table></figure><p>输入密码…</p><h3 id="2-创建软连接"><a href="#2-创建软连接" class="headerlink" title="2 创建软连接"></a>2 创建软连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">readlink -f ./insightface/</span><br><span class="line">产生软连接</span><br><span class="line">/data/menglingjun/insightface</span><br><span class="line">复制一下，然后到Home下</span><br><span class="line">ln -s /data/menglingjun/insightface .</span><br></pre></td></tr></table></figure><h3 id="3-查内存情况"><a href="#3-查内存情况" class="headerlink" title="3 查内存情况"></a>3 查内存情况</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure><h3 id="4-查看文件详情"><a href="#4-查看文件详情" class="headerlink" title="4 查看文件详情"></a>4 查看文件详情</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ll /</span><br><span class="line">~ home目录</span><br><span class="line">pwd显示当前工作目录绝对路径</span><br></pre></td></tr></table></figure><h3 id="5-查看GPU情况"><a href="#5-查看GPU情况" class="headerlink" title="5 查看GPU情况"></a>5 查看GPU情况</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure><h3 id="6-安装PIP包到个人用户下"><a href="#6-安装PIP包到个人用户下" class="headerlink" title="6 安装PIP包到个人用户下"></a>6 安装PIP包到个人用户下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install packget --user</span><br></pre></td></tr></table></figure><h3 id="7"><a href="#7" class="headerlink" title="7"></a>7</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --default-timeout=100 install -U packget</span><br></pre></td></tr></table></figure><h3 id="8-查看本机IP"><a href="#8-查看本机IP" class="headerlink" title="8 查看本机IP"></a>8 查看本机IP</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br><span class="line">ls -lht查看当前文件夹下文件信息</span><br></pre></td></tr></table></figure><h3 id="9-windows把文件传到linux下"><a href="#9-windows把文件传到linux下" class="headerlink" title="9 windows把文件传到linux下"></a>9 windows把文件传到linux下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scp -rp menglingjun@10.173.226.203:/home/menglingjun/insightface/insightface-master/datasets/lfw2/Micky_Arison/Micky_Arison_0001.jpg d:/a</span><br><span class="line">scp /d:/1.txt menglingjun@10.160.167.27:/home/menglingjun/a</span><br><span class="line">scp -r /d:/a menglingjun@10.160.167.27:/home/menglingjun/a#拷贝整个目录</span><br><span class="line">scp /d:/im2rec.py menglingjun@10.173.226.203:/home/menglingjun/insightface/insightface-master/src/data/</span><br><span class="line">scp menglingjun@10.173.226.203 :/home/menglingjun/a/d:/1.txt  /d:/a</span><br><span class="line"></span><br><span class="line">scp /d:/generate_image_pairs.py menglingjun@10.173.226.203:/home/menglingjun/insightface/insightface-master/src/data/</span><br></pre></td></tr></table></figure><h3 id="10-删除文件夹"><a href="#10-删除文件夹" class="headerlink" title="10 删除文件夹"></a>10 删除文件夹</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf //</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> LINUX </category>
+          
+      </categories>
+      
       
     </entry>
     
