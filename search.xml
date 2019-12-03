@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>算法岗位实习&amp;工作需求总结</title>
+      <link href="/2019/12/03/%E7%AE%97%E6%B3%95%E5%B2%97%E4%BD%8D%E5%AE%9E%E4%B9%A0&amp;%E5%B7%A5%E4%BD%9C%E9%9C%80%E6%B1%82%E6%80%BB%E7%BB%93/"/>
+      <url>/2019/12/03/%E7%AE%97%E6%B3%95%E5%B2%97%E4%BD%8D%E5%AE%9E%E4%B9%A0&amp;%E5%B7%A5%E4%BD%9C%E9%9C%80%E6%B1%82%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<p>本帖总结一些算法岗位实习&amp;工作的要求；陆续会补一些面经。</p><h3 id="计算机视觉算法实习"><a href="#计算机视觉算法实习" class="headerlink" title="计算机视觉算法实习"></a>计算机视觉算法实习</h3><ul><li>基本条件：<ul><li>熟悉深度学习框架（Tensorflow/Torch/Keras/Caffe）；</li><li>了解基本深度学习网络（CNN，RNN）（<strong>RNN应该是在视频理解或者NLP中应用多</strong>）</li><li>熟悉Python语言；有时也需要C++、JAVA；</li><li>熟悉Linux系统（<strong>公司一般都是服务器下操作</strong>），Shell编程；</li><li>熟悉常见的计算机视觉的应用方向；以下我总结的但不限于图像分类（）、目标检测（Detection）、语义分割（sematic segmentation）、模型压缩、弱监督（weakly supervised learning）、超分辨率重建（super resolution）、生成对抗网络（GAN）</li><li>熟悉经典的深度学习模型（backbone基本结构）</li><li>了解ML算法（Boosting、SVM…）</li></ul></li><li>优先条件：<ul><li>有顶会论文/实际项目落地经验者；（<strong>一般普通实验室没有顶会…那就得有实习经历或者老板有项目…不然就看愿不愿意培养你</strong>）</li><li>重大比赛或者竞赛有荣誉；在Github上有影响大的开源代码；</li></ul></li></ul><h3 id="自然语言算法实习"><a href="#自然语言算法实习" class="headerlink" title="自然语言算法实习"></a>自然语言算法实习</h3><h3 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h3><ul><li>简历上项目分析；听一下做了啥，以及你的工作与工作量；</li><li>基础知识：深度学习（DropOut、过拟合、各种你知道的网络…）</li><li>编程题（必须刷题，其实大家都是刷题，但是面试官几乎都会考，那就只能干了！）</li></ul><h3 id="面经"><a href="#面经" class="headerlink" title="面经"></a>面经</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工作 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2019/11/21/hello-world/"/>
       <url>/2019/11/21/hello-world/</url>
@@ -491,31 +516,6 @@
     
     
     <entry>
-      <title>python 文件操作OS总结</title>
-      <link href="/2019/08/13/python%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9COS%E6%80%BB%E7%BB%93/"/>
-      <url>/2019/08/13/python%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9COS%E6%80%BB%E7%BB%93/</url>
-      
-        <content type="html"><![CDATA[<p>本文总结了关于python文件系统的操作。</p><a id="more"></a><p>python 文件操作OS总结<br>最近在用，坐下总结！</p><p>os的一些操作</p><h4 id="os-listdir-path"><a href="#os-listdir-path" class="headerlink" title="os.listdir(path)"></a>os.listdir(path)</h4><p>列出该文件夹下面的目录，一般这么用</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">folders_1 = os.listdir(prefix)</span><br><span class="line"><span class="keyword">for</span> folder <span class="keyword">in</span> folders_1:</span><br><span class="line">...<span class="comment">#遍历这个目录</span></span><br></pre></td></tr></table></figure><h4 id="os-makedirs-path"><a href="#os-makedirs-path" class="headerlink" title="os.makedirs(path)"></a>os.makedirs(path)</h4><p>创建该路径</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.makedirs(path, mode=<span class="number">0o777</span>)</span><br></pre></td></tr></table></figure><h4 id="os-path-模块"><a href="#os-path-模块" class="headerlink" title="os.path() 模块"></a>os.path() 模块</h4><p>文件路径模块<br>1、路径拆分</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.split(path) 把路径分割成 dirname 和 basename，返回一个元组</span><br></pre></td></tr></table></figure><p>2、路径合并</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.join(path1, path2,...)把目录和文件名合成一个路径</span><br></pre></td></tr></table></figure><p>3、查看路径是否存在</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.exists(path)路径存在则返回<span class="literal">True</span>,路径损坏返回<span class="literal">False</span></span><br></pre></td></tr></table></figure><p>一般这么用</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(out_dir):</span><br><span class="line">    os.makedirs(out_dir)</span><br></pre></td></tr></table></figure><h4 id="open"><a href="#open" class="headerlink" title="open()"></a>open()</h4><p>打开文件</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open(name[, mode[, buffering]])</span><br></pre></td></tr></table></figure><p>模式如下<br><img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/2019/2019081311550612.png" alt="在这里插入图片描述"><br>例如：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(img_root_path, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()[<span class="number">0</span>:]:</span><br><span class="line">        pair = line.strip().split(<span class="string">','</span>)</span><br><span class="line">        pairs_end += pairs_F[int(pair[<span class="number">0</span>])],pairs_N[int(pair[<span class="number">1</span>])]</span><br><span class="line">        <span class="keyword">if</span> pair == <span class="string">'same'</span>:</span><br><span class="line">            issame_list.append(<span class="string">'True'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            issame_list.append(<span class="string">'False'</span>)</span><br><span class="line"><span class="keyword">return</span> pairs_end,issame_list</span><br></pre></td></tr></table></figure><p>创建文件对象，又会衍生出他的方法</p><h4 id="file-对象方法"><a href="#file-对象方法" class="headerlink" title="file 对象方法"></a>file 对象方法</h4><p><strong>file.read([size])</strong>：size 未指定则返回整个文件，如果文件大小 &gt;2 倍内存则有问题，f.read()读到文件尾时返回””(空字串)。<br><strong>file.readline()</strong>：返回一行。这个在上面那个例子提到，我们一行一行读取。<br><strong>file.readlines([size])</strong> ：返回包含size行的列表, size 未指定则返回全部行。<br><strong>for line in f: print line</strong> ：通过迭代器访问。<br><strong>f.write(“hello\n”)</strong>：如果要写入字符串以外的数据,先将他转换为字符串。<br><strong>f.tell()</strong>：返回一个整数,表示当前文件指针的位置(就是到文件头的比特数)。<br><strong>f.seek(偏移量,[起始位置])</strong>：用来移动文件指针。<br>偏移量: 单位为比特，可正可负<br>起始位置: 0 - 文件头, 默认值; 1 - 当前位置; 2 - 文件尾<br><strong>f.close()</strong> 关闭文件</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> python </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> os </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>python 参数模块argparse使用</title>
       <link href="/2019/08/13/python%20%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9D%97argparse%E4%BD%BF%E7%94%A8/"/>
       <url>/2019/08/13/python%20%E5%8F%82%E6%95%B0%E6%A8%A1%E5%9D%97argparse%E4%BD%BF%E7%94%A8/</url>
@@ -533,6 +533,31 @@
         <tags>
             
             <tag> argparse </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>python 文件操作OS总结</title>
+      <link href="/2019/08/13/python%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9COS%E6%80%BB%E7%BB%93/"/>
+      <url>/2019/08/13/python%20%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9COS%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<p>本文总结了关于python文件系统的操作。</p><a id="more"></a><p>python 文件操作OS总结<br>最近在用，坐下总结！</p><p>os的一些操作</p><h4 id="os-listdir-path"><a href="#os-listdir-path" class="headerlink" title="os.listdir(path)"></a>os.listdir(path)</h4><p>列出该文件夹下面的目录，一般这么用</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">folders_1 = os.listdir(prefix)</span><br><span class="line"><span class="keyword">for</span> folder <span class="keyword">in</span> folders_1:</span><br><span class="line">...<span class="comment">#遍历这个目录</span></span><br></pre></td></tr></table></figure><h4 id="os-makedirs-path"><a href="#os-makedirs-path" class="headerlink" title="os.makedirs(path)"></a>os.makedirs(path)</h4><p>创建该路径</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.makedirs(path, mode=<span class="number">0o777</span>)</span><br></pre></td></tr></table></figure><h4 id="os-path-模块"><a href="#os-path-模块" class="headerlink" title="os.path() 模块"></a>os.path() 模块</h4><p>文件路径模块<br>1、路径拆分</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.split(path) 把路径分割成 dirname 和 basename，返回一个元组</span><br></pre></td></tr></table></figure><p>2、路径合并</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.join(path1, path2,...)把目录和文件名合成一个路径</span><br></pre></td></tr></table></figure><p>3、查看路径是否存在</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.path.exists(path)路径存在则返回<span class="literal">True</span>,路径损坏返回<span class="literal">False</span></span><br></pre></td></tr></table></figure><p>一般这么用</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(out_dir):</span><br><span class="line">    os.makedirs(out_dir)</span><br></pre></td></tr></table></figure><h4 id="open"><a href="#open" class="headerlink" title="open()"></a>open()</h4><p>打开文件</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open(name[, mode[, buffering]])</span><br></pre></td></tr></table></figure><p>模式如下<br><img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/2019/2019081311550612.png" alt="在这里插入图片描述"><br>例如：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(img_root_path, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines()[<span class="number">0</span>:]:</span><br><span class="line">        pair = line.strip().split(<span class="string">','</span>)</span><br><span class="line">        pairs_end += pairs_F[int(pair[<span class="number">0</span>])],pairs_N[int(pair[<span class="number">1</span>])]</span><br><span class="line">        <span class="keyword">if</span> pair == <span class="string">'same'</span>:</span><br><span class="line">            issame_list.append(<span class="string">'True'</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            issame_list.append(<span class="string">'False'</span>)</span><br><span class="line"><span class="keyword">return</span> pairs_end,issame_list</span><br></pre></td></tr></table></figure><p>创建文件对象，又会衍生出他的方法</p><h4 id="file-对象方法"><a href="#file-对象方法" class="headerlink" title="file 对象方法"></a>file 对象方法</h4><p><strong>file.read([size])</strong>：size 未指定则返回整个文件，如果文件大小 &gt;2 倍内存则有问题，f.read()读到文件尾时返回””(空字串)。<br><strong>file.readline()</strong>：返回一行。这个在上面那个例子提到，我们一行一行读取。<br><strong>file.readlines([size])</strong> ：返回包含size行的列表, size 未指定则返回全部行。<br><strong>for line in f: print line</strong> ：通过迭代器访问。<br><strong>f.write(“hello\n”)</strong>：如果要写入字符串以外的数据,先将他转换为字符串。<br><strong>f.tell()</strong>：返回一个整数,表示当前文件指针的位置(就是到文件头的比特数)。<br><strong>f.seek(偏移量,[起始位置])</strong>：用来移动文件指针。<br>偏移量: 单位为比特，可正可负<br>起始位置: 0 - 文件头, 默认值; 1 - 当前位置; 2 - 文件尾<br><strong>f.close()</strong> 关闭文件</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> python </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> os </tag>
             
         </tags>
       
