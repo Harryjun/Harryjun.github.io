@@ -385,30 +385,13 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <p>本篇文章提供了了Faiss安装的教程（CPU版安好了，GPU版有点问题，后补）</p>
-<a id="more"></a>
-<hr>
-<h4 id="Step-1-下载FAISS"><a href="#Step-1-下载FAISS" class="headerlink" title="Step 1 下载FAISS"></a>Step 1 下载FAISS</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/facebookresearch/faiss</span><br></pre></td></tr></table></figure>
-
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><h4 id="Step-1-下载FAISS"><a href="#Step-1-下载FAISS" class="headerlink" title="Step 1 下载FAISS"></a>Step 1 下载FAISS</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/facebookresearch/faiss</span><br></pre></td></tr></table></figure>
 <h4 id="Step-2-生成配置"><a href="#Step-2-生成配置" class="headerlink" title="Step 2 生成配置"></a>Step 2 生成配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd faiss</span><br><span class="line">./configure --with-cuda=/usr/local/cuda-9.0 --prefix=/home/cver/software/faiss/ --with-python=python3</span><br></pre></td></tr></table></figure>
 <p>configure生成makfile文件，这里需要配置cuda目录，安装目录prefix</p>
-<h4 id="Step-3-安装faiss"><a href="#Step-3-安装faiss" class="headerlink" title="Step 3 安装faiss"></a>Step 3 安装faiss</h4><p>我运行时存在一些问题不能安装GPU版本，这里我把GPU部分屏蔽了，以后再解决。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim makefile.inc</span><br><span class="line">-------------------------------</span><br><span class="line"></span><br><span class="line">NVCC         = /usr/local/cuda-9.0/bin/nvcc</span><br><span class="line">CUDA_ROOT    = /usr/local/cuda-9.0</span><br><span class="line">//CUDA_ARCH    = -gencode=arch=compute_35,code=compute_35 \</span><br><span class="line">//-gencode=arch=compute_52,code=compute_52 \</span><br><span class="line">//-gencode=arch=compute_60,code=compute_60 \</span><br><span class="line">//-gencode=arch=compute_61,code=compute_61 \</span><br><span class="line">//-gencode=arch=compute_70,code=compute_70 \</span><br><span class="line">//-gencode=arch=compute_75,code=compute_75</span><br></pre></td></tr></table></figure>
-<p>修改之后，编译，安装</p>
+<h4 id="Step-3-安装faiss"><a href="#Step-3-安装faiss" class="headerlink" title="Step 3 安装faiss"></a>Step 3 安装faiss</h4><p>我运行时存在一些问题不能安装GPU版本，这里我把GPU部分屏蔽了，以后再解决。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">vim makefile.inc</span><br><span class="line">-------------------------------</span><br><span class="line"></span><br><span class="line">NVCC         = /usr/local/cuda-9.0/bin/nvcc</span><br><span class="line">CUDA_ROOT    = /usr/local/cuda-9.0</span><br><span class="line">//CUDA_ARCH    = -gencode=arch=compute_35,code=compute_35 \</span><br><span class="line">//-gencode=arch=compute_52,code=compute_52 \</span><br><span class="line">//-gencode=arch=compute_60,code=compute_60 \</span><br><span class="line">//-gencode=arch=compute_61,code=compute_61 \</span><br><span class="line">//-gencode=arch=compute_70,code=compute_70 \</span><br><span class="line">//-gencode=arch=compute_75,code=compute_75</span><br></pre></td></tr></table></figure><br>修改之后，编译，安装</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<h4 id="Step-4-安装swing3"><a href="#Step-4-安装swing3" class="headerlink" title="Step 4 安装swing3"></a>Step 4 安装swing3</h4><p>swing3是C++转python的桥梁…具体可以查一下。<br>首先要下载swing3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://sourceforge.net/projects/swig/files/swig/swig-3.0.12/swig-3.0.12.tar.gz</span><br><span class="line">tar -zxvf swig-3.0.12.tar.gz</span><br></pre></td></tr></table></figure>
-<p>然后配置config</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash ./configure --prefix=/home/cver/software/swing3 --without-pcre</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>配置环境变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line"></span><br><span class="line">-----------------------添加以下两句</span><br><span class="line">export SWIG_PATH=/home/cver/software/swing3/bin</span><br><span class="line">export PATH=$SWIG_PATH:$PATH</span><br></pre></td></tr></table></figure>
-
-<h4 id="Step-5-生成python包"><a href="#Step-5-生成python包" class="headerlink" title="Step 5 生成python包"></a>Step 5 生成python包</h4><p>回到faiss目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make py</span><br></pre></td></tr></table></figure>
-<p>仍然需要修改配置文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd python</span><br><span class="line">vim Makefile</span><br><span class="line"></span><br><span class="line">---------------------我没有sudo权限，所以我安装到自己目录下</span><br><span class="line">$(PYTHON) setup.py install --prefix=/home/cver/.local</span><br></pre></td></tr></table></figure>
-<p>配置好后编译，安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h4 id="Step-4-安装swing3"><a href="#Step-4-安装swing3" class="headerlink" title="Step 4 安装swing3"></a>Step 4 安装swing3</h4><p>swing3是C++转python的桥梁…具体可以查一下。<br>首先要下载swing3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://sourceforge.net/projects/swig/files/swig/swig-3.0.12/swig-3.0.12.tar.gz</span><br><span class="line">tar -zxvf swig-3.0.12.tar.gz</span><br></pre></td></tr></table></figure><br>然后配置config<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bash ./configure --prefix=/home/cver/software/swing3 --without-pcre</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure><br>配置环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line"></span><br><span class="line">-----------------------添加以下两句</span><br><span class="line">export SWIG_PATH=/home/cver/software/swing3/bin</span><br><span class="line">export PATH=$SWIG_PATH:$PATH</span><br></pre></td></tr></table></figure></p>
+<h4 id="Step-5-生成python包"><a href="#Step-5-生成python包" class="headerlink" title="Step 5 生成python包"></a>Step 5 生成python包</h4><p>回到faiss目录下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make py</span><br></pre></td></tr></table></figure><br>仍然需要修改配置文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd python</span><br><span class="line">vim Makefile</span><br><span class="line"></span><br><span class="line">---------------------我没有sudo权限，所以我安装到自己目录下</span><br><span class="line">$(PYTHON) setup.py install --prefix=/home/cver/.local</span><br></pre></td></tr></table></figure><br>配置好后编译，安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure></p>
 
       </div>
       
@@ -445,7 +428,8 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.cloudcver.com/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/&title=Faiss源码安装 | CloudCver&summary=本篇文章提供了了Faiss安装的教程（CPU版安好了，GPU版有点问题，后补）"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.cloudcver.com/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/&title=Faiss源码安装 | CloudCver&summary=本篇文章提供了了Faiss安装的教程（CPU版安好了，GPU版有点问题，后补）
+"
           
           >
           
@@ -457,7 +441,8 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.cloudcver.com/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/&title=Faiss源码安装 | CloudCver&summary=本篇文章提供了了Faiss安装的教程（CPU版安好了，GPU版有点问题，后补）"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.cloudcver.com/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/&title=Faiss源码安装 | CloudCver&summary=本篇文章提供了了Faiss安装的教程（CPU版安好了，GPU版有点问题，后补）
+"
           
           >
           
@@ -469,7 +454,8 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://www.cloudcver.com/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/&title=Faiss源码安装 | CloudCver&summary=本篇文章提供了了Faiss安装的教程（CPU版安好了，GPU版有点问题，后补）"
+          href="http://service.weibo.com/share/share.php?url=http://www.cloudcver.com/2019/09/16/Faiss%E6%BA%90%E7%A0%81%E5%AE%89%E8%A3%85/&title=Faiss源码安装 | CloudCver&summary=本篇文章提供了了Faiss安装的教程（CPU版安好了，GPU版有点问题，后补）
+"
           
           >
           
@@ -689,7 +675,7 @@
 </header>
 
     <div class='content material'>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-1-下载FAISS"><span class="toc-text">Step 1 下载FAISS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-2-生成配置"><span class="toc-text">Step 2 生成配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-3-安装faiss"><span class="toc-text">Step 3 安装faiss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-4-安装swing3"><span class="toc-text">Step 4 安装swing3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-5-生成python包"><span class="toc-text">Step 5 生成python包</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-1-下载FAISS"><span class="toc-text">Step 1 下载FAISS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-2-生成配置"><span class="toc-text">Step 2 生成配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-3-安装faiss"><span class="toc-text">Step 3 安装faiss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-4-安装swing3"><span class="toc-text">Step 4 安装swing3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-5-生成python包"><span class="toc-text">Step 5 生成python包</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -900,6 +886,8 @@
           <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
         

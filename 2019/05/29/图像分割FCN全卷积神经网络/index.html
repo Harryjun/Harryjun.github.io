@@ -384,9 +384,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>FCN全卷积神经网络是图像分割的基础网络</p>
-<a id="more"></a>
-<p>FCN实现了端到端的网络，输入mxm图像，输出为mxmxc的图像，其中c代表种类。</p>
+        <p>FCN全卷积神经网络是图像分割的基础网络<br><a id="more"></a><br>FCN实现了端到端的网络，输入mxm图像，输出为mxmxc的图像，其中c代表种类。</p>
 <h2 id="1思想概述"><a href="#1思想概述" class="headerlink" title="1思想概述"></a>1思想概述</h2><p>FCN叫做全卷积神经网络，顾名思义所有曾都是卷积层！也就是抛掉了全连接层，这是第一个改变；再者卷积神经网络卷到最后特征图尺寸越来越少，分辨率比较小，不适合我们做图像分割，好，这里引入一个上采样的做法，卷积完之后再上采样到大尺寸图；网络又考虑层数不断叠加后原图的信息丢失的比较多，那么我们这里引入一个跳层结构，把前面的第四层、第三层特征引过来叠加一下。有种resnet思想。</p>
 <h2 id="2FCN网络图"><a href="#2FCN网络图" class="headerlink" title="2FCN网络图"></a>2FCN网络图</h2><p>我们再看一下下面这个图网络的主题，从左到右卷积、池化一顿操作猛如虎（蓝色卷积，绿色池化），到了最右边16*16*4096，全连接层丢了，先给他弄到21通道再上采样到34*34*21然后合并featuremap4后再上采样，最后经过一系列得到最后500*500*21的特征图。之后怎么做？很多人没有说好，我们平时做分类是得到全连接的1*21这样对他进行softmax，21类，每类有个分数存在1*21的向量中，好我们这500*500*21是像素级别的分类，总共有500*500个像素，每个像素属于21个类别的分别得分是啥，这样用softmax计算损失。所以我们看那些标注图是每个像素有个颜色代表它所属于的类别。端到端！伟大！</p>
 <blockquote>
@@ -397,8 +395,8 @@
 <h3 id="3-1双线性插值上采样"><a href="#3-1双线性插值上采样" class="headerlink" title="3.1双线性插值上采样"></a>3.1双线性插值上采样</h3><p>首先线形插值是什么？线形插值就是知道两个点的值，连一条直线，来确定中间的点的值，具体怎么做，我们找(x1,y1)、(x2,y2)连成一条直线，[x1,x2]中的点就可以用线上的点表示。<br>双线性插值是一个三维的坐标系，我们找到四个点来确定中心点坐标，如下图为网上找的一个例子。<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g3jdvkj58tj20ta0hk421.jpg" alt="在这里插入图片描述"></p>
 <blockquote>
 <p>这种方法计算简单，无需训练。</p>
-</blockquote>
 <h3 id="3-2反卷积上采样"><a href="#3-2反卷积上采样" class="headerlink" title="3.2反卷积上采样"></a>3.2反卷积上采样</h3><p><strong>3.2.1 怎样上采样</strong><br>普通的卷积操作，会使得分辨率降低，如下图3*3的卷积核去卷积4*4得到2*2的输出。上采样的过程也是卷积，那么怎么会得到分辨率提高呢？之前我们看卷积时有个保持输出与输入同分辨率的方法就是周围补0，嗯嗯。那么你是否灵机一动，那要是让分辨率提高呢？是不是再多补一些0，对的看看图2。</p>
+</blockquote>
 <p><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g3jdvm4k6jj206s077gm0.jpg" alt="在这里插入图片描述"><br>图1 常规卷积操作<br><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g3jdvnl0qqj209k0aqdhd.jpg" alt="在这里插入图片描述"><br>图2 上采样操作（四周补0）</p>
 <p>其实呢作者在这又换了个方法，你想一下，只在四周补0会导致最边上的信息不太好，那我们把这个信息平均下，在每个像素与像素之间补0呢，看图3就是这么操作的。</p>
 <p><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g3jdvp4fnaj20az0chmzc.jpg" alt="在这里插入图片描述"><br>图3 反卷积插零</p>
@@ -899,6 +897,8 @@
           <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
         

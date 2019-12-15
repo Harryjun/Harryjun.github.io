@@ -384,10 +384,8 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>最近在学习目标检测sPPnet时看到ROI映射到featuremap中的方法，文中对此叙述较少，所以就此问题差了一些资料，在知乎上发现一片理解较好的文章(文末给出了参考文献)，于此做一总结。</p>
-<a id="more"></a>
-<p>先谈一下感受视野，在学习卷积的时候，我们比较熟悉的是上一层图映射到下一层之后的尺寸，很少谈及感受野，这其实是一个重要的概念。</p>
-<h2 id="卷积中的感受视野"><a href="#卷积中的感受视野" class="headerlink" title="卷积中的感受视野"></a>卷积中的感受视野</h2><p>首先，我们知道上一层图的尺寸，去推测下一层的尺寸，如下公式即可，这个大家应该很熟悉<br>output field size = ( input field size - kernel size + 2*padding ) / stride + 1<br>(output field size 是卷积层的输出，input field size 是卷积层的输入，stride步长，padding填充像素，kernelsize卷积核尺寸)<br>随后，我们想如果知道后一层的尺寸，是不是就可以知道前一层的尺寸<br>答案必然是： input field size = （output field size - 1）* stride - 2*padding + kernel size<br>那么此时如果我们把最后一层的尺寸定为1，向前推是不是可以知道最后一层的一个小单位格子对应到原图的尺寸，也就是感受野了。</p>
+        <p>最近在学习目标检测sPPnet时看到ROI映射到featuremap中的方法，文中对此叙述较少，所以就此问题差了一些资料，在知乎上发现一片理解较好的文章(文末给出了参考文献)，于此做一总结。<br><a id="more"></a><br>先谈一下感受视野，在学习卷积的时候，我们比较熟悉的是上一层图映射到下一层之后的尺寸，很少谈及感受野，这其实是一个重要的概念。</p>
+<h2 id="卷积中的感受视野"><a href="#卷积中的感受视野" class="headerlink" title="卷积中的感受视野"></a>卷积中的感受视野</h2><p>首先，我们知道上一层图的尺寸，去推测下一层的尺寸，如下公式即可，这个大家应该很熟悉<br>output field size = ( input field size - kernel size + 2*padding ) / stride + 1<br>(output field size 是卷积层的输出，input field size 是卷积层的输入，stride步长，padding填充像素，kernelsize卷积核尺寸)<br>随后，我们想如果知道后一层的尺寸，是不是就可以知道前一层的尺寸<br>答案必然是： input field size = （output field size - 1）<em> stride - 2</em>padding + kernel size<br>那么此时如果我们把最后一层的尺寸定为1，向前推是不是可以知道最后一层的一个小单位格子对应到原图的尺寸，也就是感受野了。</p>
 <blockquote>
 <p>卷积神经网络CNN中，某一层输出结果中一个元素所对应的输入层的区域大小，被称作感受野receptive field。感受野的大小是由kernel size，stride，padding , outputsize 一起决定的。</p>
 </blockquote>
@@ -399,7 +397,7 @@
 </blockquote>
 <p>我们最后再看一下下面这个图给出的计算！理解一下它的计算！<br><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g2slyem4i2j20jd05jgmo.jpg" alt="在这里插入图片描述"></p>
 <p>上面是感受野的映射公式，到了ROI对于上面的公式，何凯明在SPP-net中采用做了一个简化。其实就是巧妙的化简一下公式<br>$pi = s_i \cdot p_{i+1} +( (k_i -1)/2 - padding)$<br>令每一层的padding都为<br>$padding = \lfloor k_i /2 \rfloor<br>\Rightarrow$<br>$pi = s_i \cdot p_{i+1} +( (k_i -1)/2 -  \lfloor k_i /2 \rfloor)$<br>当$k_i$ 为奇数 $( (k_i -1)/2 -  \lfloor k_i /2 \rfloor) = 0$  所以 $p_i = s_i \cdot p_{i+1}$<br>当k_i 为偶数 $( (k_i -1)/2 -  \lfloor k_i /2 \rfloor) = -0.5$ 所以 $p_i = s_i \cdot p_{i+1} -0.5$<br>而 $p_i$ 是坐标值，不可能取小数 所以基本上可以认为$p_i = s_i \cdot p_{i+1}$。公式得到了化简：感受野中心点的坐标$p_i$只跟前一层 $p_{i+1}$ 有关。</p>
-<h2 id="ROI映射变换"><a href="#ROI映射变换" class="headerlink" title="ROI映射变换"></a>ROI映射变换</h2><p>ROI映射的时候是将左上角和右小角映射到featuremap然后确定最后的区域。<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g2slzgnf91j20na0cxgmu.jpg" alt="在这里插入图片描述"><br>考虑原图上的点不可能每一个点在featuremap中都有对应，所以我们就找最近的点。<br>例如图中左上角的点（x,y）映射到 feature map上的(x’,y’) ： 使得 (x’,y’) 在原始图上感受野（上图绿色框）的中心点 与（x,y）尽可能接近。<br>在上面每层都填充padding/2 得到的简化公式 ： $p_i = s_i \cdot p_{i+1}$<br>我们考虑从featuremap传到原图得到$p_0 = S \cdot p_{i+1}$ 其中 $(S = \prod_{0}^{i} s_i)$(所有步长量乘积~~)<br>呵呵简单了不少。把式子反过来就变为：$x’ =  \lfloor x/S \rfloor   ,;y’ =  \lfloor y/S \rfloor$。<br>这样就实现了ROI坐标变换，sPPnet中改了一下：$x’ =  \lfloor x/S \rfloor +1  ,;y’ =  \lfloor y/S \rfloor +1$,加了一个1，有什莫用呢？笔者认为相当于把得到的坐标向里面缩一下保证准确性。</p>
+<h2 id="ROI映射变换"><a href="#ROI映射变换" class="headerlink" title="ROI映射变换"></a>ROI映射变换</h2><p>ROI映射的时候是将左上角和右小角映射到featuremap然后确定最后的区域。<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g2slzgnf91j20na0cxgmu.jpg" alt="在这里插入图片描述"><br>考虑原图上的点不可能每一个点在featuremap中都有对应，所以我们就找最近的点。<br>例如图中左上角的点（x,y）映射到 feature map上的(x’,y’) ： 使得 (x’,y’) 在原始图上感受野（上图绿色框）的中心点 与（x,y）尽可能接近。<br>在上面每层都填充padding/2 得到的简化公式 ： $p_i = s_i \cdot p_{i+1}$<br>我们考虑从featuremap传到原图得到$p_0 = S \cdot p_{i+1}$ 其中 $(S = \prod_{0}^{i} s_i)$(所有步长量乘积~~)<br>呵呵简单了不少。把式子反过来就变为：$x’ =  \lfloor x/S \rfloor   ,\;y’ =  \lfloor y/S \rfloor$。<br>这样就实现了ROI坐标变换，sPPnet中改了一下：$x’ =  \lfloor x/S \rfloor +1  ,\;y’ =  \lfloor y/S \rfloor +1$,加了一个1，有什莫用呢？笔者认为相当于把得到的坐标向里面缩一下保证准确性。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]原始图片中的ROI如何映射到到feature map?<br><a href="https://zhuanlan.zhihu.com/p/24780433" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24780433</a><br>[2]目标检测CNN经典网络（二）SPPnet<br><a href="https://blog.csdn.net/CLOUD_J/article/details/89893140" target="_blank" rel="noopener">https://blog.csdn.net/CLOUD_J/article/details/89893140</a></p>
 
       </div>
@@ -882,6 +880,8 @@
           <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
         

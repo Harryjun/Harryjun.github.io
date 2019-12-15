@@ -384,8 +384,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>继R-CNN与SPP-net之后又出现了Fast R-CNN与Faster R-CNN,比之前的网络有了更快的速度，其准确率也没有降低。并且把端到端的概念引入到目标检测中。</p>
-<a id="more"></a>
+        <p>继R-CNN与SPP-net之后又出现了Fast R-CNN与Faster R-CNN,比之前的网络有了更快的速度，其准确率也没有降低。并且把端到端的概念引入到目标检测中。<br><a id="more"></a></p>
 <h2 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h2><p>FastR-CNN借鉴SPP-net思想加入ROI感兴趣池化，并将两个任务回归和分类同时进行，进行多任务训练。<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g2surkjl1rj20kd08fjy3.jpg" alt="在这里插入图片描述"></p>
 <h3 id="ROI池化"><a href="#ROI池化" class="headerlink" title="ROI池化"></a>ROI池化</h3><p>ROI感兴趣池化可以看作SPPpool的简化，下图可以看出，ROI只对感兴趣的区域做一次池化即可。<br>考虑到感兴趣区域（RoI）尺寸不一，但是输入图中后面FC层的大小是一个统一的固定值，因为ROI池化层的作用类似于SPP-net中的SPP层，即将不同尺寸的RoI feature map池化成一个固定大小的feature map。具体操作：假设经过RoI池化后的固定大小为是一个超参数，因为输入的RoI feature map大小不一样，假设为，需要对这个feature map进行池化来减小尺寸，那么可以计算出池化窗口的尺寸为：h/H,w/W，即用这个计算出的窗口对RoI feature map做max pooling，Pooling对每一个feature map通道都是独立的。</p>
 <p><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g2surmhqqfj20o509c0tp.jpg" alt="在这里插入图片描述"></p>
@@ -877,6 +876,8 @@
           <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
         

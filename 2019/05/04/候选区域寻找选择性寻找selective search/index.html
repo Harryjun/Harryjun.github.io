@@ -384,8 +384,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>目标检测时需要筛选候选区域，常见的方法有滑窗法，选择搜索法。本文简单介绍一下候选区域寻找的方法。</p>
-<a id="more"></a>
+        <p>目标检测时需要筛选候选区域，常见的方法有滑窗法，选择搜索法。本文简单介绍一下候选区域寻找的方法。<br><a id="more"></a></p>
 <h2 id="候选区域寻找selective-search"><a href="#候选区域寻找selective-search" class="headerlink" title="候选区域寻找selective search"></a>候选区域寻找selective search</h2><p>关于候选区域的选择有多种方法，最简单的方法为滑窗法，就是以一定间距不断横纵遍历得到所有的窗口，但是所有区域都遍历，而且有时候物体不一样大？这就太浪费时间了。<br>论文章所采用的方法是选择搜索法。<br>算法具体如下图所示<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g2rexwevloj20jn0grjwj.jpg" alt="在这里插入图片描述"><br>step0：生成区域集R。</p>
 <p>step1：计算区域集R里每个相邻区域的相似度S={s1,s2,…}<br>//循环以下步骤<br>step2：找出相似度最高的两个区域，将其合并为新集，添加进R<br>step3：从S中移除所有与step2中有关的子集<br>step4：计算新集与所有子集的相似度<br>step5：S若为空则跳出循环，否则跳至step2</p>
 <p><strong>相似度计算</strong><br>那么关键点在于相似度怎么判断？<br>图像之间的特征有很多，颜色？纹理特征？尺寸等？对于相似度的判断，选择性搜索考虑了颜色、纹理、尺寸和空间交叠这4个参数。<br><strong>1、颜色特征</strong><br>将色彩空间转为HSV，每个通道下以bins=25计算直方图，这样每个区域的颜色直方图有25*3=75个区间。 对直方图除以区域尺寸做归一化后使用下式计算相似度：<br><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g2rfnt2p9bj208h0203yg.jpg" alt="在这里插入图片描述"><br>上式如何理解？简单说一下，我们归一化后每个通道的数据后，一维特征向量的和为1.0，比较两个区域的特征向量每一位，把每一位的最小值加起来。如果全都一样那么结果肯定是1啊！如果不一样，每一位都取最小值，那就肯定比1小啊！哈哈就是这么理解。</p>
@@ -875,6 +874,8 @@
           <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
         

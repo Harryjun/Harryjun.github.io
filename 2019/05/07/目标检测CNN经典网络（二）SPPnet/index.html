@@ -384,8 +384,7 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        <p>在上文介绍了R-CNN网络，可以看出其存在很多问题：卷积网络的重复计算造成计算量大耗时多，之后出现了SPPnet提出先卷积再进行框选目标区域的方法。</p>
-<a id="more"></a>
+        <p>在上文介绍了R-CNN网络，可以看出其存在很多问题：卷积网络的重复计算造成计算量大耗时多，之后出现了SPPnet提出先卷积再进行框选目标区域的方法。<br><a id="more"></a></p>
 <h2 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h2><p>首先看下面这幅图，R-CNN中我们在卷积之前需要先选定预选框，然后可能大小尺寸不一，需要对其进行crop或者warp一下同意尺寸再进行卷积网络；SPPnet提出我们可以先对原图进行卷积神经网络，再利用预选框去找出对应的第五层卷积网络所对应的特征图（<strong>因为我们发现其实再训练卷积网络时，原图和每层的卷积图实际位置关系还是不变的</strong>）全连接层我们单独放在后面，在进入全连接层之前我们做了一个金字塔池化SSP（后面讲！）到统一尺寸。<br><img src="http://wx2.sinaimg.cn/large/e8c7da07ly1g2smbne71yj20fi09977s.jpg" alt="在这里插入图片描述"></p>
 <h2 id="空间金字塔-最大池化"><a href="#空间金字塔-最大池化" class="headerlink" title="空间金字塔+最大池化"></a>空间金字塔+最大池化</h2><p>在图像处理中有个图像金字塔的思想可以采样图像到任意大小，这里借鉴这个思想，我们把卷积网络的输出得到的13*13*256特征提取三个不同尺寸，分别是1*1（也就是原图），2*2（原图分为四份），4*4（原图分为16份），然后对每一份选区最大的一个值代表该区域也就是最大池化（一份包含很多像素点啊）。最后得到16+4+1=21  *256 的特征！<br>这样不管上一层输出的尺寸多大，我们都能做这个变换！</p>
 <blockquote>
@@ -878,6 +877,8 @@
           <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
         

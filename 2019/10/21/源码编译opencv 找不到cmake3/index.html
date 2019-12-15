@@ -385,12 +385,8 @@
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
         <p>源码编译opencv 找不到cmake3</p>
-<a id="more"></a>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-D WITH_CUBLAS=ON ..</span><br><span class="line">-- The CXX compiler identification is GNU 5.5.0</span><br><span class="line">-- The C compiler identification is GNU 5.5.0</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++ -- broken</span><br><span class="line">CMake Error at /usr/share/cmake3/Modules/CMakeTestCXXCompiler.cmake:45 (message):</span><br><span class="line">  The C++ compiler</span><br><span class="line"></span><br><span class="line">    &quot;/usr/local/gcc/bin/g++&quot;</span><br><span class="line"></span><br><span class="line">  is not able to compile a simple test program.</span><br><span class="line"></span><br><span class="line">  It fails with the following output:</span><br><span class="line"></span><br><span class="line">    Change Dir: /home/menglingjun/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp</span><br><span class="line"></span><br><span class="line">    Run Build Command:&quot;/usr/bin/gmake&quot; &quot;cmTC_39633/fast&quot;</span><br><span class="line">    /usr/bin/gmake -f CMakeFiles/cmTC_39633.dir/build.make CMakeFiles/cmTC_39633.dir/build</span><br><span class="line">    gmake[1]: Entering directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    /bin/sh: /usr/bin/cmake3: No such file or directory</span><br><span class="line">    gmake[1]: *** [CMakeFiles/cmTC_39633.dir/testCXXCompiler.cxx.o] Error 127</span><br><span class="line">    gmake[1]: Leaving directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    gmake: *** [cmTC_39633/fast] Error 2</span><br><span class="line">  CMake will not be able to correctly generate this project.</span><br></pre></td></tr></table></figure>
-<p>关注这里/bin/sh: /usr/bin/cmake3: No such file or directory<br>我查看了一下/usr/bin/下有cmake，查一下cmake版本（cmake –version）发现cmake是3版本，我觉得这个cmake就是3，所以创建一个软链（副本）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s cmake cmake3</span><br></pre></td></tr></table></figure>
-<p>我这里就ok了，如果你有别的问题，百度其他地方把。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-D WITH_CUBLAS=ON ..</span><br><span class="line">-- The CXX compiler identification is GNU 5.5.0</span><br><span class="line">-- The C compiler identification is GNU 5.5.0</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++</span><br><span class="line">-- Check for working CXX compiler: /usr/local/gcc/bin/g++ -- broken</span><br><span class="line">CMake Error at /usr/share/cmake3/Modules/CMakeTestCXXCompiler.cmake:45 (message):</span><br><span class="line">  The C++ compiler</span><br><span class="line"></span><br><span class="line">    &quot;/usr/local/gcc/bin/g++&quot;</span><br><span class="line"></span><br><span class="line">  is not able to compile a simple test program.</span><br><span class="line"></span><br><span class="line">  It fails with the following output:</span><br><span class="line"></span><br><span class="line">    Change Dir: /home/menglingjun/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp</span><br><span class="line"></span><br><span class="line">    Run Build Command:&quot;/usr/bin/gmake&quot; &quot;cmTC_39633/fast&quot;</span><br><span class="line">    /usr/bin/gmake -f CMakeFiles/cmTC_39633.dir/build.make CMakeFiles/cmTC_39633.dir/build</span><br><span class="line">    gmake[1]: Entering directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    /bin/sh: /usr/bin/cmake3: No such file or directory</span><br><span class="line">    gmake[1]: *** [CMakeFiles/cmTC_39633.dir/testCXXCompiler.cxx.o] Error 127</span><br><span class="line">    gmake[1]: Leaving directory `/data/menglingjun/software/opencv-master/build/CMakeFiles/CMakeTmp&apos;</span><br><span class="line">    gmake: *** [cmTC_39633/fast] Error 2</span><br><span class="line">  CMake will not be able to correctly generate this project.</span><br></pre></td></tr></table></figure>
+<p>关注这里/bin/sh: /usr/bin/cmake3: No such file or directory<br>我查看了一下/usr/bin/下有cmake，查一下cmake版本（cmake —version）发现cmake是3版本，我觉得这个cmake就是3，所以创建一个软链（副本）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s cmake cmake3</span><br></pre></td></tr></table></figure><br>我这里就ok了，如果你有别的问题，百度其他地方把。</p>
 
       </div>
       
@@ -427,7 +423,8 @@
       
         <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.cloudcver.com/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/&title=源码编译opencv 找不到cmake3 | CloudCver&summary=源码编译opencv 找不到cmake3"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.cloudcver.com/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/&title=源码编译opencv 找不到cmake3 | CloudCver&summary=源码编译opencv 找不到cmake3
+"
           
           >
           
@@ -439,7 +436,8 @@
       
         <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.cloudcver.com/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/&title=源码编译opencv 找不到cmake3 | CloudCver&summary=源码编译opencv 找不到cmake3"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.cloudcver.com/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/&title=源码编译opencv 找不到cmake3 | CloudCver&summary=源码编译opencv 找不到cmake3
+"
           
           >
           
@@ -451,7 +449,8 @@
       
         <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://www.cloudcver.com/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/&title=源码编译opencv 找不到cmake3 | CloudCver&summary=源码编译opencv 找不到cmake3"
+          href="http://service.weibo.com/share/share.php?url=http://www.cloudcver.com/2019/10/21/%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91opencv%20%E6%89%BE%E4%B8%8D%E5%88%B0cmake3/&title=源码编译opencv 找不到cmake3 | CloudCver&summary=源码编译opencv 找不到cmake3
+"
           
           >
           
@@ -661,6 +660,20 @@
           
             
               
+  <section class='widget toc-wrapper'>
+    
+<header class='material'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer noopener" href="javascript:void(0)" target="_blank"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content material'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-text"></span></a></li></ol>
+    </div>
+  </section>
+
 
             
           
@@ -868,6 +881,8 @@
           <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
         
           <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
         
