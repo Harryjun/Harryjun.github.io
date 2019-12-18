@@ -435,17 +435,26 @@
 <li>要点：根据需求不同上线了政治人物审核、公众人物审核两个版本服务。算法主体包括利用MTCNN网络进行人脸检测与对齐，再利用人脸特征提取网络（ArcFace+triplet）提取人脸特征与预先提取好的特征库进行比对，计算人脸相似度，给出结果。</li>
 </ul>
 </li>
-<li>Prj2：视频理解之关键帧提取与视频摘要生成</li>
+<li>Prj2：视频理解之关键帧提取与视频摘要生成<ul>
+<li>需求：对全网视频进行视频理解，主要包括视频场景分割、场景分类、视频摘要生成、视频封面制作等。    </li>
+<li>要点：目前做了一些视频理解方面的调研工作，以及一些视频摘要生成的baseline实验，包括用强化学习对视频摘要做代表性奖励与关键帧不相似度奖励的DR-DSN网络实验等。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>2019.06至今        基于GAN的滴虫性阴道炎图像生成技术研究</p>
 <ul>
-<li>以滴虫性阴道炎的疾病诊断问题为背景，研究其图像生成问题，解决滴虫图像数据不足问题，为进一步图像分类诊断做数据增强。</li>
-<li>环境：Python3.6；tensorflow1.6；opencv3.5。</li>
-<li>要点：利用GAN图像生成技术解决数据不充足问题；利用图像分类解决滴虫性阴道炎辅助诊断问题。</li>
-<li>GitHub：<a href="https://github.com/Harryjun/GANTestDiChong" target="_blank" rel="noopener">https://github.com/Harryjun/GANTestDiChong</a></li>
+<li>需求：课题主要研究滴虫性阴道炎的疾病诊断问题，当前问题主要在于数据集的稀缺，我们需要利用现有医院提供的部分数据集去生成更加完备的数据集。</li>
+<li>要点：<ol>
+<li>相比于其他数据集，医学数据集更为稀缺，所以首先需要用传统数据增强方法对数据进行增强；</li>
+<li>在WGAN基础上将人脸识别的类间距应用到此增加不同形态滴虫生成图的类间距；（实验中）</li>
+<li>在损失函数上增加输出图像间距与输入噪声之比的正则化项提高图像多样性。</li>
+</ol>
+</li>
 </ul>
 </li>
+</ul>
+<ul>
 <li><p>2017.03-2017.06    BMS智能电池管理系统</p>
 <ul>
 <li>本项目主要实现对电池组充电过程的性能监控及健康管理。主要涉及无线通信协议的搭建以及上位机界面（用C#编写）的设计。</li>
@@ -481,9 +490,10 @@
 <h4 id="为啥写这个博客"><a href="#为啥写这个博客" class="headerlink" title="为啥写这个博客"></a>为啥写这个博客</h4><blockquote>
 <p>一则，本人就爱玩这个，搞点新鲜玩意；<br>二呢，也是总结下知识，记录点东西，也想给别人分享些东西；<br>三点，记录点生活琐碎，等我50出头在回忆，哈哈；</p>
 </blockquote>
-<h4 id="为啥博客名叫这个？"><a href="#为啥博客名叫这个？" class="headerlink" title="为啥博客名叫这个？"></a>为啥博客名叫这个？</h4><div align=center><font size=4>哈哈，以前我所有的名字叫做意犹未尽，后来做了cv就变为cloudcver。cv上云，云上的cver。</font></div>
+<h4 id="为啥博客名叫这个？"><a href="#为啥博客名叫这个？" class="headerlink" title="为啥博客名叫这个？"></a>为啥博客名叫这个？</h4><div align=center><font size=4>哈哈，以前我所有的名字叫做意犹未尽，后来做了cv就变为cloudcver。</font></div>
+<div align=center><font size=4>cv上云，云上的cver。</font></div>
+![](https://tuchuangblog-1257632417.cos.ap-chengdu.myqcloud.com/9904fc68ce07064b4e1df814b5333222.jpg)
 
-<p><img src="https://tuchuangblog-1257632417.cos.ap-chengdu.myqcloud.com/9904fc68ce07064b4e1df814b5333222.jpg" alt=""></p>
 <div><font size=4>
 if 你想和我说点什么:
 <br>
