@@ -134,7 +134,7 @@
 
       
     </cover>
-    <header class="l_header material">
+    <header class="l_header no_sidebar material">
   <div id="loading-bar-wrapper">
     <div id="loading-bar" class="material"></div>
   </div>
@@ -207,8 +207,6 @@
 			<a class="logo flat-box"></a>
 			<ul class='switcher h-list'>
 				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)' target="_blank" rel="noopener"></a></li>
-        
-          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)' target="_blank" rel="noopener"></a></li>
         
 			</ul>
 		</div>
@@ -294,7 +292,7 @@
 
   <div class="l_body">
     <div class='body-wrapper'>
-      <div class='l_main'>
+      <div class='l_main no_sidebar'>
   
 
   <article id="page" class="post white-box article-type-page" itemscope itemprop="blogPost">
@@ -385,31 +383,39 @@
 
     <section class="article typo">
       <div class="article-entry" itemprop="articleBody">
-        
+        <h3 id="Project"><a href="#Project" class="headerlink" title="Project"></a>Project</h3><blockquote>
+<p>此贴已更新 <strong>2020/1/1-2020/3/6</strong> 内容</p>
+</blockquote>
+<h3 id="视频审核项目"><a href="#视频审核项目" class="headerlink" title="视频审核项目"></a>视频审核项目</h3><hr>
+<ul>
+<li>对全网视频进行视频审核，对视频是否涉及政治人物、敏感人物进行审核。</li>
+<li>展示版本：视频关键帧提取+ MTCNN人脸检测 + ArcFace人脸识别 + 274类任务</li>
+<li>准确度实现开集测试99.6%，自建闭集测试98.7%</li>
+<li>测试API接口：</li>
+<li>电脑客户端展示：</li>
+<li>效果展示：</li>
+<li>未来：<h3 id="瓜果蔬菜分类Demo"><a href="#瓜果蔬菜分类Demo" class="headerlink" title="瓜果蔬菜分类Demo"></a>瓜果蔬菜分类Demo</h3></li>
+</ul>
+<hr>
+<ul>
+<li>应用于学校食堂、无人餐厅等场所，实现对餐盘的视频进行自动检测。</li>
+<li>Demo:开源Resnet、MobileNet版本</li>
+<li>目前实现4类蔬菜的分类（AI研习社比赛）</li>
+<li>准确度：</li>
+<li>测试API接口：</li>
+<li>移动客户端（MobileNet）展示：</li>
+<li>效果展示：</li>
+<li>未来：<h3 id="商品变换检测"><a href="#商品变换检测" class="headerlink" title="商品变换检测"></a>商品变换检测</h3></li>
+</ul>
+<hr>
+<ul>
+<li>应用于线下零售店的缺货检测，可以自动检测商品变换，商品是否缺货。</li>
+<li>方案：分割思想来做（backbone：FCN）</li>
+<li>准确度：</li>
+</ul>
+
       </div>
       
-      
-    </section>
-  </article>
-
-
-
-  <!-- 显示推荐文章和评论 -->
-
-
-
-  <article class="post white-box comments">
-    <section class="article typo">
-      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
-      
-      
-      
-      
-        <section id="comments">
-          <div id="valine_container" class="valine_thread">
-            <i class="fas fa-spinner fa-spin fa-fw"></i>
-          </div>
-        </section>
       
     </section>
   </article>
@@ -620,7 +626,7 @@
           
           id="project">
           
-            <i class="fas fa-code-branch fa-fw" aria-hidden="true"></i>
+            <i class="fas fa-sitemap fa-fw" aria-hidden="true"></i>
           
           我的项目
         </a></li>
@@ -1017,36 +1023,6 @@
 
 
 
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  
-    
-      <script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1.0.6/js/volantis.min.js"></script>
-    
-  
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-    return GUEST_INFO.indexOf(item) > -1
-  });
-  var notify = 'true' == true;
-  var verify = 'true' == true;
-  var valine = new Valine();
-  valine.init({
-    el: '#valine_container',
-    notify: notify,
-    verify: verify,
-    guest_info: guest_info,
-    
-    appId: "TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz",
-    appKey: "qfw2KwYOyVL3X6U2ET9vnyIa",
-    placeholder: "怎么说？老哥~",
-    pageSize:'10',
-    avatar:'mp',
-    lang:'zh-cn',
-    highlight:'true'
-  })
-  </script>
 
 
 
