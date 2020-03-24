@@ -10,16 +10,16 @@
 <title>多光谱知识总结 - CloudCver</title>
 
 
-    <meta name="description" content="anaconda + python3.6安装 多光谱知识总结1、什么是多光谱？多光谱成像技术是基于液晶可调谐滤波（LCTF)技术，可在不同波长处（420一720nm）检测荧光探针或染料在细胞或组织中的分布，可获取各种波长范围内的所有信号，通过光谱学的原理，可将每一种色原或染料分离成单独的图像，完全去除样本的自发荧光，可明显提高组织切片成像的信噪比，还可将每种信号进行单独分离、定量，为多指标检测提供">
+    <meta name="description" content="多光谱知识总结">
 <meta name="keywords" content="多光谱">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多光谱知识总结">
 <meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;%E5%A4%9A%E5%85%89%E8%B0%B1&#x2F;#2019&#x2F;11&#x2F;09&#x2F;%E5%A4%9A%E5%85%89%E8%B0%B1&#x2F;index.html">
 <meta property="og:site_name" content="CloudCver">
-<meta property="og:description" content="anaconda + python3.6安装 多光谱知识总结1、什么是多光谱？多光谱成像技术是基于液晶可调谐滤波（LCTF)技术，可在不同波长处（420一720nm）检测荧光探针或染料在细胞或组织中的分布，可获取各种波长范围内的所有信号，通过光谱学的原理，可将每一种色原或染料分离成单独的图像，完全去除样本的自发荧光，可明显提高组织切片成像的信噪比，还可将每种信号进行单独分离、定量，为多指标检测提供">
+<meta property="og:description" content="多光谱知识总结">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-01T08:49:28.824Z">
+<meta property="og:updated_time" content="2020-03-24T08:39:12.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
 
@@ -188,9 +188,9 @@ var _hmt = _hmt || [];
                  <time class="level-item has-text-grey" datetime="2019-11-09T09:45:39.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-11-09</time>
                  
                  <!-- 
-                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-12-01T08:49:28.824Z"><i class="far fa-calendar-check">&nbsp;</i>2019-12-01</time>
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-24T08:39:12.058Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-24</time>
                      -->
-                    <time class="level-item has-text-grey" datetime="2019-12-01T08:49:28.824Z"><i class="far fa-calendar-check">&nbsp;</i>2019-12-01</time>    
+                    <time class="level-item has-text-grey" datetime="2020-03-24T08:39:12.058Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-24</time>    
 
                 
                 <div class="level-item">
@@ -205,7 +205,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 605 words)
+                    4 minutes read (About 609 words)
                 </span>
                 
 
@@ -221,8 +221,7 @@ var _hmt = _hmt || [];
             
         </h1>
         <div class="content">
-            <p>anaconda + python3.6安装</p>
-<p>多光谱知识总结<br>1、什么是多光谱？<br>多光谱成像技术是基于液晶可调谐滤波（LCTF)技术，可在不同波长处（420一720nm）检测荧光探针或染料在细胞或组织中的分布，可获取各种波长范围内的所有信号，通过光谱学的原理，可将每一种色原或染料分离成单独的图像，完全去除样本的自发荧光，可明显提高组织切片成像的信噪比，还可将每种信号进行单独分离、定量，为多指标检测提供可行性，使之在病理诊断中有着很好的应用价值。<br>简单的说就是看看它在不同波段下是否比RGB显示情况下表现更清晰。<br>2、多光谱成像图像的评价指标<br>2.1 图像亮度信息法<br>对多光谱图像的每个波段来讲，人眼识别灰度图像的最大限度取决于灰度图像的亮度值大小和图像的灰度分布。可以用平均灰度值衡量第i波段灰度图像的亮度，用图像的标准差来度量灰度图像的离散程度<br> <img src="https://tuchuangblog-1257632417.cos.ap-chengdu.myqcloud.com/1.jpg" alt="在这里插入图片描述"><br>2.2 判断分类法<br>可以用深度学习的方法对图像做分类实验，测试其对分类的影响，或者看其提取的特征的欧式距离差别的大小。<br>3、 一些论文应用<br>3.1 马铃薯的最佳光谱范围<br>论文通过对多端波长进行了实验最终给出了马铃薯的最佳光谱范围为475，558，680，715，750，800，850（单位nm）。<br>3.2 四季豆叶片的特征波段<br>对400～720nm波段范围的多光谱图像波段数据进行优化，选取了灰度分布离散、图像亮度信息大且与其他波段相关性小的四季豆叶片特征波段。根据各波段图像的波段指数值和可识别度，从大量波段数据中通过比较两种方法获取了四季豆叶片的特征波段，得出545、630、645、720、650 和570nm波段对四季豆叶片的分类均比较理想。</p>
+            <p>多光谱知识总结<br><a id="more"></a><br>多光谱知识总结<br>1、什么是多光谱？<br>多光谱成像技术是基于液晶可调谐滤波（LCTF)技术，可在不同波长处（420一720nm）检测荧光探针或染料在细胞或组织中的分布，可获取各种波长范围内的所有信号，通过光谱学的原理，可将每一种色原或染料分离成单独的图像，完全去除样本的自发荧光，可明显提高组织切片成像的信噪比，还可将每种信号进行单独分离、定量，为多指标检测提供可行性，使之在病理诊断中有着很好的应用价值。<br>简单的说就是看看它在不同波段下是否比RGB显示情况下表现更清晰。<br>2、多光谱成像图像的评价指标<br>2.1 图像亮度信息法<br>对多光谱图像的每个波段来讲，人眼识别灰度图像的最大限度取决于灰度图像的亮度值大小和图像的灰度分布。可以用平均灰度值衡量第i波段灰度图像的亮度，用图像的标准差来度量灰度图像的离散程度<br> <img src="https://tuchuangblog-1257632417.cos.ap-chengdu.myqcloud.com/1.jpg" alt="在这里插入图片描述"><br>2.2 判断分类法<br>可以用深度学习的方法对图像做分类实验，测试其对分类的影响，或者看其提取的特征的欧式距离差别的大小。<br>3、 一些论文应用<br>3.1 马铃薯的最佳光谱范围<br>论文通过对多端波长进行了实验最终给出了马铃薯的最佳光谱范围为475，558，680，715，750，800，850（单位nm）。<br>3.2 四季豆叶片的特征波段<br>对400～720nm波段范围的多光谱图像波段数据进行优化，选取了灰度分布离散、图像亮度信息大且与其他波段相关性小的四季豆叶片特征波段。根据各波段图像的波段指数值和可识别度，从大量波段数据中通过比较两种方法获取了四季豆叶片的特征波段，得出545、630、645、720、650 和570nm波段对四季豆叶片的分类均比较理想。</p>
 
         </div>
         
@@ -232,7 +231,7 @@ var _hmt = _hmt || [];
                 <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
                 <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/%E5%A4%9A%E5%85%89%E8%B0%B1/#2019/11/09/%E5%A4%9A%E5%85%89%E8%B0%B1/">https://www.cloudcver.com/posts/%E5%A4%9A%E5%85%89%E8%B0%B1/#2019/11/09/%E5%A4%9A%E5%85%89%E8%B0%B1/</a></li>
                 <li><strong>发布时间：</strong>2019-11-09</li>
-                <li><strong>最后修改：</strong>2019-12-01</li>
+                <li><strong>最后修改：</strong>2020-03-24</li>
                 <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
                 </li>
             </ul>
@@ -411,7 +410,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">计算机视觉</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">23</span>
+                <span class="level-item tag">24</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
@@ -451,7 +450,7 @@ var _hmt = _hmt || [];
                 <span class="level-item">工具</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
@@ -495,6 +494,25 @@ var _hmt = _hmt || [];
                     <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/#2020/03/06/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo部署博客到阿里云服务器</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/#2020/03/04/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tensorflow加载预训练模型数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-04T09:45:39.000Z">2020-03-04</time></div>
+                    <a href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/#2020/03/04/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tensorflow加载预训练模型数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
                     </p>
                 </div>
             </div>
@@ -557,25 +575,6 @@ var _hmt = _hmt || [];
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/posts/pytorch%E5%AE%89%E8%A3%85linux/#2020/02/18/pytorch%E5%AE%89%E8%A3%85linux/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="pytorch安装linux下">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-18T02:41:30.000Z">2020-02-18</time></div>
-                    <a href="/posts/pytorch%E5%AE%89%E8%A3%85linux/#2020/02/18/pytorch%E5%AE%89%E8%A3%85linux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch安装linux下</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -599,7 +598,7 @@ var _hmt = _hmt || [];
                 <p class="is-size-7">
                     
                 &copy; 2020 CloudCver&nbsp;
-                <a  href="http://beian.miit.gov.cn/" target="_blank">苏ICP备20007028号-1</a>&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">京ICP备20008496号-1</a>&nbsp;
                 Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
                         <a href="https://www.upyun.com/"   target="_blank"  style="border:0">

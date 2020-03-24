@@ -7,19 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>tensorflow自建数据集dataset使用 - CloudCver</title>
+<title>tensorflow加载预训练模型数据 - CloudCver</title>
 
 
-    <meta name="description" content="tensorflow自建数据集dataset使用">
+    <meta name="description" content="tensorflow加载预训练模型数据">
 <meta name="keywords" content="tensorflow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tensorflow自建数据集dataset使用">
-<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8&#x2F;#2020&#x2F;02&#x2F;25&#x2F;tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8&#x2F;index.html">
+<meta property="og:title" content="tensorflow加载预训练模型数据">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE&#x2F;#2020&#x2F;03&#x2F;04&#x2F;tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE&#x2F;index.html">
 <meta property="og:site_name" content="CloudCver">
-<meta property="og:description" content="tensorflow自建数据集dataset使用">
+<meta property="og:description" content="tensorflow加载预训练模型数据">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-03-06T10:21:02.447Z">
+<meta property="og:updated_time" content="2020-03-24T08:37:06.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
 
@@ -27,7 +27,7 @@
 
 
 
-<link rel="alternative" href="/atom.xml" title="tensorflow自建数据集dataset使用" type="application/atom+xml">
+<link rel="alternative" href="/atom.xml" title="tensorflow加载预训练模型数据" type="application/atom+xml">
 
 
 
@@ -98,7 +98,7 @@ var _hmt = _hmt || [];
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="tensorflow自建数据集dataset使用" height="28">
+                <img src="/images/logo.png" alt="tensorflow加载预训练模型数据" height="28">
             
             </a>
         </div>
@@ -182,15 +182,15 @@ var _hmt = _hmt || [];
                 
 
 
-                <!-- <time class="level-item has-text-grey" datetime="2020-02-25T09:45:39.000Z">2020-02-25</time>
+                <!-- <time class="level-item has-text-grey" datetime="2020-03-04T09:45:39.000Z">2020-03-04</time>
                  -->
 
-                 <time class="level-item has-text-grey" datetime="2020-02-25T09:45:39.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-02-25</time>
+                 <time class="level-item has-text-grey" datetime="2020-03-04T09:45:39.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-04</time>
                  
                  <!-- 
-                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-06T10:21:02.447Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-06</time>
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-24T08:37:06.731Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-24</time>
                      -->
-                    <time class="level-item has-text-grey" datetime="2020-03-06T10:21:02.447Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-06</time>    
+                    <time class="level-item has-text-grey" datetime="2020-03-24T08:37:06.731Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-24</time>    
 
                 
                 <div class="level-item">
@@ -205,7 +205,7 @@ var _hmt = _hmt || [];
                 <span class="level-item has-text-grey">
                     
                     
-                    8 minutes read (About 1184 words)
+                    2 minutes read (About 229 words)
                 </span>
                 
 
@@ -217,32 +217,23 @@ var _hmt = _hmt || [];
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                tensorflow自建数据集dataset使用
+                tensorflow加载预训练模型数据
             
         </h1>
         <div class="content">
-            <p>tensorflow自建数据集dataset使用<br><a id="more"></a></p>
-<h3 id="1-Dataset"><a href="#1-Dataset" class="headerlink" title="1 Dataset"></a>1 Dataset</h3><p><strong>tensorflow中提供了两个dataset的API，一个是做一个数据源，另一个是做一个管道用来不断提取数据。</strong></p>
-<p><strong>tf.data.Dataset</strong>：表示一串元素（elements），其中每个元素包含了一或多个Tensor对象。例如：在一个图片pipeline中，一个元素可以是单个训练样本，它们带有一个表示图片数据的tensors和一个label组成的pair。有两种不同的方式创建一个dataset：<br>创建一个source (例如：<strong>Dataset.from_tensor_slices()</strong>)， 从一或多个tf.Tensor对象中构建一个dataset<br>应用一个transformation（例如：<strong>Dataset.batch()</strong>），从一或多个tf.data.Dataset对象上构建一个dataset<br><strong>tf.data.Iterator</strong>：它提供了主要的方式来从一个dataset中抽取元素。通过<strong>Iterator.get_next()</strong> 返回的该操作会yields出Datasets中的下一个元素，作为输入pipeline和模型间的接口使用。最简单的iterator是一个“one-shot iterator”，它与一个指定的Dataset相关联，通过它来进行迭代。对于更复杂的使用，Iterator.initializer操作可以使用不同的datasets重新初始化（reinitialize）和参数化（parameterize）一个iterator ，例如，在同一个程序中通过training data和validation data迭代多次。</p>
-<h3 id="2、tf-data-Dataset"><a href="#2、tf-data-Dataset" class="headerlink" title="2、tf.data.Dataset"></a>2、tf.data.Dataset</h3><p>一般我们可以从tensor序列直接导入到Dataset中，如下几个例子，直接是tensor</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dataset1 = tf.data.Dataset.from_tensor_slices(tf.random_uniform([<span class="number">4</span>, <span class="number">10</span>]))</span><br><span class="line">print(dataset1.output_types)  <span class="comment"># ==&gt; "tf.float32"</span></span><br><span class="line">print(dataset1.output_shapes)  <span class="comment"># ==&gt; "(10,)"</span></span><br><span class="line"></span><br><span class="line">dataset2 = tf.data.Dataset.from_tensor_slices(</span><br><span class="line">   (tf.random_uniform([<span class="number">4</span>]),</span><br><span class="line">    tf.random_uniform([<span class="number">4</span>, <span class="number">100</span>], maxval=<span class="number">100</span>, dtype=tf.int32)))</span><br><span class="line">print(dataset2.output_types)  <span class="comment"># ==&gt; "(tf.float32, tf.int32)"</span></span><br><span class="line">print(dataset2.output_shapes)  <span class="comment"># ==&gt; "((), (100,))"</span></span><br><span class="line"></span><br><span class="line">dataset3 = tf.data.Dataset.zip((dataset1, dataset2))</span><br><span class="line">print(dataset3.output_types)  <span class="comment"># ==&gt; (tf.float32, (tf.float32, tf.int32))</span></span><br><span class="line">print(dataset3.output_shapes)  <span class="comment"># ==&gt; "(10, ((), (100,)))"</span></span><br></pre></td></tr></table></figure>
-<p>在做图像这方面时，我们可以把图像的path和标签导入，再进行批量处理，dataset有个map函数，对所有的数据执行同一函数，这样我们可以再读取图片，解码图片，resize等等。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_and_preprocess_from_path_label</span><span class="params">(path, label)</span>:</span></span><br><span class="line">    image = tf.read_file(path)  <span class="comment"># 读取图片</span></span><br><span class="line">    image = tf.image.decode_jpeg(image, channels=<span class="number">3</span>)</span><br><span class="line">    image = tf.image.resize_image_with_crop_or_pad(image, args.img_height, args.img_width)  <span class="comment"># 原始图片大小为(266, 320, 3)，重设为(192, 192)</span></span><br><span class="line">    <span class="comment"># image /= 255.0  # 归一化到[0,1]范围</span></span><br><span class="line">    <span class="keyword">return</span> image, label</span><br><span class="line">dataset = dataset.map(load_and_preprocess_from_path_label)</span><br></pre></td></tr></table></figure>
-<h3 id="3、创建iterator"><a href="#3、创建iterator" class="headerlink" title="3、创建iterator"></a>3、创建iterator</h3><p>创建完Dataset API，我们可以利用iterator访问数据，有四种iterator：<br>one-shot<br>initializable<br>reinitializable<br>feedable</p>
-<h4 id="3-1-make-one-shot-iterator"><a href="#3-1-make-one-shot-iterator" class="headerlink" title="3.1 make_one_shot_iterator()"></a>3.1 make_one_shot_iterator()</h4><p>one-shot iterator是最简单的iterator，它只支持在一个dataset上迭代一次的操作，不需要显式初始化。<br>举个例子，我8个数据，就能遍历八次，我搞十次，当第9次就会报错。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import tensorflow as tf</span><br><span class="line">data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]</span><br><span class="line">dataset = tf.data.Dataset.from_tensor_slices(data)</span><br><span class="line">dataset = dataset.shuffle(8).batch(4).repeat()##不断重复，这样就可以遍历完数据继续遍历。</span><br><span class="line">it = dataset.make_one_shot_iterator()</span><br><span class="line">next_val = it.get_next()</span><br><span class="line">with tf.Session() as sess:</span><br><span class="line">    for i in range(10):</span><br><span class="line">		print(sess.run(next_val))</span><br></pre></td></tr></table></figure><br>结果：<br>因为有17个数据，遍历完一次，最后一次不够batch，就打出一个数，我在训练数据时，加了一个shape判断，shape等于batchsize，再feed，不然就再找下一个iterrator即可。<br><img src="https://img-blog.csdnimg.cn/20200225145132433.png" alt="在这里插入图片描述"></p>
-<h4 id="3-2-make-initializable-iterator"><a href="#3-2-make-initializable-iterator" class="headerlink" title="3.2 make_initializable_iterator()"></a>3.2 make_initializable_iterator()</h4><p>initializable需要显式初始化，他可以对数据加上个参数，feed时候可以给参数。</p>
-<h3 id="4、举例"><a href="#4、举例" class="headerlink" title="4、举例"></a>4、举例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># read datasets</span></span><br><span class="line">data_path = pathlib.Path(args.traindata_dir)</span><br><span class="line">all_image_paths = list(data_path.glob(<span class="string">'*.jpg'</span>))</span><br><span class="line">all_image_paths = [str(path) <span class="keyword">for</span> path <span class="keyword">in</span> all_image_paths]  <span class="comment"># 所有图片路径的列表</span></span><br><span class="line"><span class="comment">## 读取csv文件</span></span><br><span class="line">all_image_labels = []</span><br><span class="line"><span class="keyword">with</span> open(args.label_path, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    reader = csv.reader(f)</span><br><span class="line">    first = <span class="literal">True</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> reader:</span><br><span class="line">        <span class="keyword">if</span> first == <span class="literal">True</span>:</span><br><span class="line">            first = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            all_image_labels.append(row[<span class="number">1</span>])</span><br><span class="line"><span class="comment">## 打乱数据</span></span><br><span class="line">random_index = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(all_image_paths)):</span><br><span class="line">    random_index.append(i)</span><br><span class="line">random.shuffle(random_index)  <span class="comment"># 打散</span></span><br><span class="line">temp = []</span><br><span class="line">temp2 = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(random_index)):</span><br><span class="line">    temp.append(all_image_paths[random_index[i]])</span><br><span class="line">    temp2.append(all_image_labels[random_index[i]])</span><br><span class="line">all_image_paths = temp</span><br><span class="line">all_image_labels = temp2</span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建dataset</span></span><br><span class="line">dataset = tf.data.Dataset.from_tensor_slices((all_image_paths, all_image_labels))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_and_preprocess_from_path_label</span><span class="params">(path, label)</span>:</span></span><br><span class="line">    image = tf.read_file(path)  <span class="comment"># 读取图片</span></span><br><span class="line">    image = tf.image.decode_jpeg(image, channels=<span class="number">3</span>)</span><br><span class="line">    image = tf.image.resize_image_with_crop_or_pad(image, args.img_height, args.img_width)  <span class="comment"># 原始图片大小为(266, 320, 3)，重设为(192, 192)</span></span><br><span class="line">    <span class="comment"># image /= 255.0  # 归一化到[0,1]范围</span></span><br><span class="line">    <span class="keyword">return</span> image, label</span><br><span class="line"></span><br><span class="line">dataset = dataset.map(load_and_preprocess_from_path_label)</span><br><span class="line">dataset = dataset.shuffle(<span class="number">2</span> * args.train_batch_size).batch(args.train_batch_size).repeat()</span><br><span class="line">iterator = dataset.make_initializable_iterator()</span><br><span class="line">img_next = iterator.get_next()</span><br></pre></td></tr></table></figure>
-<p>训练时<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sess.run(iterator.initializer)</span><br><span class="line">print(<span class="string">'Start training...'</span>)</span><br><span class="line"><span class="keyword">for</span> step <span class="keyword">in</span> range(args.train_steps):</span><br><span class="line">    train_batch_data, train_batch_labels = sess.run(img_next)</span><br><span class="line">    <span class="keyword">if</span> train_batch_data.shape[<span class="number">0</span>] != args.train_batch_size:</span><br><span class="line">        train_batch_data, train_batch_labels = sess.run(img_next)</span><br><span class="line">    start_time = time.time()</span><br></pre></td></tr></table></figure></p>
+            <p>tensorflow加载预训练模型数据<br><a id="more"></a></p>
+<h3 id="1、自己写图或者修改后的图加载参数"><a href="#1、自己写图或者修改后的图加载参数" class="headerlink" title="1、自己写图或者修改后的图加载参数"></a>1、自己写图或者修改后的图加载参数</h3><p>Tips 1自己重写了一遍图，加载别人训过的参数，要注意图的变量名字要一致！<br>Tips 2自己写一个图，部分图的变量用预训练的参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1去除某些参数</span></span><br><span class="line">exclude = [<span class="string">'MobilenetV1/Logits/Conv2d_1c_1x1/biases'</span>,<span class="string">'global_step'</span>]</span><br><span class="line">variables_to_restore = tf.contrib.framework.get_variables_to_restore(exclude=exclude)</span><br><span class="line">saver = tf.train.Saver(variables_to_restore)</span><br><span class="line"><span class="comment"># 2只加载当前搭建的图中部分变量</span></span><br><span class="line">variables_to_restore = [val <span class="keyword">for</span> val <span class="keyword">in</span> tf.global_variables() <span class="keyword">if</span>  <span class="string">'Adam'</span> <span class="keyword">not</span> <span class="keyword">in</span> val.name <span class="keyword">and</span> <span class="string">'power'</span> <span class="keyword">not</span> <span class="keyword">in</span> val.name <span class="keyword">and</span> <span class="string">'global'</span> <span class="keyword">not</span> <span class="keyword">in</span> val.name <span class="keyword">and</span> <span class="string">'Logits/'</span> <span class="keyword">not</span> <span class="keyword">in</span> val.name]</span><br><span class="line">saver = tf.train.Saver(variables_to_restore)</span><br><span class="line"><span class="comment">#加载参数</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.run(tf.global_variables_initializer())</span><br><span class="line">    <span class="comment"># 装载参数</span></span><br><span class="line">    saver.restore(sess,  ckpt_path)</span><br><span class="line">    <span class="comment"># 此时改为所有变量以便于之后保存...</span></span><br><span class="line">    variables_to_restore = [val <span class="keyword">for</span> val <span class="keyword">in</span> tf.global_variables()]</span><br><span class="line">	saver = tf.train.Saver(variables_to_restore)</span><br></pre></td></tr></table></figure>
 
         </div>
         
         
             <ul class="post-copyright">
-                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/">tensorflow自建数据集dataset使用</a></li>
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/#2020/03/04/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/">tensorflow加载预训练模型数据</a></li>
                 <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
-                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/">https://www.cloudcver.com/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/</a></li>
-                <li><strong>发布时间：</strong>2020-02-25</li>
-                <li><strong>最后修改：</strong>2020-03-06</li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/#2020/03/04/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/">https://www.cloudcver.com/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/#2020/03/04/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/</a></li>
+                <li><strong>发布时间：</strong>2020-03-04</li>
+                <li><strong>最后修改：</strong>2020-03-24</li>
                 <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
                 </li>
             </ul>
@@ -278,16 +269,16 @@ var _hmt = _hmt || [];
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/#2020/03/04/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/#2020/03/06/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">tensorflow加载预训练模型数据</span>
+                <span class="level-item">hexo部署博客到阿里云服务器</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/#2020/02/20/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/">
-                <span class="level-item">Docker基础知识学习（来自阿里云）</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/">
+                <span class="level-item">tensorflow自建数据集dataset使用</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
