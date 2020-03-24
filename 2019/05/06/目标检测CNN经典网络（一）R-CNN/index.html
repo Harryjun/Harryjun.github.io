@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>目标检测CNN经典网络（一）R-CNN | CloudCver</title>
+  
+  
+
+  
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.1/css/all.min.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" href="/style.css">
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post half'>
+      
+        
+  <h1 class='title'>CloudCver</h1>
+
+
+  <div class="m_search">
+    <form name="searchform" class="form u-search-form">
+      <input type="text" class="input u-search-input" placeholder="探索一下，意犹未尽！" />
+      <i class="icon fas fa-search fa-fw"></i>
+    </form>
+  </div>
+
+<div class='menu navgation'>
+  <ul class='h-list'>
+    
+      
+        <li>
+          <a class="nav home" href="/"
+            
+            
+            id="home">
+            <i class='fas fa-home fa-fw'></i>&nbsp;主页
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/project/"
+            
+            
+            id="project">
+            <i class='fas fa-sitemap fa-fw'></i>&nbsp;项目
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/categories/"
+            
+            
+            id="categories">
+            <i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/archives/"
+            
+            
+            id="archives">
+            <i class='fas fa-file-alt fa-fw'></i>&nbsp;归档
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/plan/"
+            
+            
+            id="plan">
+            <i class='fas fa-paper-plane fa-fw'></i>&nbsp;KR
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/friends/"
+            
+              rel="nofollow"
+            
+            
+            id="friends">
+            <i class='fas fa-link fa-fw'></i>&nbsp;我的友链
+          </a>
+        </li>
+      
+        <li>
+          <a class="nav home" href="/about/"
+            
+              rel="nofollow"
+            
+            
+            id="about">
+            <i class='fas fa-info-circle fa-fw'></i>&nbsp;关于
+          </a>
+        </li>
+      
+    
+  </ul>
+</div>
+
+      
+    </cover>
+    <header class="l_header material">
+  <div id="loading-bar-wrapper">
+    <div id="loading-bar" class="material"></div>
+  </div>
+
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+      <a class="logo flat-box" href='/' >
+        
+          CloudCver
+        
+      </a>
+			<div class='menu navgation'>
+				<ul class='h-list'>
+          
+  					
+  						<li>
+								<a class="nav flat-box" href="/categories/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="categories">
+									<i class='fas fa-folder-open fa-fw'></i>&nbsp;分类
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/tags/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="tags">
+									<i class='fas fa-hashtag fa-fw'></i>&nbsp;标签
+								</a>
+							</li>
+      			
+  						<li>
+								<a class="nav flat-box" href="/archives/"
+                  
+                    rel="nofollow"
+                  
+                  
+                  id="archives">
+									<i class='fas fa-archive fa-fw'></i>&nbsp;归档
+								</a>
+							</li>
+      			
+      		
+				</ul>
+			</div>
+
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="搜索" />
+						<i class="icon fas fa-search fa-fw"></i>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a class="fas fa-search fa-fw" href='javascript:void(0)' target="_blank" rel="noopener"></a></li>
+				
+				<li class='s-menu'><a class="fas fa-bars fa-fw" href='javascript:void(0)' target="_blank" rel="noopener"></a></li>
+			</ul>
+		</div>
+
+		<div class='nav-sub container container--flex'>
+			<a class="logo flat-box"></a>
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a class="flat-btn fas fa-comments fa-fw" href='javascript:void(0)' target="_blank" rel="noopener"></a></li>
+        
+          <li class='s-toc'><a class="flat-btn fas fa-list fa-fw" href='javascript:void(0)' target="_blank" rel="noopener"></a></li>
+        
+			</ul>
+		</div>
+	</div>
+</header>
+	<aside class="menu-phone">
+    <header>
+		<nav class="menu navgation">
+      <ul>
+        
+          
+            <li>
+							<a class="nav flat-box" href="/"
+                
+                
+                id="home">
+								<i class='fas fa-clock fa-fw'></i>&nbsp;近期文章
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/blog/archives/"
+                
+                  rel="nofollow"
+                
+                
+                id="blogarchives">
+								<i class='fas fa-file-alt fa-fw'></i>&nbsp;文章归档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/projects/"
+                
+                
+                id="projects">
+								<i class='fas fa-code-branch fa-fw'></i>&nbsp;开源项目
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/friends/"
+                
+                  rel="nofollow"
+                
+                
+                id="friends">
+								<i class='fas fa-link fa-fw'></i>&nbsp;我的友链
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="https://xaoxuu.com/wiki/material-x/"
+                
+                  rel="nofollow"
+                
+                
+                id="https:xaoxuu.comwikimaterial-x">
+								<i class='fas fa-book fa-fw'></i>&nbsp;主题文档
+							</a>
+            </li>
+          
+            <li>
+							<a class="nav flat-box" href="/about/"
+                
+                  rel="nofollow"
+                
+                
+                id="about">
+								<i class='fas fa-info-circle fa-fw'></i>&nbsp;关于小站
+							</a>
+            </li>
+          
+       
+      </ul>
+		</nav>
+    </header>
+	</aside>
+<script>setLoadingBarProgress(40);</script>
+
+  </div>
+
+
+  <div class="l_body">
+    <div class='body-wrapper'>
+      <div class='l_main'>
+  
+
+  <article id="post" class="post white-box article-type-post" itemscope itemprop="blogPost">
+    
+
+
+  <section class='meta'>
+    
+    
+    <div class="meta" id="header-meta">
+      
+        
+  
+    <h1 class="title">
+      <a href="/2019/05/06/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8BCNN%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89R-CNN/">
+        目标检测CNN经典网络（一）R-CNN
+      </a>
+    </h1>
+  
+
+
+      
+      <div class='new-meta-box'>
+        
+          
+        
+          
+            
+  <div class='new-meta-item author'>
+    
+      <a href="http://www.cloudcver.com" rel="nofollow">
+        
+          <i class="fas fa-user" aria-hidden="true"></i>
+        
+        <p>CloudCver</p>
+      </a>
+    
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+    <p>2019-05-06</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/' rel="nofollow">
+      <i class="fas fa-folder-open" aria-hidden="true"></i>
+      <p>计算机视觉&nbsp;/&nbsp;目标检测</p>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  
+    <div class="new-meta-item browse busuanzi">
+      <a class='notlink'>
+        <i class="fas fa-eye" aria-hidden="true"></i>
+        <p>
+          <span id="busuanzi_value_page_pv">
+            <i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i>
+          </span>
+        </p>
+      </a>
+    </div>
+  
+
+
+          
+        
+          
+            
+
+          
+        
+      </div>
+      
+        <hr>
+      
+    </div>
+  </section>
+
+
+    <section class="article typo">
+      <div class="article-entry" itemprop="articleBody">
+        <p>在早期计算机视觉研究时，人们很好的将CNN应用在目标分类的问题中，但是一直不能很好的解决目标检测的问题，目标检测不仅要分析出其是什么东西，而且还要回归出其位置。这是其在CNN训练的痛点。为此出现了R-CNN网络。<br><a id="more"></a></p>
+<h2 id="R-CNN思路"><a href="#R-CNN思路" class="headerlink" title="R-CNN思路"></a>R-CNN思路</h2><p>R-CNN简单理解就是先训练一个CNN分类器，然后再对每幅图片挑选2000个预选区域，让这个预选区域经过R-CNN前向传播得到特征，特征先保留到硬盘中，此时与我们的标签进行对比，重叠率高的为正样本，重叠率低的为负样本，随后单独进行SVM训练。<br>R-CNN的整体思路如下：<br>（1）给定一张输入图片，从图片中提取 2000 个类别独立的候选区域。<strong>（selective search）</strong><br>（2）对于每个区域利用CNN网络抽取一个固定长度的特征向量。<strong>（这个CNN是提前训练好的一个网络）</strong><br>（3）再对每个区域所对应的特征向量利用 SVM 进行目标分类。<br><img src="http://wx2.sinaimg.cn/large/e8c7da07ly1g2rey2e41rj20ir0drjya.jpg" alt="在这里插入图片描述"></p>
+<h2 id="候选区域寻找selective-search"><a href="#候选区域寻找selective-search" class="headerlink" title="候选区域寻找selective search"></a>候选区域寻找selective search</h2><p>关于候选区域的选择有多种方法，最简单的方法为滑窗法，就是以一定间距不断横纵遍历得到所有的窗口，但是所有区域都遍历，而且有时候物体不一样大？这就太浪费时间了。<br>论文章所采用的方法是选择搜索法。<br>算法具体如下图所示<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g2rexwevloj20jn0grjwj.jpg" alt="在这里插入图片描述"><br>step0：生成区域集R。</p>
+<p>step1：计算区域集R里每个相邻区域的相似度S={s1,s2,…}<br>//循环以下步骤<br>step2：找出相似度最高的两个区域，将其合并为新集，添加进R<br>step3：从S中移除所有与step2中有关的子集<br>step4：计算新集与所有子集的相似度<br>step5：S若为空则跳出循环，否则跳至step2</p>
+<p><strong>相似度计算</strong><br>那么关键点在于相似度怎么判断？<br>图像之间的特征有很多，颜色？纹理特征？尺寸等？对于相似度的判断，选择性搜索考虑了颜色、纹理、尺寸和空间交叠这4个参数。<br><strong>1、颜色特征</strong><br>将色彩空间转为HSV，每个通道下以bins=25计算直方图，这样每个区域的颜色直方图有25*3=75个区间。 对直方图除以区域尺寸做归一化后使用下式计算相似度：<br><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g2rfnt2p9bj208h0203yg.jpg" alt="在这里插入图片描述"><br>上式如何理解？简单说一下，我们归一化后每个通道的数据后，一维特征向量的和为1.0，比较两个区域的特征向量每一位，把每一位的最小值加起来。如果全都一样那么结果肯定是1啊！如果不一样，每一位都取最小值，那就肯定比1小啊！哈哈就是这么理解。</p>
+<p><strong>2、纹理相似度（texture similarity）</strong></p>
+<p>论文这里的纹理采用SIFT-Like特征，采用方差为1的高斯微分在8个方向做梯度统计，然后将统计结果（尺寸与区域大小一致）以bins=10计算直方图。直方图区间数为8<em>3</em>10=240（使用RGB色彩空间）。计算公式如下所示：<br><img src="http://wx3.sinaimg.cn/large/e8c7da07ly1g2rfsef786j206n01fdfm.jpg" alt="在这里插入图片描述"></p>
+<p><strong>3、尺度相似度</strong><br>尺度相似度其实是实现优先合并小的区域，也就是减少大区域合并小区域。<br><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g2rfwamwqgj207u016mwy.jpg" alt="在这里插入图片描述"><br><strong>4、交叠相似度（shape compatibility measure）</strong><br>上述完成后，要看一下两个区域是否爱挨着，如果距离十万八千里，那就没有合并的必要。如何计算？先找一个外接矩形把它框起来，如果两个矩形相距较远，则外接矩形就很大，所以我们设计这样的指标，其指标是合并后的区域的Bounding Box（能够框住区域的最小矩形BBij）减去两个矩形的尺寸，得到相对差距。其计算方式：<br><img src="http://wx3.sinaimg.cn/large/e8c7da07ly1g2rfzhewa3j20ap0160sj.jpg" alt="在这里插入图片描述"><br><strong>候选区域排序</strong><br>相似度计算后还有一个问题，如何对候选区域排序呢，通过上述的步骤我们能够得到很多很多的区域，但是显然不是每个区域作为目标的可能性都是相同的，因此我们需要衡量这个可能性，这样就可以根据我们的需要筛选区域建议个数啦。</p>
+<p>这篇文章做法是，给予最先合并的图片块较大的权重，比如最后一块完整图像权重为1，倒数第二次合并的区域权重为2以此类推。但是当我们策略很多，多样性很多的时候呢，这个权重就会有太多的重合了，排序不好搞啊。文章做法是给他们乘以一个随机数，毕竟3分看运气嘛，然后对于相同的区域多次出现的也叠加下权重，毕竟多个方法都说你是目标，也是有理由的嘛。这样我就得到了所有区域的目标分数，也就可以根据自己的需要选择需要多少个区域了。</p>
+<h2 id="CNN网络训练"><a href="#CNN网络训练" class="headerlink" title="CNN网络训练"></a>CNN网络训练</h2><p>上述过程我们得到了大量候选区域（每个候选区域都提供了矩形框的位置情况），怎么训练呢？<br><strong>第一步、数据标注</strong>：我们对于每张图片标注一下boundbox四维向量和所属类别编号。<br><strong>第二步、预训练</strong>：论文在大型辅助训练集ILSVRC2012分类数据集（<strong>分类数据集没有约束框数据，每幅图片对应一个类别标签</strong>）上预训练了CNN。预训练采用了Caffe的CNN库。<br><strong>第三步、微调CNN</strong>：<br><strong>特定领域的参数调优</strong><br>第一步训练了一个分类器，但是我们要做的是目标检测，而且我们换了另一套数据集，所以为了让我们的CNN适应新的任务（即<strong>检测任务</strong>）和新的领域（变形后的<strong>候选窗口</strong>）。我们只使用变形后的<strong>候选区域</strong>对CNN参数进行SGD训练。<br><strong>1、网络修改</strong>：ImageNet是用了专用的1000-way分类层，这里我们换成21-way分类层，（其中20是VOC的类别数，1代表背景），卷积部分都没有改变。<br><strong>2、数据集</strong>选择性搜索算法会提取一些候选区域，如何区分正例，负例？这里我们考虑如果其和真实标注的框的<strong>IoU&gt;= 0.5</strong>就认为是正例，否则就是负例。OK这样前面选择性搜索的框到了后面就利用IOU自动标注，然后去softmax训练<br><strong>这样就训练了一个比较适合我们的候选框的分类器。<br>完美！</strong><br><del>但是好像不好耶，重合度0.5就是正例，那不是好多一半框选目标就被认为合格了，一张图片会有好多的框合格对！那么你会想我们去把阈值调高点，不久解决了！这里作者考虑如果IOU太高那样正例就太少了，负例太多，譬如对于一张图片的2000候选框，1张合格，1999张不合格；那么训练会过拟合的！所以考虑这个，这里作者降低了IOU阈值（后面也有说）那么作者咋解决的？第四步</del>~~<br><img src="http://wx3.sinaimg.cn/large/e8c7da07ly1g2rnj9kpndj20p80eigsy.jpg" alt="在这里插入图片描述"><br><strong>第四步、多目标分类器</strong><br>这里作者就又搞了20个SVM分类器，上面第三步训练好了CNN了，我们把所有的图片走一遍CNN把最后的特征留下，不训练，把它保留当成特征，去训练SVM。这里把IOU&lt;0.3的认为是负样本。</p>
+<p>另外样本数据很大，每幅图片都对应着很多的候选区域特征emmm这里论文采用了hard negative mining method<br>训练时有时模型会把重叠率低的也当成正样本，这就属于顽固负样本，需要继续投进去训练。</p>
+<blockquote>
+<p>【难负例挖掘算法，用途就是正负例数量不均衡，而负例分散代表性又不够的问题，hard negative就是每次把那些顽固的棘手的错误,再送回去继续练,练到你的成绩不再提升为止.这一个过程就叫做’hard negative mining‘】</p>
+</blockquote>
+<p><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g2rnjdi08fj20os0dpgsz.jpg" alt="在这里插入图片描述"></p>
+<p>这里你会想到为啥不直接CNN时直接搞一个分类器，还用啥SVM？<br>对于这个问题我也有所疑惑，然后查了一下，大概这么解释还可以理清。</p>
+<blockquote>
+<p>因为svm训练和cnn训练过程的正负样本定义方式各有不同，导致最后采用CNN softmax输出比采用svm精度还低。事情是这样的，cnn在训练的时候，对训练数据做了比较宽松的标注，比如一个bounding box可能只包含物体的一部分，那么我也把它标注为正样本，用于训练cnn；采用这个方法的主要原因在于因为CNN容易过拟合，所以需要大量的训练数据，所以在CNN训练阶段我们是对Bounding box的位置限制条件限制的比较松(IOU只要大于0.5都被标注为正样本了)；然而svm训练的时候，因为svm适用于少样本训练，所以对于训练样本数据的IOU要求比较严格，我们只有当bounding box把整个物体都包含进去了，我们才把它标注为物体类别，然后训练svm。一旦CNN f7层特征被提取出来，那么我们将为每个物体累训练一个svm分类器。当我们用CNN提取2000个候选框，可以得到2000<em>4096这样的特征向量矩阵，然后我们只需要把这样的一个矩阵与svm权值矩阵4096</em>N点乘(N为分类类别数目，因为我们训练的N个svm，每个svm包好了4096个W)，就可以得到结果了。</p>
+<h2 id="Bounding-box回归"><a href="#Bounding-box回归" class="headerlink" title="Bounding-box回归"></a>Bounding-box回归</h2><p>上面完成了分类，但其实回归效果不是很好，作者又在第五层卷积层采用了Bounding-box回归对候选区域做了修正，提高了边框的回归效果。</p>
+</blockquote>
+<p>下图，绿色的框表示Ground Truth, 红色的框为Selective Search提取的Region Proposal。那么很明显框定位不准(IoU&lt;0.5)，  如果我们能对红色的框进行微调， 使得经过微调后的窗口跟Ground Truth 更接近， 这样岂不是定位会更准确。 确实，Bounding-box regression 就是用来微调这个窗口的。<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g2rpqa2zgwj20d40cxjrk.jpg" alt="在这里插入图片描述"><br>那么怎么变换呢?我们可以简单的看出可以通过平移、伸缩两种操作来实现。<br>如下图所示，我们需要目标框的四维向量和合格的预选区域的向量，然后要训练一个线形回归模型，下图左边那个公式，这里计算损失公式如右下角所示。训练好后就可以用来预测了。<br>具体哪个BoundingBox模型可以参考参考文献来学习。<br><img src="http://wx3.sinaimg.cn/large/e8c7da07ly1g2rpqn5f8oj20p30d4gth.jpg" alt="在这里插入图片描述"></p>
+<h2 id="测试环节非极大值抑制-Non-Maximum-Suppression-NMS"><a href="#测试环节非极大值抑制-Non-Maximum-Suppression-NMS" class="headerlink" title="测试环节非极大值抑制(Non-Maximum Suppression, NMS)"></a>测试环节非极大值抑制(Non-Maximum Suppression, NMS)</h2><p>训练好了怎么测试？<br>测试阶段，在测试图像上使用selective search抽取2000个推荐区域（实验中，我们使用了选择性搜索的快速模式）。然后变形每一个推荐区域，再通过CNN前向传播计算出特征。然后我们使用对每个类别训练出的SVM给整个特征向量中的每个类别单独打分。<br>然后给出一张图像中所有的打分区域，然后使用NMS（每个类别是独立进行的），拒绝掉一些和高分区域的IOU大于阈值的候选框。</p>
+<blockquote>
+<p>非极大值抑制<br>给出一张图片和上面许多物体检测的候选框（即每个框可能都代表某种物体），但是这些框很可能有互相重叠的部分，我们要做的就是只保留最优的框。假设有N个框，每个框被分类器计算得到的分数为Si, 1&lt;=i&lt;=N。<br>0、建造一个存放待处理候选框的集合H，初始化为包含全部N个框；建造一个存放最优框的集合M，初始化为空集。<br>1、将所有集合 H 中的框进行排序，选出分数最高的框 m，从集合 H 移到集合 M；<br>2、遍历集合 H 中的框，分别与框 m 计算交并比（Interection-over-union，IoU），如果高于某个阈值（一般为0~0.5），则认为此框与 m 重叠，将此框从集合 H 中去除。<br>3、回到第1步进行迭代，直到集合 H 为空。集合 M 中的框为我们所需。</p>
+</blockquote>
+<p>用下面这张图可以看懂测试的流程。</p>
+<p><img src="http://wx2.sinaimg.cn/large/e8c7da07ly1g2rnpry3mzj20o00dk7bl.jpg" alt="在这里插入图片描述"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本篇论文虽然已经算是早起的目标检测的论文，但依然被新手所研究，算是目标检测的开篇之作把！他给出了目标检测的一个最简单的思路，但是费时费力。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]【深度学习】R-CNN 论文解读及个人理解<br><a href="https://blog.csdn.net/briblue/article/details/82012575" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/82012575</a><br>[2]R-CNN论文详解（论文翻译）<br><a href="https://blog.csdn.net/v1_vivian/article/details/78599229" target="_blank" rel="noopener">https://blog.csdn.net/v1_vivian/article/details/78599229</a><br>[3]选择性搜索（selective search）<br><a href="https://blog.csdn.net/guoyunfei20/article/details/78723646" target="_blank" rel="noopener">https://blog.csdn.net/guoyunfei20/article/details/78723646</a><br>[4]第三十三节，目标检测之选择性搜索-Selective Search<br><a href="https://www.cnblogs.com/zyly/p/9259392.html" target="_blank" rel="noopener">https://www.cnblogs.com/zyly/p/9259392.html</a><br>[5]边框回归：BoundingBox-Regression(BBR)<br><a href="https://blog.csdn.net/v1_vivian/article/details/80292569" target="_blank" rel="noopener">https://blog.csdn.net/v1_vivian/article/details/80292569</a></p>
+
+      </div>
+      
+        <br>
+        
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-11-22T22:45:26+08:00">
+  <a class='notlink'>
+    <i class="fas fa-clock" aria-hidden="true"></i>
+    <p>更新于 2019年11月22日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="QQ好友" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.cloudcver.com/2019/05/06/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8BCNN%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89R-CNN/&title=目标检测CNN经典网络（一）R-CNN | CloudCver&summary=在早期计算机视觉研究时，人们很好的将CNN应用在目标分类的问题中，但是一直不能很好的解决目标检测的问题，目标检测不仅要分析出其是什么东西，而且还要回归出其位置。这是其在CNN训练的痛点。为此出现了R-CNN网络。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="QQ空间" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.cloudcver.com/2019/05/06/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8BCNN%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89R-CNN/&title=目标检测CNN经典网络（一）R-CNN | CloudCver&summary=在早期计算机视觉研究时，人们很好的将CNN应用在目标分类的问题中，但是一直不能很好的解决目标检测的问题，目标检测不仅要分析出其是什么东西，而且还要回归出其位置。这是其在CNN训练的痛点。为此出现了R-CNN网络。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="微博" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://www.cloudcver.com/2019/05/06/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8BCNN%E7%BB%8F%E5%85%B8%E7%BD%91%E7%BB%9C%EF%BC%88%E4%B8%80%EF%BC%89R-CNN/&title=目标检测CNN经典网络（一）R-CNN | CloudCver&summary=在早期计算机视觉研究时，人们很好的将CNN应用在目标分类的问题中，但是一直不能很好的解决目标检测的问题，目标检测不仅要分析出其是什么东西，而且还要回归出其位置。这是其在CNN训练的痛点。为此出现了R-CNN网络。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/assets@19.1.9/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+      
+      
+          <div class="prev-next">
+              
+                  <section class="prev">
+                      <span class="art-item-left">
+                          <h6><i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页</h6>
+                          <h4>
+                              <a href="/2019/05/07/%E6%8E%A2%E8%AE%A8%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%84%9F%E5%8F%97%E8%A7%86%E9%87%8E%E4%BB%A5%E5%8F%8AsPPnet%E4%B8%ADROI%E6%98%A0%E5%B0%84%E5%88%B0featuremap/" rel="prev" title="探讨卷积的感受视野以及sPPnet中ROI映射到featuremap">
+                                
+                                    探讨卷积的感受视野以及sPPnet中ROI映射到featuremap
+                                
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/SPPnet/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> SPPnet</a> <a class="tag" href="/tags/%E6%84%9F%E5%8F%97%E9%87%8E/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 感受野</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+              
+                  <section class="next">
+                      <span class="art-item-right" aria-hidden="true">
+                          <h6>下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i></h6>
+                          <h4>
+                              <a href="/2019/05/04/%E5%80%99%E9%80%89%E5%8C%BA%E5%9F%9F%E5%AF%BB%E6%89%BE%E9%80%89%E6%8B%A9%E6%80%A7%E5%AF%BB%E6%89%BEselective%20search/" rel="prev" title="候选区域寻找选择性寻找selective search">
+                                  
+                                      候选区域寻找选择性寻找selective search
+                                  
+                              </a>
+                          </h4>
+                          
+                              
+                              <h6 class="tags">
+                                  <a class="tag" href="/tags/%E9%80%89%E6%8B%A9%E6%80%A7%E6%90%9C%E7%B4%A2/"><i class="fas fa-tag fa-fw" aria-hidden="true"></i> 选择性搜索</a>
+                              </h6>
+                          
+                      </span>
+                  </section>
+              
+          </div>
+      
+    </section>
+  </article>
+
+
+
+  <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box comments">
+    <section class="article typo">
+      <h4><i class="fas fa-comments fa-fw" aria-hidden="true"></i>&nbsp;评论</h4>
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-spinner fa-spin fa-fw"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '目标检测CNN经典网络（一）R-CNN',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+    
+    
+      
+      
+        
+          
+          
+            
+              <section class='widget author'>
+  <div class='content material'>
+    
+      <div class='avatar'>
+        <img class='avatar' src='https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/base/98c8eb199d29fcf4c33919ea5aaacb7f.jpeg'/>
+      </div>
+    
+    
+      <div class='text'>
+        
+        
+          <p>CloudCver&nbsp;|&nbsp;意犹未尽</p>
+
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/mailto:cloudcver@163.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://github.com/harryjun"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="/plan/"
+              class="social fas fa-paper-plane flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://www.zhihu.com/people/jun-jun-83-11-91/activities"
+              class="social fab fa-zhihu flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+          
+            <a href="https://blog.csdn.net/CLOUD_J"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget toc-wrapper'>
+    
+<header class='material'>
+  <div><i class="fas fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;本文目录</div>
+  
+    <!-- <div class='wrapper'><a class="s-toc rightBtn" rel="external nofollow noopener noreferrer noopener" href="javascript:void(0)" target="_blank"><i class="fas fa-thumbtack fa-fw"></i></a></div> -->
+  
+</header>
+
+    <div class='content material'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#R-CNN思路"><span class="toc-text">R-CNN思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#候选区域寻找selective-search"><span class="toc-text">候选区域寻找selective search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CNN网络训练"><span class="toc-text">CNN网络训练</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bounding-box回归"><span class="toc-text">Bounding-box回归</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环节非极大值抑制-Non-Maximum-Suppression-NMS"><span class="toc-text">测试环节非极大值抑制(Non-Maximum Suppression, NMS)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget plain'>
+  
+<header class='material'>
+  <div><i class="fas fa-laugh-beam fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;Happy&Fighting</div>
+  
+</header>
+
+  <div class='content material'>
+    <p><img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/fa69bceb27523ea26d279593b1550f1f.gif" alt=""></p>
+
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              <section class='widget grid'>
+  
+<header class='material'>
+  <div><i class="fas fa-map-signs fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;站内导航</div>
+  
+</header>
+
+  <div class='content material'>
+    <ul class="grid navgation">
+      
+        <li><a class="flat-box" title="/archives/" href="/archives/"
+          
+            rel="nofollow"
+          
+          
+          id="archives">
+          
+            <i class="fas fa-file-alt fa-fw" aria-hidden="true"></i>
+          
+          文章归档
+        </a></li>
+      
+        <li><a class="flat-box" title="/project/" href="/project/"
+          
+          
+          id="project">
+          
+            <i class="fas fa-sitemap fa-fw" aria-hidden="true"></i>
+          
+          我的项目
+        </a></li>
+      
+        <li><a class="flat-box" title="/friends/" href="/friends/"
+          
+            rel="nofollow"
+          
+          
+          id="friends">
+          
+            <i class="fas fa-link fa-fw" aria-hidden="true"></i>
+          
+          我的友链
+        </a></li>
+      
+        <li><a class="flat-box" title="/privatefile/" href="/privatefile/"
+          
+            rel="nofollow"
+          
+          
+          id="privatefile">
+          
+            <i class="fas fa-archive fa-fw" aria-hidden="true"></i>
+          
+          私人资料
+        </a></li>
+      
+        <li><a class="flat-box" title="/publicfile/" href="/publicfile/"
+          
+            rel="nofollow"
+          
+          
+          id="publicfile">
+          
+            <i class="fas fa-paste fa-fw" aria-hidden="true"></i>
+          
+          共享资料
+        </a></li>
+      
+        <li><a class="flat-box" title="/about/" href="/about/"
+          
+            rel="nofollow"
+          
+          
+          id="about">
+          
+            <i class="fas fa-info-circle fa-fw" aria-hidden="true"></i>
+          
+          关于我
+        </a></li>
+      
+    </ul>
+  </div>
+</section>
+
+            
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget category'>
+    
+<header class='material'>
+  <div><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;文章分类</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/categories/"
+    title="categories/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content material'>
+      <ul class="entry">
+        
+          <li><a class="flat-box" title="/categories/Debug/" href="/categories/Debug/"><div class='name'>Debug</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/LINUX/" href="/categories/LINUX/"><div class='name'>LINUX</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/TensorFlow/" href="/categories/TensorFlow/"><div class='name'>TensorFlow</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/python/" href="/categories/python/"><div class='name'>python</div><div class='badge'>(11)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/"><div class='name'>网络爬虫</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%85%B6%E4%BB%96/" href="/categories/%E5%85%B6%E4%BB%96/"><div class='name'>其他</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%88%B7%E9%A2%98/" href="/categories/%E5%88%B7%E9%A2%98/"><div class='name'>刷题</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E5%B7%A5%E4%BD%9C/" href="/categories/%E5%B7%A5%E4%BD%9C/"><div class='name'>工作</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/"><div class='name'>生活随笔</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/"><div class='name'>计算机视觉</div><div class='badge'>(23)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/"><div class='name'>GAN</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/"><div class='name'>人脸识别</div><div class='badge'>(5)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/"><div class='name'>图像分类</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/"><div class='name'>图像生成</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/"><div class='name'>工具</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/"><div class='name'>目标检测</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box child" title="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"><div class='name'>语义分割</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+            
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            
+              
+  <section class='widget tagcloud'>
+    
+<header class='material'>
+  <div><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;热门标签</div>
+  
+    <a class="rightBtn"
+    
+      rel="nofollow"
+    
+    
+    href="/tags/"
+    title="tags/">
+    <i class="fas fa-expand-arrows-alt fa-fw"></i></a>
+  
+</header>
+
+    <div class='content material'>
+      <a href="/tags/AlexNet/" style="font-size: 14px; color: #999">AlexNet</a> <a href="/tags/CVPR/" style="font-size: 14px; color: #999">CVPR</a> <a href="/tags/Docker/" style="font-size: 14px; color: #999">Docker</a> <a href="/tags/FCN/" style="font-size: 14px; color: #999">FCN</a> <a href="/tags/GPU/" style="font-size: 14px; color: #999">GPU</a> <a href="/tags/Google-Drive/" style="font-size: 14px; color: #999">Google Drive</a> <a href="/tags/GoogleClab/" style="font-size: 14px; color: #999">GoogleClab</a> <a href="/tags/MSGAN/" style="font-size: 14px; color: #999">MSGAN</a> <a href="/tags/Pycharm/" style="font-size: 14px; color: #999">Pycharm</a> <a href="/tags/SPPnet/" style="font-size: 14px; color: #999">SPPnet</a> <a href="/tags/VGG/" style="font-size: 14px; color: #999">VGG</a> <a href="/tags/YouTube-8M/" style="font-size: 14px; color: #999">YouTube-8M</a> <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/argparse/" style="font-size: 14px; color: #999">argparse</a> <a href="/tags/bazel/" style="font-size: 19px; color: #777">bazel</a> <a href="/tags/cmake/" style="font-size: 14px; color: #999">cmake</a> <a href="/tags/csv/" style="font-size: 14px; color: #999">csv</a> <a href="/tags/faiss/" style="font-size: 14px; color: #999">faiss</a> <a href="/tags/glib/" style="font-size: 14px; color: #999">glib</a> <a href="/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/tags/insightface/" style="font-size: 24px; color: #555">insightface</a> <a href="/tags/keras/" style="font-size: 14px; color: #999">keras</a> <a href="/tags/labelme/" style="font-size: 14px; color: #999">labelme</a> <a href="/tags/libffi/" style="font-size: 14px; color: #999">libffi</a> <a href="/tags/linux/" style="font-size: 14px; color: #999">linux</a> <a href="/tags/mediapipe/" style="font-size: 14px; color: #999">mediapipe</a> <a href="/tags/opencv/" style="font-size: 19px; color: #777">opencv</a> <a href="/tags/os/" style="font-size: 14px; color: #999">os</a> <a href="/tags/pip/" style="font-size: 14px; color: #999">pip</a> <a href="/tags/pytorch/" style="font-size: 14px; color: #999">pytorch</a> <a href="/tags/screen/" style="font-size: 14px; color: #999">screen</a> <a href="/tags/tensorflow/" style="font-size: 14px; color: #999">tensorflow</a> <a href="/tags/vim/" style="font-size: 14px; color: #999">vim</a> <a href="/tags/webdriver/" style="font-size: 14px; color: #999">webdriver</a> <a href="/tags/wgan/" style="font-size: 14px; color: #999">wgan</a> <a href="/tags/xml/" style="font-size: 14px; color: #999">xml</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #999">人脸识别</a> <a href="/tags/%E5%A4%9A%E5%85%89%E8%B0%B1/" style="font-size: 14px; color: #999">多光谱</a> <a href="/tags/%E6%84%9F%E5%8F%97%E9%87%8E/" style="font-size: 14px; color: #999">感受野</a> <a href="/tags/%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F/" style="font-size: 14px; color: #999">清华镜像</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%8E%89%E6%B8%8A%E6%BD%AD/" style="font-size: 14px; color: #999">玉渊潭</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 14px; color: #999">算法</a> <a href="/tags/%E8%BD%AF%E8%BF%9E%E6%8E%A5/" style="font-size: 14px; color: #999">软连接</a> <a href="/tags/%E9%80%89%E6%8B%A9%E6%80%A7%E6%90%9C%E7%B4%A2/" style="font-size: 14px; color: #999">选择性搜索</a>
+    </div>
+  </section>
+
+
+            
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+          
+          
+        
+      
+    
+
+  
+</aside>
+
+<footer id="footer" class="clearfix">
+  
+    <div class="footer">
+      <p>开心总比不开心要好，要努力，更要开心哦！</p>
+
+    </div>
+    <br>
+  
+  
+    <div class="social-wrapper">
+      
+        
+          <a href="/mailto:cloudcver@163.com"
+            class="social fas fa-envelope flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://github.com/harryjun"
+            class="social fab fa-github flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="/plan/"
+            class="social fas fa-paper-plane flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://www.zhihu.com/people/jun-jun-83-11-91/activities"
+            class="social fab fa-zhihu flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+        
+          <a href="https://blog.csdn.net/CLOUD_J"
+            class="social fas fa-rss flat-btn"
+            target="_blank"
+            rel="external nofollow noopener noreferrer">
+          </a>
+        
+      
+    </div>
+  
+  <br>
+  <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+
+  <div>
+    
+      总访问量为
+      <span id="busuanzi_value_site_pv"><i class="fas fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+      次
+    
+
+
+
+    <!--<i class="fas fa-chart-area"></i>-->
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script>
+        var now = new Date();
+        function createtime() {
+            var grt= new Date("01/01/2019 01:06:02");
+            now.setTime(now.getTime()+250);
+            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+            document.getElementById("timeDate").innerHTML = "，小破站已苟且存活了 "+dnum+" 天 ";
+            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+        }
+    setInterval("createtime()",250);
+    </script>
+  </div>
+  </br>
+  <div><p>Copyright ©2019-2020 CloudCver版权所有ICP<a href="www.beian.miit.gov.cn">京ICP备20008496号-1</a></p>
+</div>
+
+
+</footer>
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)' target="_blank" rel="noopener"></a>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+
+  <script>
+    var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+    var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+    var ALGOLIA_API_KEY = "";
+    var ALGOLIA_APP_ID = "";
+    var ALGOLIA_INDEX_NAME = "";
+    var AZURE_SERVICE_NAME = "";
+    var AZURE_INDEX_NAME = "";
+    var AZURE_QUERY_KEY = "";
+    var BAIDU_API_ID = "";
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/"||"/";
+    if(!ROOT.endsWith('/'))ROOT += '/';
+  </script>
+
+<script src="//instant.page/1.2.2" type="module" integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+
+
+  <script async src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      const $reveal = $('.reveal');
+      if ($reveal.length === 0) return;
+      const sr = ScrollReveal({ distance: 0 });
+      sr.reveal('.reveal');
+    });
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+    
+      <script src="https://cdn.jsdelivr.net/gh/xaoxuu/volantis@1.0.6/js/volantis.min.js"></script>
+    
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var notify = 'true' == true;
+  var verify = 'true' == true;
+  var valine = new Valine();
+  valine.init({
+    el: '#valine_container',
+    notify: notify,
+    verify: verify,
+    guest_info: guest_info,
+    
+    appId: "TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz",
+    appKey: "qfw2KwYOyVL3X6U2ET9vnyIa",
+    placeholder: "怎么说？老哥~",
+    pageSize:'10',
+    avatar:'mp',
+    lang:'zh-cn',
+    highlight:'true'
+  })
+  </script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/app.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-material-x@19.9/js/search.js"></script>
+
+
+
+
+<!-- 复制 -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  let COPY_SUCCESS = "复制成功";
+  let COPY_FAILURE = "复制失败";
+  /*页面载入完成后，创建复制按钮*/
+  !function (e, t, a) {
+    /* code */
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '  <i class="fa fa-copy"></i><span>复制</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+
+      clipboard.on('success', function(e) {
+        //您可以加入成功提示
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        success_prompt(COPY_SUCCESS);
+        e.clearSelection();
+      });
+      clipboard.on('error', function(e) {
+        //您可以加入失败提示
+        console.error('Action:', e.action);
+        console.error('Trigger:', e.trigger);
+        fail_prompt(COPY_FAILURE);
+      });
+    }
+    initCopyCode();
+
+  }(window, document);
+
+  /**
+   * 弹出式提示框，默认1.5秒自动消失
+   * @param message 提示信息
+   * @param style 提示样式，有alert-success、alert-danger、alert-warning、alert-info
+   * @param time 消失时间
+   */
+  var prompt = function (message, style, time)
+  {
+      style = (style === undefined) ? 'alert-success' : style;
+      time = (time === undefined) ? 1500 : time*1000;
+      $('<div>')
+          .appendTo('body')
+          .addClass('alert ' + style)
+          .html(message)
+          .show()
+          .delay(time)
+          .fadeOut();
+  };
+
+  // 成功提示
+  var success_prompt = function(message, time)
+  {
+      prompt(message, 'alert-success', time);
+  };
+
+  // 失败提示
+  var fail_prompt = function(message, time)
+  {
+      prompt(message, 'alert-danger', time);
+  };
+
+  // 提醒
+  var warning_prompt = function(message, time)
+  {
+      prompt(message, 'alert-warning', time);
+  };
+
+  // 信息提示
+  var info_prompt = function(message, time)
+  {
+      prompt(message, 'alert-info', time);
+  };
+
+</script>
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  let LAZY_LOAD_IMAGE = "";
+  $(".article-entry").find("fancybox").find("img").each(function () {
+      var element = document.createElement("a");
+      $(element).attr("data-fancybox", "gallery");
+      $(element).attr("href", $(this).attr("src"));
+      /* 图片采用懒加载处理时,
+       * 一般图片标签内会有个属性名来存放图片的真实地址，比如 data-original,
+       * 那么此处将原本的属性名src替换为对应属性名data-original,
+       * 修改如下
+       */
+       if (LAZY_LOAD_IMAGE) {
+         $(element).attr("href", $(this).attr("data-original"));
+       }
+      $(this).wrap(element);
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
