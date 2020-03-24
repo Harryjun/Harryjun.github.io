@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>insightface测试recognition验证集效果全过程 - CloudCver</title>
+
+
+    <meta name="description" content="insightface测试recognition验证集效果全过程">
+<meta name="keywords" content="insightface">
+<meta property="og:type" content="article">
+<meta property="og:title" content="insightface测试recognition验证集效果全过程">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B&#x2F;#2019&#x2F;08&#x2F;08&#x2F;insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B&#x2F;index.html">
+<meta property="og:site_name" content="CloudCver">
+<meta property="og:description" content="insightface测试recognition验证集效果全过程">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-11-22T14:51:30.468Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="insightface测试recognition验证集效果全过程" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/fight.png" >
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.4.1/css/all.min.css">
+<!-- <link rel="stylesheet" href="/css/Ubuntu:400,600%7CSource+Code+Pro.css"> -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?5ac05e6533e626ce0ede656787f8a015";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+
+
+    <!-- night mode -->
+    <script type="text/javascript" src="/js/night.js"></script>
+    <canvas id="universe"></canvas>
+    <script type="text/javascript" src="/js/universe.js"></script>
+    <!-- night mode -->
+
+
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="insightface测试recognition验证集效果全过程" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/project">Project</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/plan">Plan</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+                <a class="navbar-item"
+                href="/friends">Links</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                <a class="navbar-item" target="_blank" rel="noopener" title="Pan" href="https://pan.bitcrush.top">
+                        
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    
+                </a>
+
+                <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
+                    <i class="fas fa-moon" id="night-icon"></i>
+                </a>
+                <a class="navbar-item" target="_blank" rel="noopener" title="Valine-Admin" href="https://admin.bitcrush.top/"><i class="fas fa-cog"></i></a>
+
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my GitHub" href="https://github.com/Aimerence">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+
+
+
+
+
+
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- PIN -->
+                
+
+
+                <!-- <time class="level-item has-text-grey" datetime="2019-08-08T03:41:15.000Z">2019-08-08</time>
+                 -->
+
+                 <time class="level-item has-text-grey" datetime="2019-08-08T03:41:15.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-08-08</time>
+                 
+                 <!-- 
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-11-22T14:51:30.468Z"><i class="far fa-calendar-check">&nbsp;</i>2019-11-22</time>
+                     -->
+                    <time class="level-item has-text-grey" datetime="2019-11-22T14:51:30.468Z"><i class="far fa-calendar-check">&nbsp;</i>2019-11-22</time>    
+
+                
+                <div class="level-item">
+                    <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">人脸识别</a>
+                </div>
+                
+
+                
+
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 minutes read (About 1767 words)
+                </span>
+                
+
+                
+
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                insightface测试recognition验证集效果全过程
+            
+        </h1>
+        <div class="content">
+            <p>insightface测试recognition验证集效果全过程<br><a id="more"></a></p>
+<blockquote>
+<p>本过程在insightface代码下作实验，源代码参考<br><a href="https://github.com/deepinsight/insightface#pretrained-models">https://github.com/deepinsight/insightface#pretrained-models</a><br>实验测试recognition下的eval验证</p>
+</blockquote>
+<h2 id="1数据准备"><a href="#1数据准备" class="headerlink" title="1数据准备"></a>1数据准备</h2><p>数据准备参考博文：insightface数据制作全过程记录<br><a href="https://blog.csdn.net/CLOUD_J/article/details/98769515">https://blog.csdn.net/CLOUD_J/article/details/98769515</a></p>
+<h2 id="2eval验证"><a href="#2eval验证" class="headerlink" title="2eval验证"></a>2eval验证</h2><p>在/recognition/eval下verification.py文件<br><img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/2019/20190808181303477.png" alt="在这里插入图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 verification.py --data-dir ../../datasets/lfw --model ../../models/model-r50-am-lfw/model,0 --nfolds 10</span><br></pre></td></tr></table></figure>
+<p>运行时出现了点问题，主要在于我们之前准备数据集时没有打乱数据导致正样本挤在一起，会使这一部分数据负样本为0，我们计算正确率会用负样本识别正确比上总负样样本数，分母出现0，所以做了更改calculate_val_far函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_val_far</span><span class="params">(threshold, dist, actual_issame)</span>:</span></span><br><span class="line">    predict_issame = np.less(dist, threshold)</span><br><span class="line">    true_accept = np.sum(np.logical_and(predict_issame, actual_issame))</span><br><span class="line">    false_accept = np.sum(np.logical_and(predict_issame, np.logical_not(actual_issame)))</span><br><span class="line">    n_same = np.sum(actual_issame)</span><br><span class="line">    n_diff = np.sum(np.logical_not(actual_issame))</span><br><span class="line">    <span class="comment">#print(true_accept, false_accept)</span></span><br><span class="line">    <span class="comment">#print(n_same, n_diff)</span></span><br><span class="line">    <span class="keyword">if</span> n_same == <span class="number">0</span>:</span><br><span class="line">        val = <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        val = float(true_accept) / float(n_same)</span><br><span class="line">    <span class="keyword">if</span> n_diff == <span class="number">0</span>:</span><br><span class="line">        far = <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        far = float(false_accept) / float(n_diff)</span><br><span class="line">    <span class="keyword">return</span> val, far</span><br></pre></td></tr></table></figure>
+<h2 id="3代码解析"><a href="#3代码解析" class="headerlink" title="3代码解析"></a>3代码解析</h2><h3 id="3-1主函数"><a href="#3-1主函数" class="headerlink" title="3.1主函数"></a>3.1主函数</h3><p>主函数首先做了模型载入，数据载入bin文件，然后对载入的模型分别做测试，检测各个模型数据效果。<br>核心在这里，遍历ver_list不同数据集，遍历nets不同模型<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> args.mode==<span class="number">0</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(ver_list)):</span><br><span class="line">      results = []</span><br><span class="line">      <span class="keyword">for</span> model <span class="keyword">in</span> nets:</span><br><span class="line">        acc1, std1, acc2, std2, xnorm, embeddings_list = test(ver_list[i], model, args.batch_size, args.nfolds)</span><br><span class="line">        print(<span class="string">'[%s]XNorm: %f'</span> % (ver_name_list[i], xnorm))</span><br><span class="line">        print(<span class="string">'[%s]Accuracy: %1.5f+-%1.5f'</span> % (ver_name_list[i], acc1, std1))</span><br><span class="line">        print(<span class="string">'[%s]Accuracy-Flip: %1.5f+-%1.5f'</span> % (ver_name_list[i], acc2, std2))</span><br><span class="line">        results.append(acc2)</span><br><span class="line">      print(<span class="string">'Max of [%s] is %1.5f'</span> % (ver_name_list[i], np.max(results)))</span><br><span class="line">  <span class="keyword">elif</span> args.mode==<span class="number">1</span>:</span><br><span class="line">    model = nets[<span class="number">0</span>]</span><br><span class="line">    test_badcase(ver_list[<span class="number">0</span>], model, args.batch_size, args.target)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    model = nets[<span class="number">0</span>]</span><br><span class="line">    dumpR(ver_list[<span class="number">0</span>], model, args.batch_size, args.target)</span><br></pre></td></tr></table></figure><br>然后再提示几点，<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--model<span class="string">', default='</span>../../models/model-r50-am-lfw/model,<span class="number">50</span></span><br></pre></td></tr></table></figure><br>该参数代表模型路径的名字加上训练的epoch，../../models/model-r50-am-lfw是路径，然后model是名字；<br>后面的50是epoch就是你可能在训练时会把多个epoch的结果输出，你可能验证不同epoch当时模型参数的效果。<br><img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/2019/20190808182339708.png" alt="在这里插入图片描述"></p>
+<h3 id="3-2-test函数"><a href="#3-2-test函数" class="headerlink" title="3.2 test函数"></a>3.2 test函数</h3><p>测试函数<br>首先前向传播得到输出特征，然后计算它的范数，之后计算他的准确率</p>
+<p>前向传播主要在这！这里对你的多个数据集遍历，当然你要是只有一个数据集就一次楼。data数据集，ba和bb随便起的名字，然后就这样不断取batchsize进行前向传播model.forward(db, is_train=False)然后将输出存到embeddings这个东西里，最后将多个数据集都存到embeddings_list<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range( len(data_list) ):</span><br><span class="line">  data = data_list[i]</span><br><span class="line">  embeddings = <span class="literal">None</span></span><br><span class="line">  ba = <span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> ba&lt;data.shape[<span class="number">0</span>]:</span><br><span class="line">    bb = min(ba+batch_size, data.shape[<span class="number">0</span>])</span><br><span class="line">    count = bb-ba</span><br><span class="line">    _data = nd.slice_axis(data, axis=<span class="number">0</span>, begin=bb-batch_size, end=bb)</span><br><span class="line">    <span class="comment">#print(_data.shape, _label.shape)</span></span><br><span class="line">    time0 = datetime.datetime.now()</span><br><span class="line">    <span class="keyword">if</span> data_extra <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">      db = mx.io.DataBatch(data=(_data,), label=(_label,))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      db = mx.io.DataBatch(data=(_data,_data_extra), label=(_label,))</span><br><span class="line">    model.forward(db, is_train=<span class="literal">False</span>)</span><br><span class="line">    net_out = model.get_outputs()<span class="comment">#获取输出</span></span><br><span class="line">    _embeddings = net_out[<span class="number">0</span>].asnumpy()</span><br><span class="line">    time_now = datetime.datetime.now()</span><br><span class="line">    diff = time_now - time0</span><br><span class="line">    time_consumed+=diff.total_seconds()</span><br><span class="line">    <span class="comment">#print(_embeddings.shape)</span></span><br><span class="line">    <span class="keyword">if</span> embeddings <span class="keyword">is</span> <span class="literal">None</span>:<span class="comment">#第一次的话先创建一个列表</span></span><br><span class="line">      embeddings = np.zeros( (data.shape[<span class="number">0</span>], _embeddings.shape[<span class="number">1</span>]) )</span><br><span class="line">    embeddings[ba:bb,:] = _embeddings[(batch_size-count):,:]<span class="comment">#补进去</span></span><br><span class="line">    ba = bb</span><br><span class="line">  embeddings_list.append(embeddings)</span><br></pre></td></tr></table></figure></p>
+<p>第二步，做了个范数计算<br>计算一下特征的总平均范数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">_xnorm = <span class="number">0.0</span></span><br><span class="line">_xnorm_cnt = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> embed <span class="keyword">in</span> embeddings_list:</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(embed.shape[<span class="number">0</span>]):</span><br><span class="line">    _em = embed[i]</span><br><span class="line">    _norm=np.linalg.norm(_em)</span><br><span class="line">    <span class="comment">#print(_em.shape, _norm)</span></span><br><span class="line">    _xnorm+=_norm</span><br><span class="line">    _xnorm_cnt+=<span class="number">1</span></span><br><span class="line">_xnorm /= _xnorm_cnt</span><br></pre></td></tr></table></figure><br>第三步 计算准确率<br>这里传入特征列表和标签列表还有nrof_folds，啥意思，这个是做K折检测的，分K份检测。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_, _, accuracy, val, val_std, far = evaluate(embeddings, issame_list, nrof_folds=nfolds)</span><br><span class="line">acc2, std2 = np.mean(accuracy), np.std(accuracy)</span><br></pre></td></tr></table></figure><br>这里有一点注意，文中有个  embeddings = embeddings_list[0] + embeddings_list[1]我理解把两个数据集组合验证。</p>
+<h3 id="3-3evaluate评估函数"><a href="#3-3evaluate评估函数" class="headerlink" title="3.3evaluate评估函数"></a>3.3evaluate评估函数</h3><p>首先先将数据集分了两块，就是原来是这样<br>A1 A2 A3  A4   B1  B2<br>这样A1和A2对比同类1<br>改成这样<br>A1 A3 B1奇数放一起<br>A2 A4 B2偶数放一起</p>
+<blockquote>
+<p>python中a::b代表从a开始以b单位增长</p>
+</blockquote>
+<p>这里还搞了个thresholds作为阈值，会在评估函数里遍历寻找最好的阈值。<br>完事做了两个评估<br>calculate_roc<br>calculate_val</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate</span><span class="params">(embeddings, actual_issame, nrof_folds=<span class="number">10</span>, pca = <span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="comment"># Calculate evaluation metrics</span></span><br><span class="line">    thresholds = np.arange(<span class="number">0</span>, <span class="number">4</span>, <span class="number">0.01</span>)</span><br><span class="line">    embeddings1 = embeddings[<span class="number">0</span>::<span class="number">2</span>]</span><br><span class="line">    embeddings2 = embeddings[<span class="number">1</span>::<span class="number">2</span>]</span><br><span class="line">    tpr, fpr, accuracy = calculate_roc(thresholds, embeddings1, embeddings2,</span><br><span class="line">        np.asarray(actual_issame), nrof_folds=nrof_folds, pca = pca)</span><br><span class="line">    thresholds = np.arange(<span class="number">0</span>, <span class="number">4</span>, <span class="number">0.001</span>)</span><br><span class="line">    val, val_std, far = calculate_val(thresholds, embeddings1, embeddings2,</span><br><span class="line">        np.asarray(actual_issame), <span class="number">1e-3</span>, nrof_folds=nrof_folds)</span><br><span class="line">    <span class="keyword">return</span> tpr, fpr, accuracy, val, val_std, far</span><br></pre></td></tr></table></figure>
+<h2 id="3-4-calculate-roc"><a href="#3-4-calculate-roc" class="headerlink" title="3.4 calculate_roc"></a>3.4 calculate_roc</h2><p>第一步 先生命一个K折数据类<br>1、这里assert是断言的意思，就是说后面那句话不对就直接报错；<br>2、LFold在前面有声明类，就是调用kfold这个包<br>3、<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span>(embeddings1.shape[<span class="number">0</span>] == embeddings2.shape[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">assert</span>(embeddings1.shape[<span class="number">1</span>] == embeddings2.shape[<span class="number">1</span>])</span><br><span class="line">    nrof_pairs = min(len(actual_issame), embeddings1.shape[<span class="number">0</span>])</span><br><span class="line">    nrof_thresholds = len(thresholds)</span><br><span class="line">    k_fold = LFold(n_splits=nrof_folds, shuffle=<span class="literal">False</span>)</span><br><span class="line">    </span><br><span class="line">    tprs = np.zeros((nrof_folds,nrof_thresholds))</span><br><span class="line">    fprs = np.zeros((nrof_folds,nrof_thresholds))</span><br><span class="line">    accuracy = np.zeros((nrof_folds))</span><br><span class="line">    indices = np.arange(nrof_pairs)</span><br></pre></td></tr></table></figure></p>
+<p>第二步，求了下范数距离欧式距离</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> pca==<span class="number">0</span>:</span><br><span class="line">  diff = np.subtract(embeddings1, embeddings2)<span class="comment">#做减法</span></span><br><span class="line">  dist = np.sum(np.square(diff),<span class="number">1</span>)<span class="comment">#求平方和</span></span><br></pre></td></tr></table></figure>
+<p>第三步 遍历thresholds寻找最好的阈值。<br>k_fold.split(indices)是分数据函数，用训练集取找好的阈值，用测试机打分。tprs暂时没用，关注accuracy准确率<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> fold_idx, (train_set, test_set) <span class="keyword">in</span> enumerate(k_fold.split(indices)):</span><br><span class="line">        <span class="comment">#print('train_set', train_set)</span></span><br><span class="line">        <span class="comment">#print('test_set', test_set)</span></span><br><span class="line">        <span class="keyword">if</span> pca&gt;<span class="number">0</span>:</span><br><span class="line">          print(<span class="string">'doing pca on'</span>, fold_idx)</span><br><span class="line">          embed1_train = embeddings1[train_set]</span><br><span class="line">          embed2_train = embeddings2[train_set]</span><br><span class="line">          _embed_train = np.concatenate( (embed1_train, embed2_train), axis=<span class="number">0</span> )</span><br><span class="line">          <span class="comment">#print(_embed_train.shape)</span></span><br><span class="line">          pca_model = PCA(n_components=pca)</span><br><span class="line">          pca_model.fit(_embed_train)</span><br><span class="line">          embed1 = pca_model.transform(embeddings1)</span><br><span class="line">          embed2 = pca_model.transform(embeddings2)</span><br><span class="line">          embed1 = sklearn.preprocessing.normalize(embed1)</span><br><span class="line">          embed2 = sklearn.preprocessing.normalize(embed2)</span><br><span class="line">          <span class="comment">#print(embed1.shape, embed2.shape)</span></span><br><span class="line">          diff = np.subtract(embed1, embed2)</span><br><span class="line">          dist = np.sum(np.square(diff),<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Find the best threshold for the fold</span></span><br><span class="line">        acc_train = np.zeros((nrof_thresholds))</span><br><span class="line">        <span class="keyword">for</span> threshold_idx, threshold <span class="keyword">in</span> enumerate(thresholds):<span class="comment">#遍历找最好阈值</span></span><br><span class="line">            _, _, acc_train[threshold_idx] = calculate_accuracy(threshold, dist[train_set], actual_issame[train_set])</span><br><span class="line">        best_threshold_index = np.argmax(acc_train)</span><br><span class="line">        <span class="comment">#print('threshold', thresholds[best_threshold_index])</span></span><br><span class="line">        <span class="keyword">for</span> threshold_idx, threshold <span class="keyword">in</span> enumerate(thresholds):</span><br><span class="line">            tprs[fold_idx,threshold_idx], fprs[fold_idx,threshold_idx], _ = calculate_accuracy(threshold, dist[test_set], actual_issame[test_set])</span><br><span class="line">        _, _, accuracy[fold_idx] = calculate_accuracy(thresholds[best_threshold_index], dist[test_set], actual_issame[test_set])</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-5-准确率计算"><a href="#3-5-准确率计算" class="headerlink" title="3.5 准确率计算"></a>3.5 准确率计算</h3><p>核心函数在这，我们的改动也在这里。</p>
+<p>说几个注意</p>
+<blockquote>
+<p>np.less求最小值，求每个值与阈值相比，如果比阈值小则真。<br>np.logical_and代表逻辑与的意思，就是两个numpy进行与，把预测和真实进行与一下得到tp，就是预测正确的正样本truepositive。<br>np.logical_not(actual_issame)代表取反，给真是样本取反，<br>fp = np.sum(np.logical_and(predict_issame, np.logical_not(actual_issame)))这样代表预测和真实样本取反的与就是错误预测的正样本。<br>tn，fn一样。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_accuracy</span><span class="params">(threshold, dist, actual_issame)</span>:</span></span><br><span class="line">    predict_issame = np.less(dist, threshold)</span><br><span class="line">    tp = np.sum(np.logical_and(predict_issame, actual_issame))</span><br><span class="line">    fp = np.sum(np.logical_and(predict_issame, np.logical_not(actual_issame)))</span><br><span class="line">    tn = np.sum(np.logical_and(np.logical_not(predict_issame), np.logical_not(actual_issame)))</span><br><span class="line">    fn = np.sum(np.logical_and(np.logical_not(predict_issame), actual_issame))</span><br><span class="line">  </span><br><span class="line">    tpr = <span class="number">0</span> <span class="keyword">if</span> (tp+fn==<span class="number">0</span>) <span class="keyword">else</span> float(tp) / float(tp+fn)</span><br><span class="line">    fpr = <span class="number">0</span> <span class="keyword">if</span> (fp+tn==<span class="number">0</span>) <span class="keyword">else</span> float(fp) / float(fp+tn)</span><br><span class="line">    acc = float(tp+tn)/dist.size</span><br><span class="line">    <span class="keyword">return</span> tpr, fpr, acc</span><br></pre></td></tr></table></figure>
+<p>最后结果如下<br>Accuracy没有，我们只有一个数据集，这里我理解的是Acuuracy是单个数据集准确率，Accuracy-Flip和其他数据集混在一起，这里就看0.99675即可。<br><img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/2019/2019080914404384.png" alt="在这里插入图片描述"></p>
+<p>前面阈值打印出来是1.39</p>
+<p> <img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/2019/20190809144230616.png" alt="在这里插入图片描述"></p>
+<h2 id="4结果"><a href="#4结果" class="headerlink" title="4结果"></a>4结果</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>LFW</th>
+<th>CFP-FP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>renet-r50</td>
+<td>99.63%(99.80%)</td>
+<td>92.66%(92.74%)</td>
+</tr>
+<tr>
+<td>renet-r100</td>
+<td>99.81%(99.77%)</td>
+<td>95.94%(98.27%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>注意：括号内为github作者的结果，括号前为我的结果。结果取batchsize=16</strong></p>
+<p>目前对于差别有些疑问，还等待发现，如有大神能指点，还请指导。</p>
+<h2 id="5问题"><a href="#5问题" class="headerlink" title="5问题"></a>5问题</h2><p><strong>1、内存问题</strong><br><img src="https://blogpic-1257632417.cos.ap-chengdu.myqcloud.com/BlogGit/2019/20190813153114557.png" alt="在这里插入图片描述"><br>考虑减小batchsize<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 verification.py --data-dir ../../datasets/lfw2/ --model ../../models/model-r100-ii/model,<span class="number">0</span> --nfolds <span class="number">10</span> --batch-size <span class="number">16</span></span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        
+            <ul class="post-copyright">
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B/#2019/08/08/insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B/">insightface测试recognition验证集效果全过程</a></li>
+                <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B/#2019/08/08/insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B/">https://www.cloudcver.com/posts/insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B/#2019/08/08/insightface%E6%B5%8B%E8%AF%95recognition%E9%AA%8C%E8%AF%81%E9%9B%86%E6%95%88%E6%9E%9C%E5%85%A8%E8%BF%87%E7%A8%8B/</a></li>
+                <li><strong>发布时间：</strong>2019-08-08</li>
+                <li><strong>最后修改：</strong>2019-11-22</li>
+                <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+                </li>
+            </ul>
+            
+
+        
+
+            <hr style="height:1px;margin:1rem 0"/>
+
+
+
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+
+                    <a class="has-link-grey -link" href="/tags/insightface/" rel="tag">insightface</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C/#2019/08/09/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8B%E4%B8%80%E4%BA%9B%E6%93%8D%E4%BD%9C/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">linux服务器下一些操作</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/insightface%E6%95%B0%E6%8D%AE%E5%88%B6%E4%BD%9C%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/#2019/08/07/insightface%E6%95%B0%E6%8D%AE%E5%88%B6%E4%BD%9C%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/">
+                <span class="level-item">insightface数据制作全过程记录</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+  
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        avatar: 'mp',
+        notify: true,
+        verify: true,
+        app_id: 'TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz',
+        app_key: 'qfw2KwYOyVL3X6U2ET9vnyIa',
+        placeholder: '给我的文章加点评论吧~~'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right ">
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Debug/">
+            <span class="level-start">
+                <span class="level-item">Debug</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LINUX/">
+            <span class="level-start">
+                <span class="level-item">LINUX</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TensorFlow/">
+            <span class="level-start">
+                <span class="level-item">TensorFlow</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
+            <span class="level-start">
+                <span class="level-item">网络爬虫</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%85%B6%E4%BB%96/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E4%BD%9C/">
+            <span class="level-start">
+                <span class="level-item">工作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+            <span class="level-start">
+                <span class="level-item">计算机视觉</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">23</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
+            <span class="level-start">
+                <span class="level-item">GAN</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+            <span class="level-start">
+                <span class="level-item">人脸识别</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">图像分类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">
+            <span class="level-start">
+                <span class="level-item">图像生成</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+            <span class="level-start">
+                <span class="level-item">目标检测</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+            <span class="level-start">
+                <span class="level-item">语义分割</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/#2020/03/06/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo部署博客到阿里云服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T09:45:39.000Z">2020-03-06</time></div>
+                    <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/#2020/03/06/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo部署博客到阿里云服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tensorflow自建数据集dataset使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-25T09:45:39.000Z">2020-02-25</time></div>
+                    <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tensorflow自建数据集dataset使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/#2020/02/20/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="GoogleClab使用注意事项  !cd指令失效">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/#2020/02/20/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">GoogleClab使用注意事项  !cd指令失效</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/LINUX/">LINUX</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/#2020/02/20/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker基础知识学习（来自阿里云）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/#2020/02/20/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker基础知识学习（来自阿里云）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/pytorch%E5%AE%89%E8%A3%85linux/#2020/02/18/pytorch%E5%AE%89%E8%A3%85linux/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="pytorch安装linux下">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-18T02:41:30.000Z">2020-02-18</time></div>
+                    <a href="/posts/pytorch%E5%AE%89%E8%A3%85linux/#2020/02/18/pytorch%E5%AE%89%E8%A3%85linux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch安装linux下</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AlexNet/">
+                        <span class="tag">AlexNet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CVPR/">
+                        <span class="tag">CVPR</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/FCN/">
+                        <span class="tag">FCN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GPU/">
+                        <span class="tag">GPU</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google-Drive/">
+                        <span class="tag">Google Drive</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GoogleClab/">
+                        <span class="tag">GoogleClab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MSGAN/">
+                        <span class="tag">MSGAN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SPPnet/">
+                        <span class="tag">SPPnet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VGG/">
+                        <span class="tag">VGG</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/YouTube-8M/">
+                        <span class="tag">YouTube-8M</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/argparse/">
+                        <span class="tag">argparse</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bazel/">
+                        <span class="tag">bazel</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cmake/">
+                        <span class="tag">cmake</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/csv/">
+                        <span class="tag">csv</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/faiss/">
+                        <span class="tag">faiss</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/glib/">
+                        <span class="tag">glib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/insightface/">
+                        <span class="tag">insightface</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/keras/">
+                        <span class="tag">keras</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/labelme/">
+                        <span class="tag">labelme</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libffi/">
+                        <span class="tag">libffi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mediapipe/">
+                        <span class="tag">mediapipe</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/os/">
+                        <span class="tag">os</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pip/">
+                        <span class="tag">pip</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/screen/">
+                        <span class="tag">screen</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tensorflow/">
+                        <span class="tag">tensorflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vim/">
+                        <span class="tag">vim</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webdriver/">
+                        <span class="tag">webdriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wgan/">
+                        <span class="tag">wgan</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/xml/">
+                        <span class="tag">xml</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+                        <span class="tag">人脸识别</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%85%89%E8%B0%B1/">
+                        <span class="tag">多光谱</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%84%9F%E5%8F%97%E9%87%8E/">
+                        <span class="tag">感受野</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F/">
+                        <span class="tag">清华镜像</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%88%AC%E8%99%AB/">
+                        <span class="tag">爬虫</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%8E%89%E6%B8%8A%E6%BD%AD/">
+                        <span class="tag">玉渊潭</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%BD%AF%E8%BF%9E%E6%8E%A5/">
+                        <span class="tag">软连接</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%80%89%E6%8B%A9%E6%80%A7%E6%90%9C%E7%B4%A2/">
+                        <span class="tag">选择性搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo  has-mb-6" href="/">
+
+
+
+                
+
+                <p class="is-size-7">
+                    
+                &copy; 2020 CloudCver&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">苏ICP备20007028号-1</a>&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                        <a href="https://www.upyun.com/"   target="_blank"  style="border:0">
+                            <img src="/images/ypy.png" alt="又拍云提供服务"   style="width: 70px; display: inline; vertical-align: middle;">
+                          </a>
+                         <br>
+                          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                          <script>
+                              var now = new Date(); 
+                              function createtime() { 
+                                  var grt= new Date("1/2/2019 08:00:00");// 此处修改你的建站时间或者网站上线时间 
+                                  now.setTime(now.getTime()+250); 
+                                  days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                                  hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                                  if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                                  mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                                  seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                                  snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                                  document.getElementById("timeDate").innerHTML = "This site has been running safely for "+dnum+" 天 "; 
+                                  document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒 "; 
+                              } 
+                              setInterval("createtime()",250);
+                          </script>
+
+
+                        
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                            <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.cloudcver.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+
+
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

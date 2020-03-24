@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Tensorflow学习总结（二）用Tensorflow实现一个全卷积神经网络 - CloudCver</title>
+
+
+    <meta name="description" content="学习完CS231N一系列课程后，我们都书写了自己的深层卷积网络，代码量不多。这里我们使用google的tensorflow框架去写一个卷积神经网络，并去把卷积网路中的优化一步一步复现出来。">
+<meta name="keywords" content="CV, Python Cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow学习总结（二）用Tensorflow实现一个全卷积神经网络">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC&#x2F;#2019&#x2F;03&#x2F;17&#x2F;Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC&#x2F;index.html">
+<meta property="og:site_name" content="CloudCver">
+<meta property="og:description" content="学习完CS231N一系列课程后，我们都书写了自己的深层卷积网络，代码量不多。这里我们使用google的tensorflow框架去写一个卷积神经网络，并去把卷积网路中的优化一步一步复现出来。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-03-18T15:40:40.149Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="Tensorflow学习总结（二）用Tensorflow实现一个全卷积神经网络" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/fight.png" >
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.4.1/css/all.min.css">
+<!-- <link rel="stylesheet" href="/css/Ubuntu:400,600%7CSource+Code+Pro.css"> -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?5ac05e6533e626ce0ede656787f8a015";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+
+
+    <!-- night mode -->
+    <script type="text/javascript" src="/js/night.js"></script>
+    <canvas id="universe"></canvas>
+    <script type="text/javascript" src="/js/universe.js"></script>
+    <!-- night mode -->
+
+
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Tensorflow学习总结（二）用Tensorflow实现一个全卷积神经网络" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/project">Project</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/plan">Plan</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+                <a class="navbar-item"
+                href="/friends">Links</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                <a class="navbar-item" target="_blank" rel="noopener" title="Pan" href="https://pan.bitcrush.top">
+                        
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    
+                </a>
+
+                <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
+                    <i class="fas fa-moon" id="night-icon"></i>
+                </a>
+                <a class="navbar-item" target="_blank" rel="noopener" title="Valine-Admin" href="https://admin.bitcrush.top/"><i class="fas fa-cog"></i></a>
+
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my GitHub" href="https://github.com/Aimerence">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+
+
+
+
+
+
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- PIN -->
+                
+
+
+                <!-- <time class="level-item has-text-grey" datetime="2019-03-17T08:22:21.000Z">2019-03-17</time>
+                 -->
+
+                 <time class="level-item has-text-grey" datetime="2019-03-17T08:22:21.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-03-17</time>
+                 
+                 <!-- 
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-03-18T15:40:40.149Z"><i class="far fa-calendar-check">&nbsp;</i>2019-03-18</time>
+                     -->
+                    <time class="level-item has-text-grey" datetime="2019-03-18T15:40:40.149Z"><i class="far fa-calendar-check">&nbsp;</i>2019-03-18</time>    
+
+                
+                <div class="level-item">
+                    <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/TensorFlow/">TensorFlow</a>
+                </div>
+                
+
+                
+
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16 minutes read (About 2454 words)
+                </span>
+                
+
+                
+
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Tensorflow学习总结（二）用Tensorflow实现一个全卷积神经网络
+            
+        </h1>
+        <div class="content">
+            <p>学习完CS231N一系列课程后，我们都书写了自己的深层卷积网络，代码量不多。这里我们使用google的tensorflow框架去写一个卷积神经网络，并去把卷积网路中的优化一步一步复现出来。</p>
+<a id="more"></a>
+<p>搭建一个卷积神经网络，需要包括以下几个部分：</p>
+<ol>
+<li><strong>数据输入</strong></li>
+<li><strong>前向传播</strong></li>
+<li><strong>损失计算+正则化优化</strong></li>
+<li><strong>网络优化</strong></li>
+<li><strong>测试</strong></li>
+</ol>
+<h2 id="一、数据输入"><a href="#一、数据输入" class="headerlink" title="一、数据输入"></a>一、数据输入</h2><p>数据输入，定义变量我们定义了两个输入数据的占位，方便之后运行时传入即可。然后定义了隐含层的参数输出层的参数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#输入数据</span></span><br><span class="line">   X = tf.placeholder(tf.float32,[<span class="literal">None</span>,INPUT_NODE],name = <span class="string">"x-input"</span>)</span><br><span class="line">   y_ = tf.placeholder(tf.float32,[<span class="literal">None</span>,OUTPUT_NODE],name = <span class="string">"y-output"</span>)</span><br><span class="line">   <span class="comment">#隐藏层参数</span></span><br><span class="line">   weight1 = tf.Variable(tf.truncated_normal([INPUT_NODE,LAYER1_NODE],stddev = <span class="number">0.1</span>))</span><br><span class="line">   b1 = tf.Variable(tf.constant(<span class="number">0.1</span>,shape = [LAYER1_NODE]))</span><br><span class="line">   <span class="comment">#输出层参数</span></span><br><span class="line">   weight2 = tf.Variable(tf.truncated_normal([LAYER1_NODE,OUTPUT_NODE],stddev = <span class="number">0.1</span>))</span><br><span class="line">   b2 = tf.Variable(tf.constant(<span class="number">0.1</span>,shape = [OUTPUT_NODE]))</span><br><span class="line">   <span class="comment">#定义step</span></span><br><span class="line">   global_step = tf.Variable(<span class="number">0</span>,trainable=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、前向传播"><a href="#二、前向传播" class="headerlink" title="二、前向传播"></a>二、前向传播</h2><p>前向传播比价简单<br>1、矩阵相乘matmul<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = tf.matmul(X,weight1)</span><br></pre></td></tr></table></figure><br>2、激活函数<br>激活函数有很多种类<br>RELU激活函数tf.nn.relu()<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layer1 = tf.nn.relu(tf.matmul(X,weight1) + b1)</span><br></pre></td></tr></table></figure><br>3、一个两层的神经网络<br>代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#前向传播</span></span><br><span class="line">   <span class="comment">#计算得分</span></span><br><span class="line">   layer1 = tf.nn.relu(tf.matmul(X,weight1) + b1)</span><br><span class="line">   y = tf.matmul(layer1,weight2) + b2</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、损失计算-正则化优化"><a href="#三、损失计算-正则化优化" class="headerlink" title="三、损失计算+正则化优化"></a>三、损失计算+正则化优化</h2><p>经过前向传播我们得到了传播后的分数，之后我们需要计算它的损失，一部分是得分的损失，一部分是权重的正则损失。</p>
+<h3 id="softmax回归-交叉熵损失"><a href="#softmax回归-交叉熵损失" class="headerlink" title="softmax回归+交叉熵损失"></a>softmax回归+交叉熵损失</h3><p>在计算损失之前，我们先对结果进行分类回归，一般对于多分类问题，我们采用softmax分类器进行回归，softmax可以将分数转变为概率的形式，就可以反应每个数据归属于每个类别的概率。然后我们采用交叉熵（cross_entropy）来计算损失。<br>tensorflow中提供了tf.nn.sparse_softmax_cross_entropy_with_logits函数来计算损失，其输入有两个参数logits是回归结果，label是标签。<br>logits填入待取log的概率化数据。格式为[N,C]，其中N代表样本数量，C代表最后的划分类别数。<br>label填入标签数据，格式为[N,1]，其中N代表样本数量，每一行只有一个结果，取值0-C。<br>这里我们用的数据集样本标签和logits格式是一样的，所以我们引用tf.argmax选取每一行的最大值所代表的编号，得到[N,1]类型结果。<br>计算完后我们将所有损失加起来取平均。如下所示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算损失</span></span><br><span class="line">   cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits = y, labels=tf.argmax(y_,<span class="number">1</span>))</span><br><span class="line">   cross_entropy_mean = tf.reduce_mean(cross_entropy)</span><br></pre></td></tr></table></figure></p>
+<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><p>有时候我们的数据量少，参数多的时候可能会出现过拟合现象，我们一般采取正则化的方式来优化，过拟合的原因在于权重参数可能在调解过程中变得过于复杂去适应我们的训练数据，就好比我们有五个不等式方程，我们去改善它的5*5个系数，使他对于我们的数据都能正确，如果一次取样10个数据，我们可能获得等式的25个唯一参数，很好的去适应这10个数据，但换一组数据它就不是那么好，在控制中就是鲁棒性不是太好。<br>所以我们引入一个刻画权重参数复杂程度的指标J(θ)，然后用一个系数乘以它，来调节它对整个损失的影响比例。这就是正则化<br>一般我们采用L1、L2损失函数，在tensorflow中为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">regular = tf.contrib.layers.l2_regularizer(REGULARZATION_RATE)(weight)</span><br></pre></td></tr></table></figure><br>把L2改为L1就代表L1正则化。可以看出后面有两个括号，第一个括号参数为正则化系数，第二个为权重。也可以改写为下面的代码，先声明一个具有某个正则化系数的函数regular，然后在计算W1与W2时可以直接用regular(W1)。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#正则化损失</span></span><br><span class="line">regular = tf.contrib.layers.l2_regularizer(REGULARZATION_RATE)</span><br><span class="line">regularization = regular(weight1) + regular(weight2)</span><br></pre></td></tr></table></figure><br>PS：两个正则化的对比：L1正则化会让参数变得稀疏（指会有更多参数变为0），而L2正则化则不会（因为参数的平方后会让小的参数变得更小，大的参数变得更大，同样起到了特征选取的功能，而不会让参数变为0）。其次是L1正则化计算不可导，而L2的正则化损失函数可导。</p>
+<p>下面给出整体的损失计算代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#计算损失</span></span><br><span class="line">   cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits = y, labels=tf.argmax(y_,<span class="number">1</span>))</span><br><span class="line">   cross_entropy_mean = tf.reduce_mean(cross_entropy)</span><br><span class="line">   <span class="comment">#正则化损失</span></span><br><span class="line">   regular = tf.contrib.layers.l2_regularizer(REGULARZATION_RATE)</span><br><span class="line">   regularization = regular(weight1) + regular(weight2)</span><br><span class="line">   <span class="comment">#总损失</span></span><br><span class="line">   loss = cross_entropy_mean + regularization</span><br></pre></td></tr></table></figure></p>
+<h2 id="四、网络优化Optimizer"><a href="#四、网络优化Optimizer" class="headerlink" title="四、网络优化Optimizer"></a>四、网络优化Optimizer</h2><p>计算完损失之后需要进行网络优化，网络优化也就是通过不停改变参数把损失值降低，一般我们多采用随机梯度下降法，</p>
+<h3 id="Optimizer优化"><a href="#Optimizer优化" class="headerlink" title="Optimizer优化"></a>Optimizer优化</h3><p>1、梯度下降法<br>一般我们常用的优化算法为梯度下降法，也就是每次计算出梯度后对每一个参数进行线形调节X = X + learning_rate * Gradient<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.train.GradientDescentOptimizer(learning_rate)<span class="comment">#梯度下降法类</span></span><br></pre></td></tr></table></figure><br>这种优化算法存在一些问题，可能会出现有好几个波谷，但是梯度下降一直在一个波谷里面来回动荡。这会导致梯度下降法有时不能找到最优解，只能找到一个极值点。再者梯度下降法对所有数据进行运算，耗时太长。<br>每一个优化方法类下都有一个minimize函数，对某个值进行最小化优化。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_ = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss)</span><br></pre></td></tr></table></figure></p>
+<p>2、随机梯度下降法（SGD）<br>考虑梯度下降法优化速度慢的问题，后来有人提出随机梯度下降法，我们每次训练可以不训练所有的数据，可以只取一个小的batch数据进行训练，这样每次训练的速度就会加快，然后我们每次取样的batch不一样，这样就保证稳定性了。<br>代码可以和上面一样，考虑每次训练取样batch即可。</p>
+<p>更多的优化算法在我另一篇博客中介绍。</p>
+<p>在这之后我们在考虑一个学习率的问题，学习率在一开始可能需要大一点比价好，加快收敛速度，但是在后期，就需要慢下来，因为幅度大的话可能在两边来回晃，很难收敛。</p>
+<h3 id="学习率优化问题"><a href="#学习率优化问题" class="headerlink" title="学习率优化问题"></a>学习率优化问题</h3><p>这里给出一个<strong>指数衰减法</strong>的方法。让学习率以指数方式慢慢衰减。这里我抓取一张常用的图，tensorflow提供两个衰减情况，一个是连续衰减，一个是梯度衰减，如下图所示。<br><img src="https://wx2.sinaimg.cn/large/e8c7da07ly1g17dit90yzj20r10cpgru.jpg" alt="image"><br>tensorflow给出以下函数expoential_decay，参数有四个，基础学习率，全局步数，衰减步数，衰减率。其公式为：<br>learning_rate = LEARNING_RATE_BASE * LEARNING_RATE_DECAY^(global_step/decay_step)<br>含义很明白，当全局步数达到衰减步数时学习率变为基础学习率的基础上乘以衰减率，如果是连续衰减时，在这过程中则一直变化。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#学习率更新</span></span><br><span class="line">    learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE,global_step,\</span><br><span class="line">   decay_step,LEARNING_RATE_DECAY)</span><br></pre></td></tr></table></figure></p>
+<h2 id="五、测试结果"><a href="#五、测试结果" class="headerlink" title="五、测试结果"></a>五、测试结果</h2><p>在进行一段时间训练后我们希望输出以测试集的正确性，利用tf.equal得到两组数据是否i相等，然后求结果的平均值，如下所示。<br>tf.cast可以将其转换类型，因为equal返回的时bool型。故我们将其转换为float32再求平均数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">correct_prediction = tf.equal(tf.argmax(y,<span class="number">1</span>),tf.argmax(y_,<span class="number">1</span>))</span><br><span class="line">   show_result = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))</span><br></pre></td></tr></table></figure>
+<h2 id="六、运行"><a href="#六、运行" class="headerlink" title="六、运行"></a>六、运行</h2><p>首先开启一个会话，然后初始化所有变量，然后准备一个字典型数据，mnist数据集给了一个取样函数next_batch直接取样即可，然后运行_train把数据送进去。当运行100次时打印数据。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment">#初始化数据</span></span><br><span class="line">    tf.global_variables_initializer().run()</span><br><span class="line">    <span class="comment">#验证集数据</span></span><br><span class="line">    validate_feed = &#123;X:mnist.validation.images,y_:mnist.validation.labels&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> it <span class="keyword">in</span> range(TRAINING_STEPS):</span><br><span class="line">        XS,YS = mnist.train.next_batch(BATCH_SIZE)<span class="comment">#取样数据</span></span><br><span class="line">        sess.run(train_,feed_dict=&#123;X:XS,y_:YS&#125;)</span><br><span class="line">        <span class="keyword">if</span> it % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="comment">#打印数据</span></span><br><span class="line">            result = sess.run(show_result,feed_dict=validate_feed)</span><br><span class="line">            print(<span class="string">"After %d training step(s),validation accuracy is %g"</span>%(it,result))</span><br></pre></td></tr></table></figure><br>主函数我们编写如下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mnist = input_data.read_data_sets(<span class="string">'./'</span>, one_hot=<span class="literal">True</span>)</span><br><span class="line"><span class="comment">#mnist = input_data.read_data_sets("/",one_hot = True)</span></span><br><span class="line"></span><br><span class="line">print(mnist.train.num_examples)</span><br><span class="line">print(mnist.train.images[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">train(mnist)</span><br></pre></td></tr></table></figure><br>注意：这里我们是在本地存了一些数据，如有需要可以从我的github获取<br><a href="https://github.com/Harryjun/CNN_MNIST_tensorflow1">用Tensorflow搭建两层神经网络训练MNIST数据集</a></p>
+<p>最后结果如下所示<br><img src="https://ws1.sinaimg.cn/large/e8c7da07ly1g17djk44akj20dl09n76w.jpg" alt="image"></p>
+
+        </div>
+        
+        
+            <ul class="post-copyright">
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC/#2019/03/17/Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC/">Tensorflow学习总结（二）用Tensorflow实现一个全卷积神经网络</a></li>
+                <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC/#2019/03/17/Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC/">https://www.cloudcver.com/posts/Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC/#2019/03/17/Tensorflow%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93%EF%BC%88%E4%BA%8C%EF%BC%89%E7%94%A8Tensorflow%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%20-%20%E5%89%AF%E6%9C%AC/</a></li>
+                <li><strong>发布时间：</strong>2019-03-17</li>
+                <li><strong>最后修改：</strong>2019-03-18</li>
+                <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+                </li>
+            </ul>
+            
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/%E7%8E%89%E6%B8%8A%E6%BD%AD%E6%A8%B1%E8%8A%B1%E4%B9%8B%E6%97%85/#2019/03/18/%E7%8E%89%E6%B8%8A%E6%BD%AD%E6%A8%B1%E8%8A%B1%E4%B9%8B%E6%97%85/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">玉渊潭樱花之旅</span>
+            </a>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+  
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        avatar: 'mp',
+        notify: true,
+        verify: true,
+        app_id: 'TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz',
+        app_key: 'qfw2KwYOyVL3X6U2ET9vnyIa',
+        placeholder: '给我的文章加点评论吧~~'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right ">
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Debug/">
+            <span class="level-start">
+                <span class="level-item">Debug</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LINUX/">
+            <span class="level-start">
+                <span class="level-item">LINUX</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TensorFlow/">
+            <span class="level-start">
+                <span class="level-item">TensorFlow</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
+            <span class="level-start">
+                <span class="level-item">网络爬虫</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%85%B6%E4%BB%96/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E4%BD%9C/">
+            <span class="level-start">
+                <span class="level-item">工作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+            <span class="level-start">
+                <span class="level-item">计算机视觉</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">23</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
+            <span class="level-start">
+                <span class="level-item">GAN</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+            <span class="level-start">
+                <span class="level-item">人脸识别</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">图像分类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">
+            <span class="level-start">
+                <span class="level-item">图像生成</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+            <span class="level-start">
+                <span class="level-item">目标检测</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+            <span class="level-start">
+                <span class="level-item">语义分割</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/#2020/03/06/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo部署博客到阿里云服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T09:45:39.000Z">2020-03-06</time></div>
+                    <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/#2020/03/06/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo部署博客到阿里云服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tensorflow自建数据集dataset使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-25T09:45:39.000Z">2020-02-25</time></div>
+                    <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/#2020/02/25/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tensorflow自建数据集dataset使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/#2020/02/20/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="GoogleClab使用注意事项  !cd指令失效">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/#2020/02/20/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">GoogleClab使用注意事项  !cd指令失效</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/LINUX/">LINUX</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/#2020/02/20/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker基础知识学习（来自阿里云）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/#2020/02/20/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker基础知识学习（来自阿里云）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/pytorch%E5%AE%89%E8%A3%85linux/#2020/02/18/pytorch%E5%AE%89%E8%A3%85linux/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="pytorch安装linux下">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-18T02:41:30.000Z">2020-02-18</time></div>
+                    <a href="/posts/pytorch%E5%AE%89%E8%A3%85linux/#2020/02/18/pytorch%E5%AE%89%E8%A3%85linux/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pytorch安装linux下</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/02/">
+                <span class="level-start">
+                    <span class="level-item">February 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">8</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/AlexNet/">
+                        <span class="tag">AlexNet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/CVPR/">
+                        <span class="tag">CVPR</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Docker/">
+                        <span class="tag">Docker</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/FCN/">
+                        <span class="tag">FCN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GPU/">
+                        <span class="tag">GPU</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Google-Drive/">
+                        <span class="tag">Google Drive</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/GoogleClab/">
+                        <span class="tag">GoogleClab</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MSGAN/">
+                        <span class="tag">MSGAN</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/SPPnet/">
+                        <span class="tag">SPPnet</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VGG/">
+                        <span class="tag">VGG</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/YouTube-8M/">
+                        <span class="tag">YouTube-8M</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/anaconda/">
+                        <span class="tag">anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/argparse/">
+                        <span class="tag">argparse</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/bazel/">
+                        <span class="tag">bazel</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/cmake/">
+                        <span class="tag">cmake</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/csv/">
+                        <span class="tag">csv</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/faiss/">
+                        <span class="tag">faiss</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/glib/">
+                        <span class="tag">glib</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/hexo/">
+                        <span class="tag">hexo</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/insightface/">
+                        <span class="tag">insightface</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/keras/">
+                        <span class="tag">keras</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/labelme/">
+                        <span class="tag">labelme</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/libffi/">
+                        <span class="tag">libffi</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/linux/">
+                        <span class="tag">linux</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/mediapipe/">
+                        <span class="tag">mediapipe</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/opencv/">
+                        <span class="tag">opencv</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/os/">
+                        <span class="tag">os</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pip/">
+                        <span class="tag">pip</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pytorch/">
+                        <span class="tag">pytorch</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/screen/">
+                        <span class="tag">screen</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/tensorflow/">
+                        <span class="tag">tensorflow</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/vim/">
+                        <span class="tag">vim</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/webdriver/">
+                        <span class="tag">webdriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/wgan/">
+                        <span class="tag">wgan</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/xml/">
+                        <span class="tag">xml</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+                        <span class="tag">人脸识别</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E5%A4%9A%E5%85%89%E8%B0%B1/">
+                        <span class="tag">多光谱</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%84%9F%E5%8F%97%E9%87%8E/">
+                        <span class="tag">感受野</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E6%B8%85%E5%8D%8E%E9%95%9C%E5%83%8F/">
+                        <span class="tag">清华镜像</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%88%AC%E8%99%AB/">
+                        <span class="tag">爬虫</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%8E%89%E6%B8%8A%E6%BD%AD/">
+                        <span class="tag">玉渊潭</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="tag">算法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E8%BD%AF%E8%BF%9E%E6%8E%A5/">
+                        <span class="tag">软连接</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/%E9%80%89%E6%8B%A9%E6%80%A7%E6%90%9C%E7%B4%A2/">
+                        <span class="tag">选择性搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo  has-mb-6" href="/">
+
+
+
+                
+
+                <p class="is-size-7">
+                    
+                &copy; 2020 CloudCver&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">苏ICP备20007028号-1</a>&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                        <a href="https://www.upyun.com/"   target="_blank"  style="border:0">
+                            <img src="/images/ypy.png" alt="又拍云提供服务"   style="width: 70px; display: inline; vertical-align: middle;">
+                          </a>
+                         <br>
+                          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                          <script>
+                              var now = new Date(); 
+                              function createtime() { 
+                                  var grt= new Date("1/2/2019 08:00:00");// 此处修改你的建站时间或者网站上线时间 
+                                  now.setTime(now.getTime()+250); 
+                                  days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                                  hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                                  if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                                  mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                                  seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                                  snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                                  document.getElementById("timeDate").innerHTML = "This site has been running safely for "+dnum+" 天 "; 
+                                  document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒 "; 
+                              } 
+                              setInterval("createtime()",250);
+                          </script>
+
+
+                        
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                            <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.cloudcver.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+
+
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
