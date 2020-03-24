@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>WGAN代码解读及实验总结 - CloudCver</title>
+
+
+    <meta name="description" content="GAN作为图像的另一个新领域，本成为21世纪最好的idea。嘿嘿，最近小试牛刀，下载了个WGAN的代码，这里简单分析下，给大家一个参考。 【提示】本文预计阅读时间5分钟，带灰色底纹的和加粗的为重要部分哦！">
+<meta name="keywords" content="wgan">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WGAN代码解读及实验总结">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;WGAN%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB%E5%8F%8A%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93&#x2F;index.html">
+<meta property="og:site_name" content="CloudCver">
+<meta property="og:description" content="GAN作为图像的另一个新领域，本成为21世纪最好的idea。嘿嘿，最近小试牛刀，下载了个WGAN的代码，这里简单分析下，给大家一个参考。 【提示】本文预计阅读时间5分钟，带灰色底纹的和加粗的为重要部分哦！">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-11-25T09:33:57.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="WGAN代码解读及实验总结" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/fight.png" >
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.4.1/css/all.min.css">
+<!-- <link rel="stylesheet" href="/css/Ubuntu:400,600%7CSource+Code+Pro.css"> -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?5ac05e6533e626ce0ede656787f8a015";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+
+
+    <!-- night mode -->
+    <script type="text/javascript" src="/js/night.js"></script>
+    <canvas id="universe"></canvas>
+    <script type="text/javascript" src="/js/universe.js"></script>
+    <!-- night mode -->
+
+
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="WGAN代码解读及实验总结" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/project">Project</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/plan">Plan</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+                <a class="navbar-item"
+                href="/links">Links</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                <a class="navbar-item" target="_blank" rel="noopener" title="Pan" href="https://pan.bitcrush.top">
+                        
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    
+                </a>
+
+                <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
+                    <i class="fas fa-moon" id="night-icon"></i>
+                </a>
+                <a class="navbar-item" target="_blank" rel="noopener" title="Valine-Admin" href="https://admin.bitcrush.top/"><i class="fas fa-cog"></i></a>
+
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my GitHub" href="https://github.com/Aimerence">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+
+
+
+
+
+
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- PIN -->
+                
+
+
+                <!-- <time class="level-item has-text-grey" datetime="2019-07-01T03:09:12.000Z">2019-07-01</time>
+                 -->
+
+                 <time class="level-item has-text-grey" datetime="2019-07-01T03:09:12.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2019-07-01</time>
+                 
+                 <!-- 
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2019-11-25T09:33:57.783Z"><i class="far fa-calendar-check">&nbsp;</i>2019-11-25</time>
+                     -->
+                    <time class="level-item has-text-grey" datetime="2019-11-25T09:33:57.783Z"><i class="far fa-calendar-check">&nbsp;</i>2019-11-25</time>    
+
+                
+                <div class="level-item">
+                    <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">图像生成</a>
+                </div>
+                
+
+                
+
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 minutes read (About 2541 words)
+                </span>
+                
+
+                
+
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                WGAN代码解读及实验总结
+            
+        </h1>
+        <div class="content">
+            <p>GAN作为图像的另一个新领域，本成为21世纪最好的idea。嘿嘿，最近小试牛刀，下载了个WGAN的代码，这里简单分析下，给大家一个参考。</p>
+<p><strong>【提示】<br>本文预计阅读时间5分钟，带灰色底纹的和加粗的为重要部分哦！</strong><br><a id="more"></a></p>
+<h2 id="（一）WGAN初识"><a href="#（一）WGAN初识" class="headerlink" title="（一）WGAN初识"></a>（一）WGAN初识</h2><p><img src="http://wx2.sinaimg.cn/large/e8c7da07ly1g4kf9xy7ubj20we0az40o.jpg" alt="在这里插入图片描述"></p>
+<p><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g4kfa25crsj20o50ayacf.jpg" alt="在这里插入图片描述"></p>
+<p><img src="http://wx3.sinaimg.cn/large/e8c7da07ly1g4kfa59t5kj20n20dj42e.jpg" alt="在这里插入图片描述"></p>
+<h2 id="（二）代码分析"><a href="#（二）代码分析" class="headerlink" title="（二）代码分析"></a>（二）代码分析</h2><h3 id="2-1-main-struct"><a href="#2-1-main-struct" class="headerlink" title="2.1 main struct"></a>2.1 main struct</h3><p>打开代码后，它的主要结构如下图所示。<br><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g4kfappsw0j20eq09wadm.jpg" alt="在这里插入图片描述"><br>我们先看一下wgan_conv主函数，打开之后首先直接到最底main的位置，如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">	os.environ[<span class="string">'CUDA_VISIBLE_DEVICES'</span>] = <span class="string">'0'</span></span><br><span class="line">	<span class="comment"># the dir of pic generated</span></span><br><span class="line">	sample_folder = <span class="string">'Samples/mnist_wgan_conv'</span></span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(sample_folder):</span><br><span class="line">		os.makedirs(sample_folder)</span><br><span class="line"></span><br><span class="line">	<span class="comment"># net param</span></span><br><span class="line">	generator = G_conv_mnist()</span><br><span class="line">	discriminator = D_conv_mnist()</span><br><span class="line">	<span class="comment"># data param</span></span><br><span class="line">	data = mnist()</span><br><span class="line"></span><br><span class="line">	<span class="comment"># run</span></span><br><span class="line">	wgan = WGAN(generator, discriminator, data)</span><br><span class="line">	wgan.train(sample_folder)</span><br></pre></td></tr></table></figure><br>这里做几点阐述</p>
+<blockquote>
+<p>1、首先创建了一个目录用来存储你的生成图像，程序会每隔一段时间输出一个图像。<br>2、搞了三个类，一个generater生成器网络，一个是discriminator判别器类，然后是数据类。<br>3、又声明一个对象WGAN网络，然后调用它的train函数</p>
+</blockquote>
+<p>OK至此，主函数结构阐述清楚。那此时你会想generater咋定义？discriminator咋定义？<br>好一个一个看。</p>
+<h3 id="2-2-generator"><a href="#2-2-generator" class="headerlink" title="2.2 generator"></a>2.2 generator</h3><p>generator是生成器网络，其实就是搭了一个上采样的网络，先将噪声输入一维向量，通过全连接到更多的数据，然后把它展开成二维的图像，这里我们先用的灰度，你也可以改成彩色。然后再上采样，随意搞得，反正最后你要上采样到和你的正样本图像维度一致。如下所示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">G_conv_mnist</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.name = <span class="string">'G_conv_mnist'</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, z)</span>:</span></span><br><span class="line">		<span class="keyword">with</span> tf.variable_scope(self.name) <span class="keyword">as</span> scope:</span><br><span class="line">			<span class="comment">#step 1 全连接层，把z白噪声变为8*15*128图</span></span><br><span class="line">			g = tcl.fully_connected(z, <span class="number">8</span>*<span class="number">15</span>*<span class="number">128</span>, activation_fn = tf.nn.relu, normalizer_fn=tcl.batch_norm,</span><br><span class="line">									weights_initializer=tf.random_normal_initializer(<span class="number">0</span>, <span class="number">0.02</span>))</span><br><span class="line">			g = tf.reshape(g, (<span class="number">-1</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">128</span>)) </span><br><span class="line">			<span class="comment">#step 2 反卷积/上采样 到16*30*64图    4代表卷积核大小</span></span><br><span class="line">			g = tcl.conv2d_transpose(g, <span class="number">64</span>, <span class="number">4</span>,stride=<span class="number">2</span>, </span><br><span class="line">									activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm, padding=<span class="string">'SAME'</span>, weights_initializer=tf.random_normal_initializer(<span class="number">0</span>, <span class="number">0.02</span>))</span><br><span class="line">			<span class="comment">#step 3 反卷积/上采样 到32*60*1的图，此时和真实手写体的数据是一样的图</span></span><br><span class="line">			g = tcl.conv2d_transpose(g, <span class="number">1</span>, <span class="number">4</span>, stride=<span class="number">2</span>, </span><br><span class="line">										activation_fn=tf.nn.sigmoid, padding=<span class="string">'SAME'</span>, weights_initializer=tf.random_normal_initializer(<span class="number">0</span>, <span class="number">0.02</span>))</span><br><span class="line">			print(g.shape)</span><br><span class="line">			<span class="keyword">return</span> g</span><br><span class="line"><span class="meta">	@property</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">vars</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=self.name)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：<br>这里你会看到一个call函数，它是咋用呢？<br>一个类下面有个call函数，你就可以生成一个对象后，直接把它当成方法用。例如<br>class G():<br>       <strong>call</strong>(x):<br>           print(x)<br>这样的话你就A = G()，然后再A(1)就打印了1。<br>其实就是说这个类弄好了，之后可以直接当函数用。</p>
+</blockquote>
+<p>好，然后我们看一下discriminator</p>
+<h3 id="2-3-discriminator"><a href="#2-3-discriminator" class="headerlink" title="2.3 discriminator"></a>2.3 discriminator</h3><p>和generator干了差不多的事情，他要把X和GX输进去，然后搭建一个卷积网络判别真假。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D_conv_mnist</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">		self.name = <span class="string">'D_conv_mnist'</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, x, reuse=False)</span>:</span></span><br><span class="line">		<span class="keyword">with</span> tf.variable_scope(self.name) <span class="keyword">as</span> scope:</span><br><span class="line">			<span class="keyword">if</span> reuse:</span><br><span class="line">				scope.reuse_variables()</span><br><span class="line">			size = <span class="number">64</span></span><br><span class="line">			<span class="comment">#step 1 卷积4*4卷积核 bzx30x60x1 -&gt; bzx15x30x64</span></span><br><span class="line">			shared = tcl.conv2d(x, num_outputs=size, kernel_size=<span class="number">4</span>, </span><br><span class="line">						stride=<span class="number">2</span>, activation_fn=lrelu)</span><br><span class="line">			<span class="comment">#step 2 卷积4*4卷积核 bzx15x30x64 -&gt; bzx7x15x128</span></span><br><span class="line">			shared = tcl.conv2d(shared, num_outputs=size * <span class="number">2</span>, kernel_size=<span class="number">4</span>,</span><br><span class="line">						stride=<span class="number">2</span>, activation_fn=lrelu, normalizer_fn=tcl.batch_norm)</span><br><span class="line">			<span class="comment">#step 3 展开向量 bzx7x15x128 -&gt; bzx6372</span></span><br><span class="line">			shared = tcl.flatten(shared)</span><br><span class="line">			<span class="comment">#step 4 全连接层</span></span><br><span class="line">			d = tcl.fully_connected(shared, <span class="number">1</span>, activation_fn=<span class="literal">None</span>, weights_initializer=tf.random_normal_initializer(<span class="number">0</span>, <span class="number">0.02</span>))</span><br><span class="line">			q = tcl.fully_connected(shared, <span class="number">128</span>, activation_fn=lrelu, normalizer_fn=tcl.batch_norm)</span><br><span class="line">			q = tcl.fully_connected(q, <span class="number">10</span>, activation_fn=<span class="literal">None</span>) <span class="comment"># 10 classes</span></span><br><span class="line">			<span class="keyword">return</span> d, q</span><br><span class="line"><span class="meta">	@property</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">vars</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">return</span> tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, scope=self.name)</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-数据的导入改写"><a href="#2-4-数据的导入改写" class="headerlink" title="2.4 数据的导入改写"></a>2.4 数据的导入改写</h3><p>我下载的代码是直接导入的minist数据集，我们可能要导入图片数据集哈，这里我做了一些改变。<br>这里加了个next_batch函数，先生成随机序列，然后读取batch图像，存到数据集中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">mnist</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, flag=<span class="string">'conv'</span>, is_tanh = False)</span>:</span></span><br><span class="line">		self.datapath = prefix + <span class="string">'bus_data/'</span></span><br><span class="line">		self.X_dim = <span class="number">784</span> <span class="comment"># for mlp</span></span><br><span class="line">		self.z_dim = <span class="number">100</span></span><br><span class="line">		self.y_dim = <span class="number">10</span></span><br><span class="line">		self.sizex = <span class="number">32</span> <span class="comment"># for conv</span></span><br><span class="line">		self.sizey = <span class="number">60</span> <span class="comment"># for conv</span></span><br><span class="line">		self.channel = <span class="number">1</span> <span class="comment"># for conv</span></span><br><span class="line">		<span class="comment">#self.data = input_data.read_data_sets(datapath, one_hot=True)</span></span><br><span class="line">		self.flag = flag</span><br><span class="line">		self.is_tanh = is_tanh</span><br><span class="line">		self.Train_nums = <span class="number">17</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self,batch_size)</span>:</span></span><br><span class="line">		batch_imgs = self.next_batch(self.datapath,batch_size)</span><br><span class="line">		<span class="comment">#batch_imgs,y = self.next_batch(prefix,batch_size)</span></span><br><span class="line">		<span class="keyword">if</span> self.flag == <span class="string">'conv'</span>:</span><br><span class="line">			batch_imgs = np.reshape(batch_imgs, (batch_size, self.sizex, self.sizey, self.channel)) </span><br><span class="line">		<span class="keyword">if</span> self.is_tanh:</span><br><span class="line">			batch_imgs = batch_imgs*<span class="number">2</span> - <span class="number">1</span></span><br><span class="line">		<span class="comment">#return batch_imgs, y</span></span><br><span class="line">		<span class="keyword">return</span> batch_imgs</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">next_batch</span><span class="params">(self,data_path, batch_size)</span>:</span></span><br><span class="line">	<span class="comment">#def next_batch(self,data_path, lable_path, batch_size):</span></span><br><span class="line">		train_temp = np.random.randint(low=<span class="number">0</span>, high=self.Train_nums, size=batch_size) <span class="comment"># 生成元素的值在[low,high)区间，随机选取</span></span><br><span class="line">		train_data_batch = np.zeros([batch_size,self.sizex,  self.sizey]) <span class="comment"># 其中[img_row,  img_col, 3]是原数据的shape，相应变化</span></span><br><span class="line">		<span class="comment">#train_label_batch = np.zeros([batch_size, self.size, self.size]) #</span></span><br><span class="line">		count = <span class="number">0</span> <span class="comment"># 后面就是读入图像，并打包成四维的batch</span></span><br><span class="line">		<span class="comment">#print(data_path)</span></span><br><span class="line">		img_list = os.listdir(data_path)</span><br><span class="line">		<span class="comment">#print(img_list)</span></span><br><span class="line">	</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> train_temp:</span><br><span class="line">			img_path = os.path.join(data_path, img_list[i])  <span class="comment"># 图片文件</span></span><br><span class="line">			img = cv.imread(img_path)</span><br><span class="line">			gray = cv.cvtColor(img,cv.COLOR_RGB2GRAY)</span><br><span class="line">			train_data_batch[count, :, :]  = cv.resize(gray,(self.sizey,  self.sizex))</span><br><span class="line">			count+=<span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> train_data_batch<span class="comment">#, train_label_batch</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">data2fig</span><span class="params">(self, samples)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> self.is_tanh:</span><br><span class="line">			samples = (samples + <span class="number">1</span>)/<span class="number">2</span></span><br><span class="line">		fig = plt.figure(figsize=(<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">		gs = gridspec.GridSpec(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">		gs.update(wspace=<span class="number">0.05</span>, hspace=<span class="number">0.05</span>)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> i, sample <span class="keyword">in</span> enumerate(samples):</span><br><span class="line">			ax = plt.subplot(gs[i])</span><br><span class="line">			plt.axis(<span class="string">'off'</span>)</span><br><span class="line">			ax.set_xticklabels([])</span><br><span class="line">			ax.set_yticklabels([])</span><br><span class="line">			ax.set_aspect(<span class="string">'equal'</span>)</span><br><span class="line">			plt.imshow(sample.reshape(self.sizex,self.sizey), cmap=<span class="string">'Greys_r'</span>)</span><br><span class="line">		<span class="keyword">return</span> fig</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-WGAN网络"><a href="#2-5-WGAN网络" class="headerlink" title="2.5 WGAN网络"></a>2.5 WGAN网络</h3><p>首先是搭网络NET，discriminator分别把真实的正样本X投进去，把噪声产生的G_sample投进去，得到正负结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nets</span></span><br><span class="line">		self.G_sample = self.generator(self.z)</span><br><span class="line"></span><br><span class="line">		self.D_real, _ = self.discriminator(self.X)</span><br><span class="line">		self.D_fake, _ = self.discriminator(self.G_sample, reuse = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>然后就是计算损失。我们利用上面结果分别计算D和G的损失，然后有两个优化器，分别对于D和G<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># loss</span></span><br><span class="line">		self.D_loss = - tf.reduce_mean(self.D_real) + tf.reduce_mean(self.D_fake)</span><br><span class="line">		self.G_loss = - tf.reduce_mean(self.D_fake)</span><br><span class="line"></span><br><span class="line">		self.D_solver = tf.train.RMSPropOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(self.D_loss, var_list=self.discriminator.vars)</span><br><span class="line">		self.G_solver = tf.train.RMSPropOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(self.G_loss, var_list=self.generator.vars)</span><br></pre></td></tr></table></figure><br>这里网络就搭建好了，我们要看一下train函数。其主要是先优化D再优化G这个步骤，这里我么此优化G和D的次数相同，你也可以去调整这个n_d。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(training_epoches):</span><br><span class="line">			<span class="comment"># update D</span></span><br><span class="line">			n_d = <span class="number">20</span> <span class="keyword">if</span> epoch &lt; <span class="number">250</span> <span class="keyword">or</span> (epoch+<span class="number">1</span>) % <span class="number">500</span> == <span class="number">0</span> <span class="keyword">else</span> <span class="number">10</span></span><br><span class="line">			<span class="keyword">for</span> _ <span class="keyword">in</span> range(n_d):</span><br><span class="line">				<span class="comment">#X_b, _ = self.data(batch_size)</span></span><br><span class="line">				X_b= self.data(batch_size)</span><br><span class="line">				self.sess.run(self.clip_D)</span><br><span class="line">				self.sess.run(</span><br><span class="line">						self.D_solver,</span><br><span class="line">            			feed_dict=&#123;self.X: X_b, self.z: sample_z(batch_size, self.z_dim)&#125;</span><br><span class="line">						)</span><br><span class="line">			<span class="comment"># update G</span></span><br><span class="line">			<span class="keyword">for</span> _ <span class="keyword">in</span> range(n_d):</span><br><span class="line">				<span class="comment">#X_b, _ = self.data(batch_size)</span></span><br><span class="line">				X_b= self.data(batch_size)</span><br><span class="line">				self.sess.run(self.clip_D)</span><br><span class="line">				self.sess.run(</span><br><span class="line">					self.G_solver,</span><br><span class="line">					feed_dict=&#123;self.z: sample_z(batch_size, self.z_dim)&#125;</span><br><span class="line">				)</span><br></pre></td></tr></table></figure><br>对于WGAN的全部代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WGAN</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, generator, discriminator, data)</span>:</span></span><br><span class="line">		self.generator = generator</span><br><span class="line">		self.discriminator = discriminator</span><br><span class="line">		self.data = data</span><br><span class="line"></span><br><span class="line">		self.z_dim = self.data.z_dim</span><br><span class="line">		self.sizex = self.data.sizex</span><br><span class="line">		self.sizey = self.data.sizey</span><br><span class="line">		self.channel = self.data.channel</span><br><span class="line"></span><br><span class="line">		self.X = tf.placeholder(tf.float32, shape=[<span class="literal">None</span>, self.sizex, self.sizey, self.channel])</span><br><span class="line">		self.z = tf.placeholder(tf.float32, shape=[<span class="literal">None</span>, self.z_dim])</span><br><span class="line">		<span class="comment"># nets</span></span><br><span class="line">		self.G_sample = self.generator(self.z)</span><br><span class="line"></span><br><span class="line">		self.D_real, _ = self.discriminator(self.X)</span><br><span class="line">		self.D_fake, _ = self.discriminator(self.G_sample, reuse = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">		<span class="comment"># loss</span></span><br><span class="line">		self.D_loss = - tf.reduce_mean(self.D_real) + tf.reduce_mean(self.D_fake)</span><br><span class="line">		self.G_loss = - tf.reduce_mean(self.D_fake)</span><br><span class="line"></span><br><span class="line">		self.D_solver = tf.train.RMSPropOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(self.D_loss, var_list=self.discriminator.vars)</span><br><span class="line">		self.G_solver = tf.train.RMSPropOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(self.G_loss, var_list=self.generator.vars)</span><br><span class="line">		</span><br><span class="line">		<span class="comment"># clip</span></span><br><span class="line">		self.clip_D = [var.assign(tf.clip_by_value(var, <span class="number">-0.01</span>, <span class="number">0.01</span>)) <span class="keyword">for</span> var <span class="keyword">in</span> self.discriminator.vars]</span><br><span class="line">		</span><br><span class="line">		gpu_options = tf.GPUOptions(allow_growth=<span class="literal">True</span>)</span><br><span class="line">		self.sess = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, sample_folder, training_epoches = <span class="number">100000</span>, batch_size = <span class="number">5</span>)</span>:</span></span><br><span class="line">		i = <span class="number">0</span></span><br><span class="line">		self.sess.run(tf.global_variables_initializer())</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span> epoch <span class="keyword">in</span> range(training_epoches):</span><br><span class="line">			<span class="comment"># update D</span></span><br><span class="line">			n_d = <span class="number">20</span> <span class="keyword">if</span> epoch &lt; <span class="number">250</span> <span class="keyword">or</span> (epoch+<span class="number">1</span>) % <span class="number">500</span> == <span class="number">0</span> <span class="keyword">else</span> <span class="number">10</span></span><br><span class="line">			<span class="keyword">for</span> _ <span class="keyword">in</span> range(n_d):</span><br><span class="line">				<span class="comment">#X_b, _ = self.data(batch_size)</span></span><br><span class="line">				X_b= self.data(batch_size)</span><br><span class="line">				self.sess.run(self.clip_D)</span><br><span class="line">				self.sess.run(</span><br><span class="line">						self.D_solver,</span><br><span class="line">            			feed_dict=&#123;self.X: X_b, self.z: sample_z(batch_size, self.z_dim)&#125;</span><br><span class="line">						)</span><br><span class="line">			<span class="comment"># update G</span></span><br><span class="line">			<span class="keyword">for</span> _ <span class="keyword">in</span> range(n_d):</span><br><span class="line">				<span class="comment">#X_b, _ = self.data(batch_size)</span></span><br><span class="line">				X_b= self.data(batch_size)</span><br><span class="line">				self.sess.run(self.clip_D)</span><br><span class="line">				self.sess.run(</span><br><span class="line">					self.G_solver,</span><br><span class="line">					feed_dict=&#123;self.z: sample_z(batch_size, self.z_dim)&#125;</span><br><span class="line">				)</span><br><span class="line"></span><br><span class="line">			<span class="comment"># print loss. save images.</span></span><br><span class="line">			<span class="keyword">if</span> epoch % <span class="number">100</span> == <span class="number">0</span> <span class="keyword">or</span> epoch &lt; <span class="number">100</span>:</span><br><span class="line">				D_loss_curr = self.sess.run(</span><br><span class="line">						self.D_loss,</span><br><span class="line">            			feed_dict=&#123;self.X: X_b, self.z: sample_z(batch_size, self.z_dim)&#125;)</span><br><span class="line">				G_loss_curr = self.sess.run(</span><br><span class="line">						self.G_loss,</span><br><span class="line">						feed_dict=&#123;self.z: sample_z(batch_size, self.z_dim)&#125;)</span><br><span class="line">				print(<span class="string">'Iter: &#123;&#125;; D loss: &#123;:.4&#125;; G_loss: &#123;:.4&#125;'</span>.format(epoch, D_loss_curr, G_loss_curr))</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> epoch % <span class="number">1000</span> == <span class="number">0</span>:</span><br><span class="line">					samples = self.sess.run(self.G_sample, feed_dict=&#123;self.z: sample_z(<span class="number">16</span>, self.z_dim)&#125;)</span><br><span class="line">					print(samples.shape)</span><br><span class="line">					fig = self.data.data2fig(samples)</span><br><span class="line">					plt.savefig(<span class="string">'&#123;&#125;/&#123;&#125;.png'</span>.format(sample_folder, str(i).zfill(<span class="number">3</span>)), bbox_inches=<span class="string">'tight'</span>)</span><br><span class="line">					i += <span class="number">1</span></span><br><span class="line">					plt.close(fig)</span><br></pre></td></tr></table></figure>
+<h2 id="（三）实验结果"><a href="#（三）实验结果" class="headerlink" title="（三）实验结果"></a>（三）实验结果</h2><p>我找了17张车的图片~~原谅我比较懒，如下图所示。基本都是差不多样子的。<br><img src="http://wx4.sinaimg.cn/large/e8c7da07ly1g4kfasarlqj20hq069q76.jpg" alt="在这里插入图片描述"><br>然后代码跑起来~我们把它resize到（30，60），主要是为了让我的机器跑快些，本来就怂。<br>一开始是一堆噪声图如下图所示。<img src="http://wx2.sinaimg.cn/large/e8c7da07ly1g4kfb1ggwnj209d08kadl.jpg" alt="在这里插入图片描述"><br>其实在训练一段时间后如下所示，可以看出具有一定车的样子，中间黑车身，貌似也能看到个车轱辘。哈哈。初见效果~<br><img src="http://wx3.sinaimg.cn/large/e8c7da07ly1g4kfb2c7ajj209d086tad.jpg" alt="在这里插入图片描述"><br>损失的结果如下所示：<br><img src="http://wx1.sinaimg.cn/large/e8c7da07ly1g4kfb2u5lmj20i2057mxj.jpg" alt="在这里插入图片描述"></p>
+<h2 id="（四）总结"><a href="#（四）总结" class="headerlink" title="（四）总结"></a>（四）总结</h2><p>通过这个实验对于GAN有了初步的了解，如果有什么写的不对的地方，还请指出。这里附上代码：<br><a href="https://github.com/Harryjun/wgan_demo">https://github.com/Harryjun/wgan_demo</a></p>
+
+        </div>
+        
+        
+            <ul class="post-copyright">
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/WGAN%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB%E5%8F%8A%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/">WGAN代码解读及实验总结</a></li>
+                <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/WGAN%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB%E5%8F%8A%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/">https://www.cloudcver.com/posts/WGAN%E4%BB%A3%E7%A0%81%E8%A7%A3%E8%AF%BB%E5%8F%8A%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/</a></li>
+                <li><strong>发布时间：</strong>2019-07-01</li>
+                <li><strong>最后修改：</strong>2019-11-25</li>
+                <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+                </li>
+            </ul>
+            
+
+        
+
+            <hr style="height:1px;margin:1rem 0"/>
+
+
+
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+
+                    <a class="has-link-grey -link" href="/tags/wgan/" rel="tag">wgan</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/insightface%E6%95%B0%E6%8D%AE%E5%88%B6%E4%BD%9C%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">insightface数据制作全过程记录</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2FCN%E5%85%A8%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+                <span class="level-item">图像分割FCN全卷积神经网络</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+  
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        avatar: 'mp',
+        notify: true,
+        verify: true,
+        app_id: 'TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz',
+        app_key: 'qfw2KwYOyVL3X6U2ET9vnyIa',
+        placeholder: '给我的文章加点评论吧~~'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right ">
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Debug/">
+            <span class="level-start">
+                <span class="level-item">Debug</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LINUX/">
+            <span class="level-start">
+                <span class="level-item">LINUX</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TensorFlow/">
+            <span class="level-start">
+                <span class="level-item">TensorFlow</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
+            <span class="level-start">
+                <span class="level-item">网络爬虫</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%85%B6%E4%BB%96/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E4%BD%9C/">
+            <span class="level-start">
+                <span class="level-item">工作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+            <span class="level-start">
+                <span class="level-item">计算机视觉</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">24</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
+            <span class="level-start">
+                <span class="level-item">GAN</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+            <span class="level-start">
+                <span class="level-item">人脸识别</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">图像分类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">
+            <span class="level-start">
+                <span class="level-item">图像生成</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+            <span class="level-start">
+                <span class="level-item">目标检测</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+            <span class="level-start">
+                <span class="level-item">语义分割</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo部署博客到阿里云服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T09:45:39.000Z">2020-03-06</time></div>
+                    <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo部署博客到阿里云服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tensorflow加载预训练模型数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-04T09:45:39.000Z">2020-03-04</time></div>
+                    <a href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tensorflow加载预训练模型数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tensorflow自建数据集dataset使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-25T09:45:39.000Z">2020-02-25</time></div>
+                    <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tensorflow自建数据集dataset使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker基础知识学习（来自阿里云）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker基础知识学习（来自阿里云）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="GoogleClab使用注意事项  !cd指令失效">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">GoogleClab使用注意事项  !cd指令失效</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/LINUX/">LINUX</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo  has-mb-6" href="/">
+
+
+
+                
+
+                <p class="is-size-7">
+                    
+                &copy; 2020 CloudCver&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">京ICP备20008496号-1</a>&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                        <a href="https://www.upyun.com/"   target="_blank"  style="border:0">
+                            <img src="/images/ypy.png" alt="又拍云提供服务"   style="width: 70px; display: inline; vertical-align: middle;">
+                          </a>
+                         <br>
+                          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                          <script>
+                              var now = new Date(); 
+                              function createtime() { 
+                                  var grt= new Date("1/2/2019 08:00:00");// 此处修改你的建站时间或者网站上线时间 
+                                  now.setTime(now.getTime()+250); 
+                                  days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                                  hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                                  if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                                  mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                                  seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                                  snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                                  document.getElementById("timeDate").innerHTML = "This site has been running safely for "+dnum+" 天 "; 
+                                  document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒 "; 
+                              } 
+                              setInterval("createtime()",250);
+                          </script>
+
+
+                        
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                            <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.cloudcver.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+
+
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

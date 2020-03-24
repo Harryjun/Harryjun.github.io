@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>hexo部署博客到阿里云服务器 - CloudCver</title>
+
+
+    <meta name="description" content="由于疫情原因，阿里云免费送了半年的服务器，不得拿来玩玩，然后我就先把我的博客从github上迁移到阿里云上来，以后有问题再换。">
+<meta name="keywords" content="hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo部署博客到阿里云服务器">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;index.html">
+<meta property="og:site_name" content="CloudCver">
+<meta property="og:description" content="由于疫情原因，阿里云免费送了半年的服务器，不得拿来玩玩，然后我就先把我的博客从github上迁移到阿里云上来，以后有问题再换。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-03-06T10:23:10.168Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="hexo部署博客到阿里云服务器" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/fight.png" >
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.4.1/css/all.min.css">
+<!-- <link rel="stylesheet" href="/css/Ubuntu:400,600%7CSource+Code+Pro.css"> -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?5ac05e6533e626ce0ede656787f8a015";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+
+
+    <!-- night mode -->
+    <script type="text/javascript" src="/js/night.js"></script>
+    <canvas id="universe"></canvas>
+    <script type="text/javascript" src="/js/universe.js"></script>
+    <!-- night mode -->
+
+
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="hexo部署博客到阿里云服务器" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/project">Project</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/plan">Plan</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+                <a class="navbar-item"
+                href="/links">Links</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                <a class="navbar-item" target="_blank" rel="noopener" title="Pan" href="https://pan.bitcrush.top">
+                        
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    
+                </a>
+
+                <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
+                    <i class="fas fa-moon" id="night-icon"></i>
+                </a>
+                <a class="navbar-item" target="_blank" rel="noopener" title="Valine-Admin" href="https://admin.bitcrush.top/"><i class="fas fa-cog"></i></a>
+
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my GitHub" href="https://github.com/Aimerence">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+
+
+
+
+
+
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- PIN -->
+                
+
+
+                <!-- <time class="level-item has-text-grey" datetime="2020-03-06T09:45:39.000Z">2020-03-06</time>
+                 -->
+
+                 <time class="level-item has-text-grey" datetime="2020-03-06T09:45:39.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-06</time>
+                 
+                 <!-- 
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-03-06T10:23:10.168Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-06</time>
+                     -->
+                    <time class="level-item has-text-grey" datetime="2020-03-06T10:23:10.168Z"><i class="far fa-calendar-check">&nbsp;</i>2020-03-06</time>    
+
+                
+                <div class="level-item">
+                    <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                </div>
+                
+
+                
+
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 971 words)
+                </span>
+                
+
+                
+
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                hexo部署博客到阿里云服务器
+            
+        </h1>
+        <div class="content">
+            <p>由于疫情原因，阿里云免费送了半年的服务器，不得拿来玩玩，然后我就先把我的博客从github上迁移到阿里云上来，以后有问题再换。</p>
+<a id="more"></a>
+<hr>
+<blockquote>
+<p>先前条件：<br>1、服务器<br>2、本地电脑已经安装hexo，并且前期已经上传过GitHub（这样的话，你的本地已经有了密钥）</p>
+</blockquote>
+<p><strong>以下部分全是在服务器端的操作！</strong><br><strong>以下部分全是在服务器端的操作！</strong><br><strong>以下部分全是在服务器端的操作！</strong></p>
+<h3 id="1、配置服务器安全组规则"><a href="#1、配置服务器安全组规则" class="headerlink" title="1、配置服务器安全组规则"></a>1、配置服务器安全组规则</h3><p>由于阿里云是默认不授权80端口的访问的，所以我们要手动配置。</p>
+<p>打开阿里云<strong>服务器管理控制台</strong>-&gt;点击左侧<strong>安全组</strong>-&gt;点击右侧的<strong>配置规则</strong>-&gt;点击<strong>添加安全组规则</strong></p>
+<p>如下图<br><img src="https://img-blog.csdnimg.cn/20200306154335794.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2、配置代理nginx"><a href="#2、配置代理nginx" class="headerlink" title="2、配置代理nginx"></a>2、配置代理nginx</h3><p>因为我们是拿nginx做Web服务器，所以我们需要安装部署好nginx，如果没有安装。以下为centos命令，其他自己百度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">安装执行命令如下</span><br><span class="line">yum install -y nginx</span><br><span class="line">启动服务器：</span><br><span class="line">systemctl start nginx</span><br><span class="line">systemctl enable nginx</span><br></pre></td></tr></table></figure><br>现在可以访问一下我们的公网IP，会进入一个默认的nginx界面，我的转到了centos介绍界面。</p>
+<p>但是我们实际上是想要让这个地址指向我们的博客，而不是nginx的默认网址，这就需要我们去配置nginx的配置文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx</span><br><span class="line">vim nginx.conf</span><br></pre></td></tr></table></figure>
+<p>找到server，更改如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Load modular configuration files from the /etc/nginx/conf.d directory.</span></span><br><span class="line">    <span class="comment"># See http://nginx.org/en/docs/ngx_core_module.html#include</span></span><br><span class="line">    <span class="comment"># for more information.</span></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80 default_server;</span><br><span class="line">        listen       [::]:80 default_server;</span><br><span class="line">        server_name  www.cloudcver.com;<span class="comment">###改成你的域名；没有域名改成服务器公网IP</span></span><br><span class="line">        root         /home/git/projects/blog;<span class="comment">## 改为服务器上存博客的地址，按照我这写就行。</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># Load configuration files for the default server block.</span></span><br><span class="line">        include /etc/nginx/default.d/*.conf;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3、搭建服务器git仓库"><a href="#3、搭建服务器git仓库" class="headerlink" title="3、搭建服务器git仓库"></a>3、搭建服务器git仓库</h3><h4 id="3-1-安装node"><a href="#3-1-安装node" class="headerlink" title="3.1 安装node"></a>3.1 安装node</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_10.x | bash -</span><br><span class="line">yum install -y nodejs</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-安装git"><a href="#3-2-安装git" class="headerlink" title="3.2 安装git"></a>3.2 安装git</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install git</span><br></pre></td></tr></table></figure>
+<h4 id="3-3-创建git用户"><a href="#3-3-创建git用户" class="headerlink" title="3.3 创建git用户"></a>3.3 创建git用户</h4><p>先添加一个git用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br></pre></td></tr></table></figure><br>修改用户权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 740 /etc/sudoers</span><br><span class="line">vi /etc/sudoers</span><br></pre></td></tr></table></figure><br>添加以下内容<br><img src="https://img-blog.csdnimg.cn/20200306174832830.png" alt="在这里插入图片描述"><br>保存退出后 将sudoers文件权限改回原样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 /etc/sudoers</span><br></pre></td></tr></table></figure><br>设置git用户的密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd git</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-4-创建SSH密钥"><a href="#3-4-创建SSH密钥" class="headerlink" title="3.4 创建SSH密钥"></a>3.4 创建SSH密钥</h4><p>我们本地电脑已经生成过密钥，直接复制到服务器上即可。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su git</span><br><span class="line">mkdir ~/.ssh</span><br><span class="line">vim ~/.ssh/authorized_keys</span><br><span class="line"><span class="comment">#然后将电脑中~/.ssh/id_rsa.pub内容复制过来粘贴。</span></span><br><span class="line">chmod 600 ~/.ssh/authorzied_keys</span><br><span class="line">chmod 700 ~/.ssh</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-5-创建git仓库"><a href="#3-5-创建git仓库" class="headerlink" title="3.5 创建git仓库"></a>3.5 创建git仓库</h4><p>在git用户下操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p projects/blog # 把项目目录建立起来</span><br><span class="line">mkdir repos &amp;&amp; cd repos</span><br><span class="line">git init --bare blog.git # 创建仓库</span><br><span class="line">cd blog.git/hooks</span><br><span class="line">vim post-receive # 创建一个钩子</span><br></pre></td></tr></table></figure><br>钩子内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</span><br></pre></td></tr></table></figure><br>保存文件，文件加权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x post-receive # 添加可执行权限</span><br><span class="line">exit # 返回到root用户</span><br><span class="line">chown -R git:git /home/git/repos/blog.git # 给git用户添加权限</span><br></pre></td></tr></table></figure><br>测试以下，在本地电脑上测试。sever_ip为你的公网IP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh git@server_ip</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20200306175622858.png" alt="在这里插入图片描述"></p>
+<h3 id="4本地电脑上传"><a href="#4本地电脑上传" class="headerlink" title="4本地电脑上传"></a>4本地电脑上传</h3><p>在hexo上添加一个部署的端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo:</span><br><span class="line">    fuwuqi: git@server_ip:/home/git/repos/blog.git</span><br><span class="line">    coding: git@e.coding.net:cloudcver/blogme.git</span><br><span class="line">    github: git@github.com:Harryjun/Harryjun.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<h3 id="5线上更新下"><a href="#5线上更新下" class="headerlink" title="5线上更新下"></a>5线上更新下</h3><p>服务器上reload一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure><br>打开自己网站会发现快了很多。<br><a href="https://www.cloudcver.com">www.cloudcver.com</a></p>
+
+        </div>
+        
+        
+            <ul class="post-copyright">
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">hexo部署博客到阿里云服务器</a></li>
+                <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">https://www.cloudcver.com/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</a></li>
+                <li><strong>发布时间：</strong>2020-03-06</li>
+                <li><strong>最后修改：</strong>2020-03-06</li>
+                <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+                </li>
+            </ul>
+            
+
+        
+
+            <hr style="height:1px;margin:1rem 0"/>
+
+
+
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+
+                    <a class="has-link-grey -link" href="/tags/hexo/" rel="tag">hexo</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/">
+                <span class="level-item">tensorflow加载预训练模型数据</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+  
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        avatar: 'mp',
+        notify: true,
+        verify: true,
+        app_id: 'TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz',
+        app_key: 'qfw2KwYOyVL3X6U2ET9vnyIa',
+        placeholder: '给我的文章加点评论吧~~'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right ">
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Debug/">
+            <span class="level-start">
+                <span class="level-item">Debug</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LINUX/">
+            <span class="level-start">
+                <span class="level-item">LINUX</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TensorFlow/">
+            <span class="level-start">
+                <span class="level-item">TensorFlow</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
+            <span class="level-start">
+                <span class="level-item">网络爬虫</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%85%B6%E4%BB%96/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E4%BD%9C/">
+            <span class="level-start">
+                <span class="level-item">工作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+            <span class="level-start">
+                <span class="level-item">计算机视觉</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">24</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
+            <span class="level-start">
+                <span class="level-item">GAN</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+            <span class="level-start">
+                <span class="level-item">人脸识别</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">图像分类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">
+            <span class="level-start">
+                <span class="level-item">图像生成</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+            <span class="level-start">
+                <span class="level-item">目标检测</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+            <span class="level-start">
+                <span class="level-item">语义分割</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="hexo部署博客到阿里云服务器">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-06T09:45:39.000Z">2020-03-06</time></div>
+                    <a href="/posts/hexo%E9%83%A8%E7%BD%B2%E5%8D%9A%E5%AE%A2%E5%88%B0%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">hexo部署博客到阿里云服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tensorflow加载预训练模型数据">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-04T09:45:39.000Z">2020-03-04</time></div>
+                    <a href="/posts/tensorflow%E5%8A%A0%E8%BD%BD%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E6%95%B0%E6%8D%AE/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tensorflow加载预训练模型数据</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="tensorflow自建数据集dataset使用">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-25T09:45:39.000Z">2020-02-25</time></div>
+                    <a href="/posts/tensorflow%E8%87%AA%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86dataset%E4%BD%BF%E7%94%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">tensorflow自建数据集dataset使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Docker基础知识学习（来自阿里云）">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/Docker%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%EF%BC%88%E6%9D%A5%E8%87%AA%E9%98%BF%E9%87%8C%E4%BA%91%EF%BC%89/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Docker基础知识学习（来自阿里云）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a> / <a class="has-link-grey -link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="GoogleClab使用注意事项  !cd指令失效">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-20T09:45:39.000Z">2020-02-20</time></div>
+                    <a href="/posts/GoogleClab%E4%BD%BF%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9%20%20!cd%E6%8C%87%E4%BB%A4%E5%A4%B1%E6%95%88/" class="title has-link-black-ter is-size-6 has-text-weight-normal">GoogleClab使用注意事项  !cd指令失效</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/LINUX/">LINUX</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo  has-mb-6" href="/">
+
+
+
+                
+
+                <p class="is-size-7">
+                    
+                &copy; 2020 CloudCver&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">京ICP备20008496号-1</a>&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                        <a href="https://www.upyun.com/"   target="_blank"  style="border:0">
+                            <img src="/images/ypy.png" alt="又拍云提供服务"   style="width: 70px; display: inline; vertical-align: middle;">
+                          </a>
+                         <br>
+                          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                          <script>
+                              var now = new Date(); 
+                              function createtime() { 
+                                  var grt= new Date("1/2/2019 08:00:00");// 此处修改你的建站时间或者网站上线时间 
+                                  now.setTime(now.getTime()+250); 
+                                  days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                                  hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                                  if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                                  mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                                  seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                                  snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                                  document.getElementById("timeDate").innerHTML = "This site has been running safely for "+dnum+" 天 "; 
+                                  document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒 "; 
+                              } 
+                              setInterval("createtime()",250);
+                          </script>
+
+
+                        
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                            <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.cloudcver.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+
+
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
