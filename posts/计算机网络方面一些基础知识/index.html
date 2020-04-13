@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>计算机网络方面一些基础知识 - CloudCver</title>
+
+
+    <meta name="description" content="本文总结了一些计算机网络方面的基础知识，包括TCP与UDP区别等等。">
+<meta name="keywords" content="TCP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络方面一些基础知识">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%96%B9%E9%9D%A2%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&#x2F;index.html">
+<meta property="og:site_name" content="CloudCver">
+<meta property="og:description" content="本文总结了一些计算机网络方面的基础知识，包括TCP与UDP区别等等。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-04-13T09:08:54.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="计算机网络方面一些基础知识" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/fight.png" >
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.4.1/css/all.min.css">
+<!-- <link rel="stylesheet" href="/css/Ubuntu:400,600%7CSource+Code+Pro.css"> -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?5ac05e6533e626ce0ede656787f8a015";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+
+
+    <!-- night mode -->
+    <script type="text/javascript" src="/js/night.js"></script>
+    <canvas id="universe"></canvas>
+    <script type="text/javascript" src="/js/universe.js"></script>
+    <!-- night mode -->
+
+
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="计算机网络方面一些基础知识" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="https://torch.cloudcver.com">PyTorch</a>
+                
+                <a class="navbar-item"
+                href="/project">Project</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/plan">Plan</a>
+                
+                <a class="navbar-item"
+                href="/share">Share</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+                <a class="navbar-item"
+                href="/links">Links</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                <a class="navbar-item" target="_blank" rel="noopener" title="Pan" href="https://pan.cloudcver.com">
+                        
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    
+                </a>
+
+                <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
+                    <i class="fas fa-moon" id="night-icon"></i>
+
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my GitHub" href="https://github.com/harryjun">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my Mall" href="https://mall.cloudcver.com">
+                        
+                        <i class="fas fa-shopping-cart"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Short Url" href="https://dwz.cloudcver.com">
+                        
+                        <i class="fas fa-flask"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login my cloudcver mail" href="https://exmail.qq.com/login/zh_tw">
+                        
+                        <i class="fas fa-envelope"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login Mall" href="http://mall.cloudcver.com/Admin">
+                        
+                        <i class="fas fa-tasks"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login Baota" href="http://119.3.189.221:8888/">
+                        
+                        <i class="fas fa-cog"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+
+
+
+
+
+
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- PIN -->
+                
+
+
+                <!-- <time class="level-item has-text-grey" datetime="2020-03-20T09:45:39.000Z">2020-03-20</time>
+                 -->
+
+                 <time class="level-item has-text-grey" datetime="2020-03-20T09:45:39.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-20</time>
+                 
+                 <!-- 
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-04-13T09:08:54.466Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-13</time>
+                     -->
+                    <time class="level-item has-text-grey" datetime="2020-04-13T09:08:54.466Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-13</time>    
+
+                
+                <div class="level-item">
+                    <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/%E5%88%B7%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+                </div>
+                
+
+                
+
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    19 minutes read (About 2848 words)
+                </span>
+                
+
+                
+
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                计算机网络方面一些基础知识
+            
+        </h1>
+        <div class="content">
+            <p>本文总结了一些计算机网络方面的基础知识，包括TCP与UDP区别等等。<br><a id="more"></a></p>
+<h3 id="1、TCP与UDP"><a href="#1、TCP与UDP" class="headerlink" title="1、TCP与UDP"></a>1、TCP与UDP</h3><h4 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h4><blockquote>
+<p>TCP（Transmission Control Protocol），传输控制协议。<br>UDP（User Data Protocol），用户数据报协议。</p>
+<h4 id="1-2-区别"><a href="#1-2-区别" class="headerlink" title="1.2 区别"></a>1.2 区别</h4><p>简单的说：</p>
+<ul>
+<li>TCP传输可靠，UDP传输不可靠。 、</li>
+<li>TCP传输数据稳定性好，但是速度慢，承受负载比较大；</li>
+<li>UDP传输数据速度快，稳定性就差，承受负载小。<ul>
+<li>TCP连接相当于两根管道（一个用于服务器到客户端，一个用于客户端到服务器），管道里面数据传输是通过字节码传输，传输是有序的，每个字节都是一个一个来传输。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>深层的说：</p>
+<ul>
+<li>TCP提供面向连接的传输，通信前要先建立连接（三次握手机制）； UDP提供无连接的传输，通信前不需要建立连接。</li>
+<li>TCP提供可靠的传输（有序，无差错，不丢失，不重复）； UDP提供不可靠的传输。</li>
+<li>TCP面向字节流的传输，因此它能将信息分割成组，并在接收端将其重组； UDP是面向数据报的传输，没有分组开销。</li>
+<li>TCP提供拥塞控制和流量控制机制； UDP不提供拥塞控制和流量控制机制，吞吐量不受拥挤控制算法的调节，只受应用软件生成数据的速率、传输带宽、源端和终端主机性能的限制。</li>
+</ul>
+<h4 id="1-3应用"><a href="#1-3应用" class="headerlink" title="1.3应用"></a>1.3应用</h4><ul>
+<li>TCP一般应用在对于稳定性要求比较高的场合，比如传输文件、QQ聊天等。</li>
+<li>UDP一般应用在对于实时性要求比较高的场合，比如视频聊天等等。<h4 id="1-4三次握手、四次挥手"><a href="#1-4三次握手、四次挥手" class="headerlink" title="1.4三次握手、四次挥手"></a>1.4三次握手、四次挥手</h4>TCP建立连接时需要进行三次握手：<blockquote>
+<p>第一次握手：建立连接时,客户端发送syn包(syn=j)到服务器,并进入SYN_SEND状态,等待服务器确认；<br>SYN：同步序列编号(Synchronize Sequence Numbers)<br>第二次握手：服务器收到syn包,必须确认客户的SYN（ack=j+1）,同时自己也发送一个SYN包（syn=k）,即SYN+ACK包,此时服务器进入SYN_RECV状态；<br>第三次握手：客户端收到服务器的SYN＋ACK包,向服务器发送确认包ACK(ack=k+1),此包发送完毕,客户端和服务器进入ESTABLISHED状态,完成三次握手.</p>
+</blockquote>
+</li>
+</ul>
+<p>四次挥手：终止TCP连接，就是指断开一个TCP连接时，需要客户端和服务端总共发送4个包以确认连接的断开。在socket编程中，这一过程由客户端或服务端任一方执行close来触发。</p>
+<p>由于TCP是双通道的，两条通道都需要单独关闭，所以客户端向服务器发送FIN，关闭第一条通道（1），服务器接受到FIN后退出等待状态，会发一个ACK（2），服务器也会发送一个FIN，关闭第二条通道（3），客户端接受到后退出等待</p>
+<blockquote>
+<p>第一次挥手：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。<br>  第二次挥手：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。<br>  第三次挥手：Server发送一个FIN，用来关闭Server到Client的数据传送，Server进入LAST_ACK状态。<br>  第四次挥手：Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手。<br><img src="https://img-blog.csdnimg.cn/20200310130735152.png" alt="在这里插入图片描述"></p>
+<h4 id="1-5-为啥要三次握手？两次可以不？"><a href="#1-5-为啥要三次握手？两次可以不？" class="headerlink" title="1.5 为啥要三次握手？两次可以不？"></a>1.5 为啥要三次握手？两次可以不？</h4><p><strong>防止失效的连接请求报文段被服务端接收，从而产生错误。</strong></p>
+</blockquote>
+<p>Mark:失效的连接请求：若客户端向服务端发送的连接请求丢失，客户端等待应答超时后就会再次发送连接请求，此时，上一个连接请求就是『失效的』。</p>
+<p>解释：如果只有两次连接的话，客户端发送请求后，如果网络比较拥堵，客户端会再次发送请求，之前的请求就会失效。如果当客户端关闭连接后，那个请求被接受，服务器就会一直等待，消耗资源。</p>
+<h3 id="2、HTTP-与HTTPS"><a href="#2、HTTP-与HTTPS" class="headerlink" title="2、HTTP 与HTTPS"></a>2、HTTP 与HTTPS</h3><p> 超文本传输协议HTTP协议被用于在Web浏览器和网站服务器之间传递信息，HTTP协议以明文方式发送内容，不提供任何方式的数据加密，如果攻击者截取了Web浏览器和网站服务器之间的传输报文，就可以直接读懂其中的信息，因此，HTTP协议不适合传输一些敏感信息，比如：信用卡号、密码等支付信息。<br>为了解决HTTP协议的这一缺陷，需要使用另一种协议：安全套接字层超文本传输协议HTTPS，为了数据传输的安全，HTTPS在HTTP的基础上加入了SSL/TLS协议，SSL/TLS依靠证书来验证服务器的身份，并为浏览器和服务器之间的通信加密。<br>HTTPS协议是由SSL/TLS+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全<br>HTTPS协议的主要作用可以分为两种：一种是建立一个信息安全通道，来保证数据传输的安全；另一种就是确认网站的真实性。</p>
+<blockquote>
+<p>1、https协议需要到CA申请证书，一般免费证书较少，因而需要一定费用。<br>2、http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl/tls加密传输协议。<br>3、http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。<br>4、http的连接很简单，是无状态的；HTTPS协议是由SSL/TLS+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</p>
+</blockquote>
+<h3 id="3、get-post-的区别"><a href="#3、get-post-的区别" class="headerlink" title="3、get post 的区别"></a>3、get post 的区别</h3><h3 id="4、输入一个网址到呈现一个界面流程"><a href="#4、输入一个网址到呈现一个界面流程" class="headerlink" title="4、输入一个网址到呈现一个界面流程"></a>4、输入一个网址到呈现一个界面流程</h3><p>第一步：首先你得在浏览器中输入网址，比如输入www.baidu.com。其中www为主机，baidu为域名，com为类型。但是有网址不能直接找到对应的响应主机，必须把网址，即域名转化为ip地址。</p>
+<p>第二步：DNS解析，当在浏览器中输入一个URL，如“www.baidu.com”时，这个地址并不是百度网站真正意义的地址。每一台连上网计算机都有一个唯一标识即它的IP地址，DNS解析就将输入的网址解析成IP地址。<br>DNS解析是一个递归查询的过程，例如要解析“www.baidu.com”时，过程如下：</p>
+<blockquote>
+<p>在本地域名服务器中查询IP地址，未找到域名；<br>本地域名服务器会向根域名服务器发送请求，未找到域名；<br>本地域名服务器向.com顶级域名服务器发送请求，未找到域名；<br>本地域名服务器向.baidu.com域名服务器发送请求，找到该域名，将相应的IP返回给本地域名服务器；</p>
+</blockquote>
+<p>第三步：浏览器发送请求至服务器，假设我们现在输入的地址是www.baidu.com，那么浏览器默认将网址改成这样的形式，即<a href="http://www.baidu.com。进行TCP连接">http://www.baidu.com。进行TCP连接</a></p>
+<p>第四步：渲染浏览器</p>
+<p>第五步：断开TCP连接</p>
+<h3 id="5七层OSI-五层网络"><a href="#5七层OSI-五层网络" class="headerlink" title="5七层OSI/五层网络"></a>5七层OSI/五层网络</h3><p>有篇文章讲的很白话，比较好！大家可以看一下。<br><a href="https://blog.csdn.net/taotongning/article/details/81352985">OSI七层协议大白话解读</a></p>
+<p>然后我做一下我的总结：<br>OSI是网络通信的协议，人们把他分为七层，也有分为五层的。内容都是一样的。通信无非就是发送请求，接受请求。<br>下面这种图展示了五层和七层的关系。<br><img src="https://img-blog.csdnimg.cn/20200311173540208.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>发送请求的过程是从最顶层（应用层）出发，每一层负责封装属于自己的信息到请求中，最后将一整个请求发送给对方。<br>接收请求的过程是从最底层（网络接口层）开始，每一层的协议负责解析属于自己的东西。<br><img src="https://img-blog.csdnimg.cn/20200311173803830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>以太网在解析请求时，先解析IP地址，路由器就干这个事。很厉害。找到IP后，需要根据MAC物理地址（<strong>物理层</strong>），找到局域网内的通信地址。计算机找到我们这台计算机后，还是不知道和哪个软件通信啊，就靠端口号，<strong>传输层</strong>有TCP协议规定着端口号。找到端口号后，HTTP数据就代表<strong>应用层数据</strong>，也可以是其他软件APP；</p>
+<blockquote>
+<p>IP和MAC地址这种映射关系由ARP（Address Resolution Protocol，地址解析协议）协议完成。</p>
+</blockquote>
+<p>（1）物理层：就是硬件地址，每个网卡出厂时都有一个唯一的MAC地址。<br>（3）网络层：IP地址<br>（2）数据链路层：把物理地址和IP数据包起来。控制网络层与物理层的通信。<br><img src="https://img-blog.csdnimg.cn/20200311171929848.png" alt="在这里插入图片描述"><br>（4）传输层：就是我们的TCP、UDP传输协议，你需要把数据按照传输格式传递给某个端口，定义了主机端到端的链接。一个主机有很多端口可以使用。<br>端口范围0-65535，0-1023为系统占用端口<br>（5）应用层：你的软件，QQ、视频、浏览器…<br>TCP协议可以为各种各样的程序传递数据，比如Email、WWW、FTP等等。那么，必须有不同协议规定电子邮件、网页、FTP数据的格式，这些应用程序协议就构成了”应用层”。</p>
+
+        </div>
+        
+        
+            <ul class="post-copyright">
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%96%B9%E9%9D%A2%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">计算机网络方面一些基础知识</a></li>
+                <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%96%B9%E9%9D%A2%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">https://www.cloudcver.com/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%96%B9%E9%9D%A2%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</a></li>
+                <li><strong>发布时间：</strong>2020-03-20</li>
+                <li><strong>最后修改：</strong>2020-04-13</li>
+                <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+                </li>
+            </ul>
+            
+
+        
+
+            <hr style="height:1px;margin:1rem 0"/>
+
+
+
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <!-- <span class="is-size-6 has-text-grey has-mr-7">#</span> -->
+                    <i class="fas fa-tags has-text-grey"></i>&nbsp;
+
+                    <a class="has-link-grey -link" href="/tags/TCP/" rel="tag">TCP</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/pyqt%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">pyqt多线程操作</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0%E5%8F%8A%E5%BA%94%E7%94%A8/">
+                <span class="level-item">SQL基础知识学习及应用</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+  
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        avatar: 'mp',
+        notify: true,
+        verify: true,
+        app_id: 'TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz',
+        app_key: 'qfw2KwYOyVL3X6U2ET9vnyIa',
+        placeholder: '给我的文章加点评论吧~~'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right ">
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Debug/">
+            <span class="level-start">
+                <span class="level-item">Debug</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LINUX/">
+            <span class="level-start">
+                <span class="level-item">LINUX</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TensorFlow/">
+            <span class="level-start">
+                <span class="level-item">TensorFlow</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
+            <span class="level-start">
+                <span class="level-item">网络爬虫</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%85%B6%E4%BB%96/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E4%BD%9C/">
+            <span class="level-start">
+                <span class="level-item">工作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+            <span class="level-start">
+                <span class="level-item">计算机视觉</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">24</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
+            <span class="level-start">
+                <span class="level-item">GAN</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+            <span class="level-start">
+                <span class="level-item">人脸识别</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">图像分类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">
+            <span class="level-start">
+                <span class="level-item">图像生成</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+            <span class="level-start">
+                <span class="level-item">目标检测</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+            <span class="level-start">
+                <span class="level-item">语义分割</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T09:05:55.670Z">2020-04-13</time></div>
+                    <a href="/posts/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%BE%85%E5%8A%A9%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">服务器远程辅助下载文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T09:04:51.207Z">2020-04-13</time></div>
+                    <a href="/posts/pyqt%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pyqt基础教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-10T09:45:39.000Z">2020-04-10</time></div>
+                    <a href="/posts/%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">宝塔部署hexo博客到服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T11:57:39.000Z">2020-03-28</time></div>
+                    <a href="/posts/Python%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%9Bsuper%EF%BC%9B%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9Bcopy%EF%BC%9B%E3%80%90%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E3%80%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python基础问题；super；迭代器；copy；【秋招备战】</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/python/">python</a> / <a class="has-link-grey -link" href="/categories/python/%E5%88%B7%E9%A2%98/">刷题</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T11:57:39.000Z">2020-03-28</time></div>
+                    <a href="/posts/pyqt%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pyqt多线程操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/python/">python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo  has-mb-6" href="/">
+
+
+
+                
+
+                <p class="is-size-7">
+                    
+                &copy; 2020 CloudCver&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">京ICP备20008496号-1</a>&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                        <a href="https://www.upyun.com/"   target="_blank"  style="border:0">
+                            <img src="/images/ypy.png" alt="又拍云提供服务"   style="width: 70px; display: inline; vertical-align: middle;">
+                          </a>
+                         <br>
+                          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                          <script>
+                              var now = new Date(); 
+                              function createtime() { 
+                                  var grt= new Date("1/2/2019 08:00:00");// 此处修改你的建站时间或者网站上线时间 
+                                  now.setTime(now.getTime()+250); 
+                                  days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                                  hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                                  if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                                  mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                                  seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                                  snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                                  document.getElementById("timeDate").innerHTML = "This site has been running safely for "+dnum+" 天 "; 
+                                  document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒 "; 
+                              } 
+                              setInterval("createtime()",250);
+                          </script>
+
+
+                        
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                            <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.cloudcver.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+
+
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

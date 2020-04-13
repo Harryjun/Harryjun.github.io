@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>pyqt基础教程 - CloudCver</title>
+
+
+    <meta name="description" content="PYQT是python版本的QT界面程序包，大家写过C、C#都做过界面设计，python也一样，非常简单。跟着我的思路走，五分钟学会！ 1、主体框架=先造一个窗口以下程序直接抄过去。以下程序直接抄过去。以下程序直接抄过去。1234567891011121314151617181920212223242526272829303132#!&#x2F;usr&#x2F;bin&#x2F;python3# -*- coding: ut">
+<meta name="keywords" content="CV, Python Cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pyqt基础教程">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;pyqt%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B&#x2F;index.html">
+<meta property="og:site_name" content="CloudCver">
+<meta property="og:description" content="PYQT是python版本的QT界面程序包，大家写过C、C#都做过界面设计，python也一样，非常简单。跟着我的思路走，五分钟学会！ 1、主体框架=先造一个窗口以下程序直接抄过去。以下程序直接抄过去。以下程序直接抄过去。1234567891011121314151617181920212223242526272829303132#!&#x2F;usr&#x2F;bin&#x2F;python3# -*- coding: ut">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-04-13T09:04:59.336Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="pyqt基础教程" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/fight.png" >
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.4.1/css/all.min.css">
+<!-- <link rel="stylesheet" href="/css/Ubuntu:400,600%7CSource+Code+Pro.css"> -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?5ac05e6533e626ce0ede656787f8a015";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+
+
+    <!-- night mode -->
+    <script type="text/javascript" src="/js/night.js"></script>
+    <canvas id="universe"></canvas>
+    <script type="text/javascript" src="/js/universe.js"></script>
+    <!-- night mode -->
+
+
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="pyqt基础教程" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="https://torch.cloudcver.com">PyTorch</a>
+                
+                <a class="navbar-item"
+                href="/project">Project</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/plan">Plan</a>
+                
+                <a class="navbar-item"
+                href="/share">Share</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+                <a class="navbar-item"
+                href="/links">Links</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                <a class="navbar-item" target="_blank" rel="noopener" title="Pan" href="https://pan.cloudcver.com">
+                        
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    
+                </a>
+
+                <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
+                    <i class="fas fa-moon" id="night-icon"></i>
+
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my GitHub" href="https://github.com/harryjun">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my Mall" href="https://mall.cloudcver.com">
+                        
+                        <i class="fas fa-shopping-cart"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Short Url" href="https://dwz.cloudcver.com">
+                        
+                        <i class="fas fa-flask"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login my cloudcver mail" href="https://exmail.qq.com/login/zh_tw">
+                        
+                        <i class="fas fa-envelope"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login Mall" href="http://mall.cloudcver.com/Admin">
+                        
+                        <i class="fas fa-tasks"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login Baota" href="http://119.3.189.221:8888/">
+                        
+                        <i class="fas fa-cog"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+
+
+
+
+
+
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- PIN -->
+                
+
+
+                <!-- <time class="level-item has-text-grey" datetime="2020-04-13T09:04:51.207Z">2020-04-13</time>
+                 -->
+
+                 <time class="level-item has-text-grey" datetime="2020-04-13T09:04:51.207Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-04-13</time>
+                 
+                 <!-- 
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-04-13T09:04:59.336Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-13</time>
+                     -->
+                    <time class="level-item has-text-grey" datetime="2020-04-13T09:04:59.336Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-13</time>    
+
+                
+
+                
+
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 756 words)
+                </span>
+                
+
+                
+
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                pyqt基础教程
+            
+        </h1>
+        <div class="content">
+            <p>PYQT是python版本的QT界面程序包，大家写过C、C#都做过界面设计，python也一样，非常简单。跟着我的思路走，五分钟学会！</p>
+<h3 id="1、主体框架-先造一个窗口"><a href="#1、主体框架-先造一个窗口" class="headerlink" title="1、主体框架=先造一个窗口"></a>1、主体框架=先造一个窗口</h3><p><strong>以下程序直接抄过去。<br>以下程序直接抄过去。<br>以下程序直接抄过去。</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtWidgets <span class="keyword">import</span> QApplication, QWidget</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtGui <span class="keyword">import</span> QIcon</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span><span class="params">(QWidget)</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        </span><br><span class="line">        self.initUI() <span class="comment">#界面绘制交给InitUi方法</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment">#设置窗口的位置和大小</span></span><br><span class="line">        self.setGeometry(<span class="number">300</span>, <span class="number">300</span>, <span class="number">300</span>, <span class="number">220</span>)  </span><br><span class="line">        <span class="comment">#设置窗口的标题</span></span><br><span class="line">        self.setWindowTitle(<span class="string">'Icon'</span>)</span><br><span class="line">        <span class="comment">#设置窗口的图标，引用当前目录下的web.png图片</span></span><br><span class="line">        self.setWindowIcon(QIcon(<span class="string">'web.png'</span>))        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">#显示窗口</span></span><br><span class="line">        self.show()</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment">#创建应用程序和对象</span></span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    ex = Example()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20200311141614384.png" alt="在这里插入图片描述"><br><strong>主函数不用动！<br>主要改initUI函数！<br>主要改initUI函数！<br>主要改initUI函数！</strong></p>
+<h3 id="2-控件-加点功能"><a href="#2-控件-加点功能" class="headerlink" title="2 控件==加点功能"></a>2 控件==加点功能</h3><p>明白一个道理：</p>
+<blockquote>
+<p>1、界面上可以加一些按钮，文本框，输入框等等，都需要导入库，声明一个对象。<br>2、函数：点击按钮连接一个函数，输入框改变连接一个函数，逻辑自己写就行。<br>3、属性：都有属性.text()代表这个控件的文字。</p>
+</blockquote>
+<p>明白这个就可以了，一个一个看！</p>
+<h4 id="2-1-按钮"><a href="#2-1-按钮" class="headerlink" title="2.1 按钮"></a>2.1 按钮</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">self.qbtn = QPushButton(<span class="string">'Quit'</span>, self)<span class="comment">#声明一个按钮</span></span><br><span class="line">self.qbtn.clicked.connect(self.download())<span class="comment">#点击按钮连接上一个函数</span></span><br><span class="line">self.qbtn.move(<span class="number">400</span>, <span class="number">10</span>)<span class="comment">#位置</span></span><br><span class="line">self.qbtn.setText(text)<span class="comment">#文字属性</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200311163643195.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="2-2-输入框"><a href="#2-2-输入框" class="headerlink" title="2.2 输入框"></a>2.2 输入框</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.file_url = QLineEdit(self)#声明一个输入框</span><br><span class="line">self.file_url.move(50, 90)#移动位置</span><br><span class="line">self.file_url.setGeometry(50, 90, 250, 23)#设置位置以及长宽。</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200311163658210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-3-文本标签"><a href="#2-3-文本标签" class="headerlink" title="2.3 文本标签"></a>2.3 文本标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.lbl = QLabel(self)</span><br><span class="line">self.lbl.setText(&quot;Url:&quot;)</span><br><span class="line">self.lbl.move(30, 93)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20200311163711489.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="2-4-文本编辑框"><a href="#2-4-文本编辑框" class="headerlink" title="2.4 文本编辑框"></a>2.4 文本编辑框</h3><p>我用它来输出日志<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.tmp = QTextEdit(self)</span><br><span class="line">self.tmp.move(50, 120)</span><br><span class="line">self.tmp.setGeometry(50, 120, 350, 70)</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20200311163727703.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0NMT1VEX0o=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="3-对话框-弹窗消息"><a href="#3-对话框-弹窗消息" class="headerlink" title="3 对话框==弹窗消息"></a>3 对话框==弹窗消息</h3><h4 id="3-1-弹窗输入"><a href="#3-1-弹窗输入" class="headerlink" title="3.1 弹窗输入"></a>3.1 弹窗输入</h4><p>能填一个内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text, ok = QInputDialog.getText(self, &apos;Input Dialog&apos;, </span><br><span class="line">            &apos;Enter your name:&apos;)</span><br></pre></td></tr></table></figure><br><img src="https://img-blog.csdnimg.cn/20200311163740256.png" alt="在这里插入图片描述"></p>
+<h4 id="3-2-打开文件"><a href="#3-2-打开文件" class="headerlink" title="3.2 打开文件"></a>3.2 打开文件</h4><p>弹出打开文件提示框。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fname = QFileDialog.getOpenFileName(self, &apos;Open file&apos;, &apos;/home&apos;)</span><br><span class="line">if fname[0]:</span><br><span class="line">    f = open(fname[0], &apos;r&apos;)</span><br><span class="line">    with f:</span><br><span class="line">        data = f.read()</span><br><span class="line">        self.textEdit.setText(data)</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-更多…"><a href="#4-更多…" class="headerlink" title="4 更多…"></a>4 更多…</h3><p>五分钟了解这些就可以了。<br>更多控件，你可以用啥就百度啥。</p>
+
+        </div>
+        
+        
+            <ul class="post-copyright">
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/pyqt%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">pyqt基础教程</a></li>
+                <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/pyqt%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/">https://www.cloudcver.com/posts/pyqt%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</a></li>
+                <li><strong>发布时间：</strong>2020-04-13</li>
+                <li><strong>最后修改：</strong>2020-04-13</li>
+                <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+                </li>
+            </ul>
+            
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%BE%85%E5%8A%A9%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">服务器远程辅助下载文件</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                <span class="level-item">宝塔部署hexo博客到服务器</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+  
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        avatar: 'mp',
+        notify: true,
+        verify: true,
+        app_id: 'TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz',
+        app_key: 'qfw2KwYOyVL3X6U2ET9vnyIa',
+        placeholder: '给我的文章加点评论吧~~'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right ">
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Debug/">
+            <span class="level-start">
+                <span class="level-item">Debug</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LINUX/">
+            <span class="level-start">
+                <span class="level-item">LINUX</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TensorFlow/">
+            <span class="level-start">
+                <span class="level-item">TensorFlow</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
+            <span class="level-start">
+                <span class="level-item">网络爬虫</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%85%B6%E4%BB%96/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E4%BD%9C/">
+            <span class="level-start">
+                <span class="level-item">工作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+            <span class="level-start">
+                <span class="level-item">计算机视觉</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">24</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
+            <span class="level-start">
+                <span class="level-item">GAN</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+            <span class="level-start">
+                <span class="level-item">人脸识别</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">图像分类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">
+            <span class="level-start">
+                <span class="level-item">图像生成</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+            <span class="level-start">
+                <span class="level-item">目标检测</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+            <span class="level-start">
+                <span class="level-item">语义分割</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T09:05:55.670Z">2020-04-13</time></div>
+                    <a href="/posts/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%BE%85%E5%8A%A9%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">服务器远程辅助下载文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T09:04:51.207Z">2020-04-13</time></div>
+                    <a href="/posts/pyqt%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pyqt基础教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-10T09:45:39.000Z">2020-04-10</time></div>
+                    <a href="/posts/%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">宝塔部署hexo博客到服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T11:57:39.000Z">2020-03-28</time></div>
+                    <a href="/posts/Python%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%9Bsuper%EF%BC%9B%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9Bcopy%EF%BC%9B%E3%80%90%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E3%80%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python基础问题；super；迭代器；copy；【秋招备战】</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/python/">python</a> / <a class="has-link-grey -link" href="/categories/python/%E5%88%B7%E9%A2%98/">刷题</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T11:57:39.000Z">2020-03-28</time></div>
+                    <a href="/posts/pyqt%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pyqt多线程操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/python/">python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo  has-mb-6" href="/">
+
+
+
+                
+
+                <p class="is-size-7">
+                    
+                &copy; 2020 CloudCver&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">京ICP备20008496号-1</a>&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                        <a href="https://www.upyun.com/"   target="_blank"  style="border:0">
+                            <img src="/images/ypy.png" alt="又拍云提供服务"   style="width: 70px; display: inline; vertical-align: middle;">
+                          </a>
+                         <br>
+                          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                          <script>
+                              var now = new Date(); 
+                              function createtime() { 
+                                  var grt= new Date("1/2/2019 08:00:00");// 此处修改你的建站时间或者网站上线时间 
+                                  now.setTime(now.getTime()+250); 
+                                  days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                                  hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                                  if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                                  mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                                  seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                                  snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                                  document.getElementById("timeDate").innerHTML = "This site has been running safely for "+dnum+" 天 "; 
+                                  document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒 "; 
+                              } 
+                              setInterval("createtime()",250);
+                          </script>
+
+
+                        
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                            <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.cloudcver.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+
+
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

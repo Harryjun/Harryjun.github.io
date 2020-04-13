@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Python基础问题；super；迭代器；copy；【秋招备战】 - CloudCver</title>
+
+
+    <meta name="description" content="Python基础问题；super的作用，解决了什么问题，为什么；迭代器，生成器；copy与deepcopy；【秋招备战】">
+<meta name="keywords" content="CV, Python Cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础问题；super；迭代器；copy；【秋招备战】">
+<meta property="og:url" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;posts&#x2F;Python%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%9Bsuper%EF%BC%9B%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9Bcopy%EF%BC%9B%E3%80%90%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E3%80%91&#x2F;index.html">
+<meta property="og:site_name" content="CloudCver">
+<meta property="og:description" content="Python基础问题；super的作用，解决了什么问题，为什么；迭代器，生成器；copy与deepcopy；【秋招备战】">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-04-13T09:12:00.598Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;www.cloudcver.com&#x2F;images&#x2F;og_image.png">
+
+
+
+
+
+<link rel="alternative" href="/atom.xml" title="Python基础问题；super；迭代器；copy；【秋招备战】" type="application/atom+xml">
+
+
+
+<link rel="icon" href="/images/fight.png" >
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.4.1/css/all.min.css">
+<!-- <link rel="stylesheet" href="/css/Ubuntu:400,600%7CSource+Code+Pro.css"> -->
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?5ac05e6533e626ce0ede656787f8a015";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<!-- <body class="is-2-column"> -->
+    <body class="is-3-column">
+
+
+    <!-- night mode -->
+    <script type="text/javascript" src="/js/night.js"></script>
+    <canvas id="universe"></canvas>
+    <script type="text/javascript" src="/js/universe.js"></script>
+    <!-- night mode -->
+
+
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Python基础问题；super；迭代器；copy；【秋招备战】" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="https://torch.cloudcver.com">PyTorch</a>
+                
+                <a class="navbar-item"
+                href="/project">Project</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/plan">Plan</a>
+                
+                <a class="navbar-item"
+                href="/share">Share</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+                <a class="navbar-item"
+                href="/links">Links</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                <a class="navbar-item" target="_blank" rel="noopener" title="Pan" href="https://pan.cloudcver.com">
+                        
+                    <i class="fa fa-cloud" aria-hidden="true"></i>
+                    
+                </a>
+
+                <a class="navbar-item night" id="night-nav" title="Night Mode" href="javascript:;">
+                    <i class="fas fa-moon" id="night-icon"></i>
+
+                
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my GitHub" href="https://github.com/harryjun">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Visit my Mall" href="https://mall.cloudcver.com">
+                        
+                        <i class="fas fa-shopping-cart"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Short Url" href="https://dwz.cloudcver.com">
+                        
+                        <i class="fas fa-flask"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login my cloudcver mail" href="https://exmail.qq.com/login/zh_tw">
+                        
+                        <i class="fas fa-envelope"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login Mall" href="http://mall.cloudcver.com/Admin">
+                        
+                        <i class="fas fa-tasks"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Login Baota" href="http://119.3.189.221:8888/">
+                        
+                        <i class="fas fa-cog"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+
+
+
+
+
+
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <!-- PIN -->
+                
+
+
+                <!-- <time class="level-item has-text-grey" datetime="2020-03-28T11:57:39.000Z">2020-03-28</time>
+                 -->
+
+                 <time class="level-item has-text-grey" datetime="2020-03-28T11:57:39.000Z"><i class="far fa-calendar-alt">&nbsp;</i>2020-03-28</time>
+                 
+                 <!-- 
+                    <time class="level-item has-text-grey is-hidden-mobile" datetime="2020-04-13T09:12:00.598Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-13</time>
+                     -->
+                    <time class="level-item has-text-grey" datetime="2020-04-13T09:12:00.598Z"><i class="far fa-calendar-check">&nbsp;</i>2020-04-13</time>    
+
+                
+                <div class="level-item">
+                    <i class="far fa-folder-open has-text-grey"></i>&nbsp;
+                <a class="has-link-grey -link" href="/categories/python/">python</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/python/%E5%88%B7%E9%A2%98/">刷题</a>
+                </div>
+                
+
+                
+
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 907 words)
+                </span>
+                
+
+                
+
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Python基础问题；super；迭代器；copy；【秋招备战】
+            
+        </h1>
+        <div class="content">
+            <p>Python基础问题；super的作用，解决了什么问题，为什么；迭代器，生成器；copy与deepcopy；【秋招备战】<br><a id="more"></a></p>
+<h3 id="1、super的作用，解决了什么问题，为什么"><a href="#1、super的作用，解决了什么问题，为什么" class="headerlink" title="1、super的作用，解决了什么问题，为什么"></a>1、super的作用，解决了什么问题，为什么</h3><p>在类的继承中，如果我们在子类中重写了init函数，则创建子类对象时会调用子类的init函数，不会执行父类的函数。<br>这个时候，有些父类的操作就没法执行。</p>
+<blockquote>
+<p>super() 就是找爹super().<strong>init</strong>(…) 就是说：”爹，先执行一下你的<strong>init</strong>方法，等你干完了我再来做我的事。”用途就是，你继承一个父类了，原先父类的初始化方法里有很多东西，你又不打算自己重新写一遍，那就叫父类先执行原来的逻辑，再执行后边的。</p>
+</blockquote>
+<p><strong>注意：super 是用来解决多重继承问题的，直接用类名调用父类方法在使用单继承的时候没问题，但是如果使用多继承，会涉及到查找顺序（MRO）、重复调用（钻石继承）等种种问题。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">     ---&gt; B ---</span><br><span class="line">A --|          |--&gt; D</span><br><span class="line">     ---&gt; C ---</span><br></pre></td></tr></table></figure></p>
+<h3 id="2、copy和deepcopy"><a href="#2、copy和deepcopy" class="headerlink" title="2、copy和deepcopy"></a>2、copy和deepcopy</h3><p>—–我们寻常意义的复制就是深复制，即将被复制对象完全再复制一遍作为独立的新个体单独存在。所以改变原有被复制对象不会对已经复制出来的新对象产生影响。<br>—–而浅复制并不会产生一个独立的对象单独存在，他只是将原有的数据块打上一个新标签，所以当其中一个标签被改变的时候，数据块就会发生变化，另一个标签也会随之改变。这就和我们寻常意义上的复制有所不同了。</p>
+<p><strong>（注意：这两个函数都在copy模块中）</strong></p>
+<h3 id="3、生成器、迭代器"><a href="#3、生成器、迭代器" class="headerlink" title="3、生成器、迭代器"></a>3、生成器、迭代器</h3><h4 id="3-1-生成器"><a href="#3-1-生成器" class="headerlink" title="3.1 生成器"></a>3.1 生成器</h4><p>就是一种自定义的迭代器,本质为迭代器，但凡函数内包含yield关键字,调用函数不会执行函数体代码,会得到一个返回值,该返回值就是生成器对象。</p>
+<p>我们可以写一个函数，里面有yield，往外抛出东西，然后你用next可以遍历，一个yield一个执行，执行完了，再next就出错。。<br>例1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fun(index):</span><br><span class="line">	yield index</span><br><span class="line">print(&quot;Hello, World!&quot;);</span><br><span class="line">a = fun(1)</span><br><span class="line">print(next(a))</span><br><span class="line">a = fun(100)</span><br><span class="line">print(next(a))</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Hello, World!<br>1<br>100</p>
+</blockquote>
+<p>例2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/python</span><br><span class="line">def fun(index):</span><br><span class="line">	yield index</span><br><span class="line">	yield 2</span><br><span class="line">print(&quot;Hello, World!&quot;);</span><br><span class="line">a = fun(1)</span><br><span class="line">print(next(a))</span><br><span class="line">print(next(a))</span><br><span class="line">a = fun(100)</span><br><span class="line">print(next(a))</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Hello, World!<br>1<br>2<br>100</p>
+</blockquote>
+<h4 id="3-2迭代器"><a href="#3-2迭代器" class="headerlink" title="3.2迭代器"></a>3.2迭代器</h4><p>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。</p>
+<p>迭代器有两个基本的方法：iter() 和 next()。<br>最简单可以这么用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list=[1,2,3,4]&gt;&gt;&gt; it = iter(list)    # 创建迭代器对象&gt;&gt;&gt; print (next(it))   # 输出迭代器的下一个元素</span><br><span class="line">1</span><br><span class="line">&gt;&gt;&gt; print (next(it))</span><br><span class="line">2</span><br></pre></td></tr></table></figure><br>再者，你可以创建一个迭代器类，只要包括iter和next两个内定函数即可。<strong>iter</strong>返回迭代器对象，<strong>next</strong>返回迭代下一个值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class MyNumbers: </span><br><span class="line">    def __iter__(self): </span><br><span class="line">        self.a = 1 </span><br><span class="line">        return self </span><br><span class="line">    def __next__(self): </span><br><span class="line">        x = self.a </span><br><span class="line">        self.a += 1 </span><br><span class="line">        return x</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：<br>1、python中，任意对象，只要定义了<strong>next</strong>方法，它就是一个迭代器。<br>2、python中的容器如列表、元组、字典、集合、字符串都可以被称作迭代器。</p>
+</blockquote>
+
+        </div>
+        
+        
+            <ul class="post-copyright">
+                <li><strong>本文标题：</strong><a href="https://www.cloudcver.com/posts/Python%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%9Bsuper%EF%BC%9B%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9Bcopy%EF%BC%9B%E3%80%90%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E3%80%91/">Python基础问题；super；迭代器；copy；【秋招备战】</a></li>
+                <li><strong>本文作者：</strong><a href="https://www.cloudcver.com">CloudCver</a></li>
+                <li><strong>本文链接：</strong><a href="https://www.cloudcver.com/posts/Python%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%9Bsuper%EF%BC%9B%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9Bcopy%EF%BC%9B%E3%80%90%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E3%80%91/">https://www.cloudcver.com/posts/Python%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%9Bsuper%EF%BC%9B%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9Bcopy%EF%BC%9B%E3%80%90%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E3%80%91/</a></li>
+                <li><strong>发布时间：</strong>2020-03-28</li>
+                <li><strong>最后修改：</strong>2020-04-13</li>
+                <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+                </li>
+            </ul>
+            
+
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/posts/%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">宝塔部署hexo博客到服务器</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/posts/pyqt%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/">
+                <span class="level-item">pyqt多线程操作</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+  
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        avatar: 'mp',
+        notify: true,
+        verify: true,
+        app_id: 'TlNCJqhvFgNcxl1qe23akWcV-gzGzoHsz',
+        app_key: 'qfw2KwYOyVL3X6U2ET9vnyIa',
+        placeholder: '给我的文章加点评论吧~~'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-3 column-right ">
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Debug/">
+            <span class="level-start">
+                <span class="level-item">Debug</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/LINUX/">
+            <span class="level-start">
+                <span class="level-item">LINUX</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/TensorFlow/">
+            <span class="level-start">
+                <span class="level-item">TensorFlow</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/">
+            <span class="level-start">
+                <span class="level-item">python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/python/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/python/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/">
+            <span class="level-start">
+                <span class="level-item">网络爬虫</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%85%B6%E4%BB%96/">
+            <span class="level-start">
+                <span class="level-item">其他</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/">
+            <span class="level-start">
+                <span class="level-item">刷题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E5%88%B7%E9%A2%98/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E4%BD%9C/">
+            <span class="level-start">
+                <span class="level-item">工作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">
+            <span class="level-start">
+                <span class="level-item">生活随笔</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+            <span class="level-start">
+                <span class="level-item">计算机视觉</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">24</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/GAN/">
+            <span class="level-start">
+                <span class="level-item">GAN</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">
+            <span class="level-start">
+                <span class="level-item">人脸识别</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+            <span class="level-start">
+                <span class="level-item">图像分类</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/">
+            <span class="level-start">
+                <span class="level-item">图像生成</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E5%B7%A5%E5%85%B7/">
+            <span class="level-start">
+                <span class="level-item">工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">
+            <span class="level-start">
+                <span class="level-item">目标检测</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">
+            <span class="level-start">
+                <span class="level-item">语义分割</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T09:05:55.670Z">2020-04-13</time></div>
+                    <a href="/posts/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%9C%E7%A8%8B%E8%BE%85%E5%8A%A9%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" class="title has-link-black-ter is-size-6 has-text-weight-normal">服务器远程辅助下载文件</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-13T09:04:51.207Z">2020-04-13</time></div>
+                    <a href="/posts/pyqt%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pyqt基础教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-10T09:45:39.000Z">2020-04-10</time></div>
+                    <a href="/posts/%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2hexo%E5%8D%9A%E5%AE%A2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">宝塔部署hexo博客到服务器</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T11:57:39.000Z">2020-03-28</time></div>
+                    <a href="/posts/Python%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98%EF%BC%9Bsuper%EF%BC%9B%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%9Bcopy%EF%BC%9B%E3%80%90%E7%A7%8B%E6%8B%9B%E5%A4%87%E6%88%98%E3%80%91/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Python基础问题；super；迭代器；copy；【秋招备战】</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/python/">python</a> / <a class="has-link-grey -link" href="/categories/python/%E5%88%B7%E9%A2%98/">刷题</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-28T11:57:39.000Z">2020-03-28</time></div>
+                    <a href="/posts/pyqt%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">pyqt多线程操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/python/">python</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+</div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo  has-mb-6" href="/">
+
+
+
+                
+
+                <p class="is-size-7">
+                    
+                &copy; 2020 CloudCver&nbsp;
+                <a  href="http://beian.miit.gov.cn/" target="_blank">京ICP备20008496号-1</a>&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a>
+                        <a href="https://www.upyun.com/"   target="_blank"  style="border:0">
+                            <img src="/images/ypy.png" alt="又拍云提供服务"   style="width: 70px; display: inline; vertical-align: middle;">
+                          </a>
+                         <br>
+                          <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+                          <script>
+                              var now = new Date(); 
+                              function createtime() { 
+                                  var grt= new Date("1/2/2019 08:00:00");// 此处修改你的建站时间或者网站上线时间 
+                                  now.setTime(now.getTime()+250); 
+                                  days = (now - grt) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                                  hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                                  if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                                  mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                                  seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                                  snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                                  document.getElementById("timeDate").innerHTML = "This site has been running safely for "+dnum+" 天 "; 
+                                  document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒 "; 
+                              } 
+                              setInterval("createtime()",250);
+                          </script>
+
+
+                        
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                        
+                            <i class="fab fa-creative-commons"></i>&nbsp;<i class="fab fa-creative-commons-by"></i>&nbsp;<i class="fab fa-creative-commons-nc"></i>&nbsp;<i class="fab fa-creative-commons-sa"></i>&nbsp;
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+
+<script>
+var IcarusThemeSettings = {
+    site: {
+        url: 'https://www.cloudcver.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+
+
+<script src="/js/animation.js"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+
+
+
+
+
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
