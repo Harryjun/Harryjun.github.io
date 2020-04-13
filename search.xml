@@ -40,8 +40,6 @@
       
       <categories>
           
-          <category> python </category>
-          
           <category> 刷题 </category>
           
       </categories>
@@ -141,6 +139,8 @@
             
             <tag> TCP </tag>
             
+            <tag> 计算机网络 </tag>
+            
         </tags>
       
     </entry>
@@ -158,6 +158,8 @@
       <categories>
           
           <category> python </category>
+          
+          <category> SQL </category>
           
       </categories>
       
